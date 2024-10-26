@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 
-const CreateButton = ({ from, content }) => {
+// eslint-disable-next-line react/prop-types
+function CreateButton({ from, content }) {
   const [isDisabled, setIsDisabled] = useState(true);
 
   useEffect(() => {
@@ -20,10 +21,10 @@ const CreateButton = ({ from, content }) => {
   };
 
   return (
-    <button onClick={handleSubmit} disabled={isDisabled}>
+    <button type="submit" onClick={handleSubmit} disabled={isDisabled}>
       생성하기
     </button>
   );
-};
+}
 
 export default CreateButton;
