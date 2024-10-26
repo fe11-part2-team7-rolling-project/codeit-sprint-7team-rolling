@@ -1,7 +1,9 @@
+import React from 'react';
+
 function PostIdPage() {
   return (
-    <div className="bg-blue-500 text-white p-4">
-      <h1 className="text-3xl font-bold">Hello, Tailwind CSS!</h1>
+    <div className="bg-blue100 text-gray300 p-4">
+      <div className="text-3xl font-['Pretendard-Regular']">To. Ashley Kim</div>
     </div>
   );
 }
