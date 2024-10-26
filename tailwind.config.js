@@ -1,6 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ['./src/**/*.{js,jsx,ts,tsx}'],
+  content: ['./src/**/*.{html,js,tsx,ts}'],
   theme: {
     colors: {
       gray100: '#F6F6F6',
@@ -41,7 +41,11 @@ module.exports = {
       purple800: '#6E0AD1',
       purple900: '#5603A7',
     },
+    fontFamily: {
+      regular: ['Pretendard-Regular'],
+      bold: ['Pretendard-Bold'],
+    },
     extend: {},
   },
-  plugins: [],
+  plugins: [require('tailwindcss'), require('autoprefixer')],
 };
