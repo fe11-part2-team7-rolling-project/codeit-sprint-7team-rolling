@@ -1,4 +1,6 @@
+// src/pages/MainPage/components/Card.js
 import React from 'react';
+import PropTypes from 'prop-types';
 
 function Card({ from, text, date, profileImage }) {
   return (
@@ -28,5 +30,13 @@ function Card({ from, text, date, profileImage }) {
     </div>
   );
 }
+
+// PropTypes 설정
+Card.propTypes = {
+  from: PropTypes.string,
+  text: PropTypes.string,
+  date: PropTypes.string,
+  profileImage: PropTypes.string,
+};
 
 export default Card;
