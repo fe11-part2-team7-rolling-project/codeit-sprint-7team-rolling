@@ -11,7 +11,7 @@ function HotList() {
     {
       id: 2,
       name: "강영훈",
-      backgroundColor: "#00FF00",
+      backgroundColor: "#ECD9FF",
       backgroundImageURL: null,
       createdAt: "2023-10-26T13:19:31.401765Z",
       messageCount: 3,
@@ -60,7 +60,7 @@ function HotList() {
     {
       id: 3,
       name: "은하",
-      backgroundColor: "#FFD700",
+      backgroundColor: "#FFE2AD",
       backgroundImageURL: null,
       createdAt: "2023-10-28T13:19:31.401765Z",
       messageCount: 5,
@@ -131,7 +131,7 @@ function HotList() {
     {
       id: 2,
       name: "강영훈",
-      backgroundColor: "#00FF00",
+      backgroundColor: "#D0F5C3",
       backgroundImageURL: null,
       createdAt: "2023-10-26T13:19:31.401765Z",
       messageCount: 3,
@@ -180,7 +180,7 @@ function HotList() {
     {
       id: 2,
       name: "강영훈",
-      backgroundColor: "#00FF00",
+      backgroundColor: "#D0F5C3",
       backgroundImageURL: null,
       createdAt: "2023-10-26T13:19:31.401765Z",
       messageCount: 3,
@@ -229,7 +229,7 @@ function HotList() {
     {
       id: 2,
       name: "강영훈",
-      backgroundColor: "#00FF00",
+      backgroundColor: "#D0F5C3",
       backgroundImageURL: null,
       createdAt: "2023-10-26T13:19:31.401765Z",
       messageCount: 3,
@@ -301,35 +301,39 @@ function HotList() {
       {hotList.map((item) => (
         <div
           key={item.id}
-          className="p-4 rounded-2xl min-w-[208px] h-[232px] min-[376px]:min-w-[275px] min-[376px]:min-h-[260px] bg-white shadow-md"
+          className="flex flex-col border-black/[.10] border-[1px] gap-3 pt-[30px] pl-[24px] rounded-2xl min-w-[208px] h-[232px] min-[376px]:min-w-[275px] min-[376px]:min-h-[260px] bg-white shadow-md"
           style={{ backgroundColor: item.backgroundColor }}
         >
-          <div className="font-bold text-lg mb-2">To. {item.name}</div>
+          {/* 받는 사람 */}
+          <div className="font-bold text-lg text-gray900 leading-7 min-[376px]:text-2xl min-[376px]:leading-9">
+            To. {item.name}
+          </div>
+
           {/* 프로필 이미지 섹션 */}
-          <div className="flex -space-x-2 mb-4">
+          <div className="flex -space-x-3">
             {item.recentMessages.slice(0, 3).map((message) => (
               <img
                 key={message.id}
                 src={message.profileImageURL}
                 alt={message.sender}
-                className="w-8 h-8 rounded-full border-2 border-white"
+                className="w-7 h-7 rounded-full border-2 border-white"
               />
             ))}
             {item.recentMessages.length > 3 && (
-              <span className="text-gray-500 text-sm ml-2">
+              <span className="w-8 h-7 rounded-[30px] bg-white text-gray500 text-xs flex justify-center items-center">
                 +{item.recentMessages.length - 3}
               </span>
             )}
           </div>
-          <div className="text-sm font-semibold mb-4">
+          <div className="text-sm font-regular text-gray700">
             {item.messageCount}명이 작성했어요!
           </div>
           {/* 리액션 섹션 */}
-          <div className="flex space-x-3 mt-4">
+          <div className="flex w-[162px] space-x-1 border-black/[.12] border-t-[1px] pt-[17px] mt-[21px]">
             {item.topReactions.map((reaction) => (
               <div
                 key={reaction.id}
-                className="flex items-center space-x-1 bg-gray-200 px-2 py-1 rounded-full"
+                className="flex items-center justify-center space-x-1 bg-black/50 w-[53px] h-[32px] rounded-full text-white text-sm"
               >
                 <span>{reaction.emoji}</span>
                 <span>{reaction.count}</span>
