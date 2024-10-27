@@ -323,15 +323,15 @@ function LatestList() {
               </span>
             )}
           </div>
-          <div className="text-sm font-regular text-gray700">
+          <div className="text-sm font-regular text-gray700 min-[376px]:text-base">
             {item.messageCount}명이 작성했어요!
           </div>
           {/* 리액션 섹션 */}
-          <div className="flex w-[162px] space-x-1 border-black/[.12] border-t-[1px] pt-[17px] mt-[21px]">
+          <div className="flex w-[162px] space-x-1 border-black/[.12] border-t-[1px] pt-[17px] mt-[21px] min-[376px]:w-[227px] min-[376px]:space-x-1.5">
             {item.topReactions.map((reaction) => (
               <div
                 key={reaction.id}
-                className="flex items-center justify-center space-x-1 bg-black/50 w-[53px] h-[32px] rounded-full text-white text-sm"
+                className="flex items-center justify-center space-x-1 bg-black/50 w-[53px] h-[32px] rounded-full text-white text-sm min-[376px]:text-base min-[376px]:w-[65px] min-[376px]:h-[36px]"
               >
                 <span>{reaction.emoji}</span>
                 <span>{reaction.count}</span>
