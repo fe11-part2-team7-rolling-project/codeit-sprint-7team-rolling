@@ -6,7 +6,7 @@ import EmojiSection from './EmojiSection';
 
 function Section({ point, title, description, cards, emojiSection }) {
   return (
-    <div className="bg-white shadow-lg rounded-lg p-6 mb-8 w-full max-w-4xl">
+    <div className="bg-purple-50 shadow-lg rounded-lg p-6 mb-8 w-full max-w-4xl">
       <div className="flex flex-col md:flex-row items-start md:items-center">
         <div className="md:w-3/5">
           <p className="text-purple-500 font-bold mb-2">{point}</p>
@@ -44,6 +44,11 @@ Section.propTypes = {
     })
   ).isRequired,
   emojiSection: PropTypes.bool,
+};
+
+// defaultProps 설정
+Section.defaultProps = {
+  emojiSection: false,
 };
 
 export default Section;

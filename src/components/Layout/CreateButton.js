@@ -1,4 +1,3 @@
-// src/components/Layout/CreateButton.js
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
@@ -11,7 +10,7 @@ function CreateButton() {
 
   return (
     <button
-      type="button" // type 속성 추가
+      type="button"
       onClick={handleClick}
       className="text-gray-700 border border-gray-400 px-4 py-2 rounded-md"
     >

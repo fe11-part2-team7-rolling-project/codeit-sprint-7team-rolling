@@ -31,7 +31,7 @@ function MainPage() {
           title="서로에게 이모지로 감정을 표현해보세요"
           description="롤링 페이퍼에 이모지를 추가할 수 있어요."
           cards={[]} // 이 섹션에 카드가 필요 없으면 빈 배열 전달
-          emojiSection={true} // 이 섹션에만 이모지 섹션 포함
+          emojiSection // emojiSection={true}를 emojiSection으로 변경
         />
 
         {/* 구경해보기 버튼 */}

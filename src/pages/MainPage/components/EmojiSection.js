@@ -1,4 +1,3 @@
-// src/pages/MainPage/components/EmojiSection.js
 import React, { useState } from 'react';
 import { FaRegSmile } from 'react-icons/fa';
 

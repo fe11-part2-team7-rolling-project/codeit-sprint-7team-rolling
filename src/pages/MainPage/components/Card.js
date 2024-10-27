@@ -1,6 +1,7 @@
 // src/pages/MainPage/components/Card.js
 import React from 'react';
 import PropTypes from 'prop-types';
+import plusCircle from '../../../assets/images/pluscircle.svg';
 
 function Card({ from, text, date, profileImage }) {
   return (
@@ -13,7 +14,7 @@ function Card({ from, text, date, profileImage }) {
         />
       ) : (
         <div className="w-10 h-10 bg-gray-200 rounded-full flex items-center justify-center mr-3">
-          <img src="/assets/images/pluscircle.svg" alt="추가 아이콘" className="w-6 h-6" />
+          <img src={plusCircle} alt="추가 아이콘" className="w-6 h-6" />
         </div>
       )}
       <div>
@@ -37,6 +38,14 @@ Card.propTypes = {
   text: PropTypes.string,
   date: PropTypes.string,
   profileImage: PropTypes.string,
+};
+
+// defaultProps 설정
+Card.defaultProps = {
+  from: '',
+  text: '',
+  date: '',
+  profileImage: null,
 };
 
 export default Card;

@@ -1,4 +1,3 @@
-// src/components/UI/ExploreButton.js
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
@@ -11,7 +10,7 @@ function ExploreButton() {
 
   return (
     <button
-      type="button" // type 속성 추가
+      type="button"
       onClick={handleClick}
       className="mt-8 px-6 py-2 bg-purple-500 text-white rounded-lg w-full sm:w-auto hover:bg-purple-600 transition-colors"
     >
