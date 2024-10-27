@@ -5,12 +5,15 @@ import MessagePage from "./pages/messagePage";
 
 function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/post/:Id" element={<PostIdPage />} />
-        <Route path="/post/:Id/message" element={<MessagePage />} />
-      </Routes>
-    </BrowserRouter>
+    <div>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/post/:Id" element={<PostIdPage />} />
+          <Route path="/post/:Id/message" element={<MessagePage />} />
+        </Routes>
+        <MessagePage />
+      </BrowserRouter>
+    </div>
   );
 }
 

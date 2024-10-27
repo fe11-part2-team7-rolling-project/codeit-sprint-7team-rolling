@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const FromInput = () => {
+function FromInput() {
   const [value, setValue] = useState("");
   const [error, SetError] = useState(false);
 
@@ -11,6 +11,7 @@ const FromInput = () => {
   };
   return (
     <div>
+      {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
       <label>From.</label>
       <input
         value={value}
@@ -26,6 +27,6 @@ const FromInput = () => {
       {error && <span className="input-error">값을 입력해 주세요.</span>}
     </div>
   );
-};
+}
 
 export default FromInput;
