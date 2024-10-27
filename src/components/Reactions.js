@@ -42,7 +42,6 @@ function Reactions() {
       {dropdownReactions.length > 0 && (
         <DropdownMenu reactions={dropdownReactions} />
       )}
-
       <button
         type="button"
         onClick={toggleEmojiPicker}

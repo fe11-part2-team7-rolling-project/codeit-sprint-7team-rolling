@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { ReactComponent as Share } from '../assets/share.svg';
 import axiosInstance from '../axiosInstance';
 import Reactions from '../components/Reactions';
+import Message from '../components/Message';
 
 function PostIdPage() {
   const [images, setImages] = useState([]);
@@ -100,6 +101,7 @@ function PostIdPage() {
             </div>
           </div>
         </div>
+        <Message />
       </div>
     </div>
   );
