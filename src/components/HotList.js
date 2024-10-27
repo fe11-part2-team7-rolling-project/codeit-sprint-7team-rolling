@@ -87,12 +87,94 @@ function HotList() {
           font: "Times New Roman",
           createdAt: "2023-11-02T07:45:25.399056Z",
         },
+        {
+          id: 35,
+          recipientId: 3,
+          sender: "이진아",
+          profileImageURL:
+            "https://fastly.picsum.photos/id/54/200/200.jpg?hmac=Wo8I6KPlR54Z1JIQSUjzXMxL1PQ8Upvb07Qyp7NpIqc",
+          relationship: "친구",
+          content: "항상 행복하길!",
+          font: "Times New Roman",
+          createdAt: "2023-11-02T07:45:25.399056Z",
+        },
+        {
+          id: 35,
+          recipientId: 3,
+          sender: "이진아",
+          profileImageURL:
+            "https://fastly.picsum.photos/id/54/200/200.jpg?hmac=Wo8I6KPlR54Z1JIQSUjzXMxL1PQ8Upvb07Qyp7NpIqc",
+          relationship: "친구",
+          content: "항상 행복하길!",
+          font: "Times New Roman",
+          createdAt: "2023-11-02T07:45:25.399056Z",
+        },
+        {
+          id: 35,
+          recipientId: 3,
+          sender: "이진아",
+          profileImageURL:
+            "https://fastly.picsum.photos/id/54/200/200.jpg?hmac=Wo8I6KPlR54Z1JIQSUjzXMxL1PQ8Upvb07Qyp7NpIqc",
+          relationship: "친구",
+          content: "항상 행복하길!",
+          font: "Times New Roman",
+          createdAt: "2023-11-02T07:45:25.399056Z",
+        },
       ],
       reactionCount: 36,
       topReactions: [
         { id: 34, emoji: "❤️", count: 16 },
         { id: 35, emoji: "🎉", count: 12 },
         { id: 36, emoji: "😊", count: 8 },
+      ],
+    },
+    {
+      id: 2,
+      name: "강영훈",
+      backgroundColor: "#00FF00",
+      backgroundImageURL: null,
+      createdAt: "2023-10-26T13:19:31.401765Z",
+      messageCount: 3,
+      recentMessages: [
+        {
+          id: 32,
+          recipientId: 2,
+          sender: "김하은",
+          profileImageURL:
+            "https://fastly.picsum.photos/id/311/200/200.jpg?hmac=CHiYGYQ3Xpesshw5eYWH7U0Kyl9zMTZLQuRDU4OtyH8",
+          relationship: "가족",
+          content: "열심히 일하는 모습 멋있습니다.",
+          font: "Pretendard",
+          createdAt: "2023-11-01T08:05:25.399056Z",
+        },
+        {
+          id: 31,
+          recipientId: 2,
+          sender: "이영준",
+          profileImageURL:
+            "https://fastly.picsum.photos/id/1025/200/200.jpg?hmac=VHJNaINoB_NM72EECUzBuWQKjTVB4_u2YOA1LxZTkcw",
+          relationship: "지인",
+          content: "항상 응원합니다",
+          font: "Noto Sans",
+          createdAt: "2023-11-01T08:04:12.852691Z",
+        },
+        {
+          id: 33,
+          recipientId: 2,
+          sender: "박지민",
+          profileImageURL:
+            "https://fastly.picsum.photos/id/64/200/200.jpg?hmac=9TEnAyLXcBd9SojGrsZtF8L_q_pBEotwMA6HfbyR5tk",
+          relationship: "친구",
+          content: "잘하고 있어요!",
+          font: "Arial",
+          createdAt: "2023-11-01T08:03:10.123456Z",
+        },
+      ],
+      reactionCount: 48,
+      topReactions: [
+        { id: 27, emoji: "😀", count: 14 },
+        { id: 31, emoji: "😊", count: 11 },
+        { id: 33, emoji: "👍", count: 10 },
       ],
     },
     {
@@ -215,7 +297,7 @@ function HotList() {
   if (error) return <div>{error}</div>;
 
   return (
-    <div className="pl-5 flex gap-3 overflow-x-auto scrollbar-hide min-[376px]:gap-5">
+    <div className="pl-5 flex gap-3 overflow-x-auto scrollbar-hide min-[376px]:gap-5 min-[1025px]:overflow-x-hidden min-[1025px]:max-w-[1190px]">
       {hotList.map((item) => (
         <div
           key={item.id}
