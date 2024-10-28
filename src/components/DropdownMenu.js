@@ -5,7 +5,7 @@ function DropdownMenu({ reactions }) {
   const [isDropdownVisible, setIsDropdownVisible] = useState(false);
 
   const toggleDropdown = () => {
-    setIsDropdownVisible(!isDropdownVisible);
+    setIsDropdownVisible((prev) => !prev);
   };
 
   return (
