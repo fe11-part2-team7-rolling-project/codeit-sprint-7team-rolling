@@ -1,0 +1,89 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 60px 0 300px;
+  }
+  
+  .content {
+    max-width: 1200px;
+  }
+  
+  .inputBox {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+    padding-bottom: 50px;
+  }
+  
+  .inputName {
+    color: var(--gray-900);
+    font-size: var(--xxl);
+    font-weight: var(--bold);
+  }   
+     
+  .describeBackgroundInfo {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .describeTitle {
+    color: var(--gray-900);
+    font-size: var(--xxl);
+    font-weight: var(--bold);
+  }
+  
+  .describeSubtitle {
+    color: var(--gray-500);
+    font-size: var(--m);
+    font-weight: var(--regular);
+  }
+  
+  .selectButton {
+    padding: 52px 0 42px;
+    width: fit-content;
+  }
+  
+  .createButton {
+    padding: 70px 0;
+  }
+  
+  /* Tablet-size */
+  @media screen and (min-width: 769px) and (max-width: 1248px) {
+    .container {
+      padding: 40px 24px;
+    }
+  
+    .content {
+      max-width: 720px;
+    }
+  
+    .selectButton {
+      padding: 40px 0 28px;
+    }
+  }
+  
+  /* Mobile-size */
+  @media screen and (max-width: 768px) {
+    .container {
+      padding: 40px 24px;
+    }
+  
+    .content {
+      max-width: 360px;
+    }
+  
+    .inputBox {
+      padding-bottom: 48px;
+    }
+  
+    .selectButton {
+      padding: 24px 0 28px;
+    }
+  
+    .createButton {
+      padding: 80px 0 24px;
+    }
+}
