@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { ReactComponent as Share } from '../assets/share.svg';
 import axiosInstance from '../axiosInstance';
 import Reactions from '../components/Reactions';
 import Message from '../components/Message';
+import Share from '../components/Share';
 
 function PostIdPage() {
   const [images, setImages] = useState([]);
@@ -32,12 +32,7 @@ function PostIdPage() {
         </div>
         <div className="flex flex-row items-center justify-between bg-white text-black w-full h-[52px] border-b border-gray200">
           <Reactions />
-          <button
-            type="button"
-            className="px-[6px] py-2 border rounded-[6px] border-gray300"
-          >
-            <Share className="w-[20px] h-[20px]" />
-          </button>
+          <Share />
         </div>
       </div>
       <div
