@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { ReactComponent as Share } from '../assets/share.svg';
 import axiosInstance from '../axiosInstance';
 import Reactions from '../components/Reactions';
@@ -49,12 +50,12 @@ function PostIdPage() {
       >
         <div className="flex flex-col gap-4 items-center justify-center p-4 z-10">
           <div className="w-full h-full min-h-[230px] bg-white flex items-center justify-center rounded-[16px] shadow-lg">
-            <button
-              type="button"
-              className="w-[56px] h-[56px] p-4 bg-gray500  rounded-full text-[24px] text-white flex flex-row justify-center items-center"
+            <Link
+              to="/post/1/message"
+              className="w-[56px] h-[56px] bg-gray500  rounded-full text-[24px] text-white flex justify-center items-center"
             >
               +
-            </button>
+            </Link>
           </div>
         </div>
         <Message />
