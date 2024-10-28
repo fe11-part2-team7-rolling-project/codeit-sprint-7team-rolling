@@ -1,4 +1,3 @@
-// src/pages/MainPage/components/Card.js
 import React from 'react';
 import PropTypes from 'prop-types';
 import plusCircle from '../../../assets/images/pluscircle.svg';

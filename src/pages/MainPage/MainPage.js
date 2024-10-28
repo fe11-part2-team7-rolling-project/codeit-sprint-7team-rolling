@@ -1,8 +1,7 @@
-// src/pages/MainPage/MainPage.js
 import React from 'react';
 import Header from '../../components/Layout/Header';
 import Section from './components/Section';
-import ExploreButton from '../../components/UI/ExploreButton';
+import ExploreButton from '../../components/Layout/ExploreButton';
 import php1 from '../../assets/images/php1.svg';
 import php2 from '../../assets/images/php2.svg';
 

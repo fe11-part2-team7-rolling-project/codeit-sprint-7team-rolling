@@ -1,4 +1,3 @@
-// src/pages/MainPage/components/Section.js
 import React from 'react';
 import PropTypes from 'prop-types';
 import Card from './Card';
@@ -15,7 +14,7 @@ function Section({ point, title, description, cards, emojiSection }) {
           <div className="flex space-x-4 overflow-x-scroll md:overflow-hidden">
             {cards.map((card, index) => (
               <Card
-                key={card.id || index} // 고유한 key 값을 사용
+                key={card.id || index}
                 from={card.from}
                 text={card.text}
                 date={card.date}
@@ -30,7 +29,6 @@ function Section({ point, title, description, cards, emojiSection }) {
   );
 }
 
-// PropTypes 설정
 Section.propTypes = {
   point: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
@@ -46,7 +44,6 @@ Section.propTypes = {
   emojiSection: PropTypes.bool,
 };
 
-// defaultProps 설정
 Section.defaultProps = {
   emojiSection: false,
 };
