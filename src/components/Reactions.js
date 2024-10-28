@@ -25,8 +25,8 @@ function Reactions() {
   const dropdownReactions = reactions.slice(3);
 
   return (
-    <div className="flex flex-row relative gap-2 mx-5">
-      <div className="flex flex-row gap-2">
+    <div className="flex flex-row relative gap-5 pl-5 pr-6 border-r border-gray200">
+      <div className="flex flex-row gap-2 my-auto">
         {visibleReactions.map((reaction) => (
           <div
             key={reaction.id}
