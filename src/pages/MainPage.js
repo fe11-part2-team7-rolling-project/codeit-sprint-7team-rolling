@@ -1,24 +1,34 @@
 import React from 'react';
-import Header from '../../components/Layout/Header';
-import Section from './components/Section';
-import ExploreButton from '../../components/Layout/ExploreButton';
-import php1 from '../../assets/images/php1.svg';
-import php2 from '../../assets/images/php2.svg';
+import Header from '../components/Layout/Header';
+import Section from '../components/Section';
+import ExploreButton from '../components/Layout/ExploreButton';
+import php1 from '../assets/php1.svg';
+import php2 from '../assets/php2.svg';
 
 function MainPage() {
   return (
     <div className="bg-gray-100 min-h-screen">
       <Header />
       <main className="flex flex-col items-center py-8 px-4 sm:px-6 md:px-16 lg:px-24">
-        
-        {/* 첫 번째 섹션 */}
         <Section
           point="Point.01"
           title="누구나 손쉽게, 온라인 롤링 페이퍼를 만들 수 있어요"
           description="로그인 없이 자유롭게 만들어요."
           cards={[
-            { id: 1, from: '장미나', text: '코로나가 한창이던 그때를...', date: '2023.07.08', profileImage: php1 },
-            { id: 2, from: '박대영', text: '일교차가 큰 시기입니다...', date: '2023.07.08', profileImage: php2 },
+            {
+              id: 1,
+              from: '장미나',
+              text: '코로나가 한창이던 그때를...',
+              date: '2023.07.08',
+              profileImage: php1,
+            },
+            {
+              id: 2,
+              from: '박대영',
+              text: '일교차가 큰 시기입니다...',
+              date: '2023.07.08',
+              profileImage: php2,
+            },
             { id: 3, from: '', text: '', date: '', profileImage: null }, // 플러스 아이콘 카드
           ]}
           emojiSection={false} // 이 섹션에는 이모지 섹션 포함하지 않음

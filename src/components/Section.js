@@ -39,7 +39,7 @@ Section.propTypes = {
       text: PropTypes.string,
       date: PropTypes.string,
       profileImage: PropTypes.string,
-    })
+    }),
   ).isRequired,
   emojiSection: PropTypes.bool,
 };
