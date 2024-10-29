@@ -1,7 +1,7 @@
-import axios from 'axios';
+import axios from "axios";
 
 const axiosInstance = axios.create({
-  baseURL: 'https://rolling-api.vercel.app',
+  baseURL: "https://rolling-api.vercel.app",
   timeout: 2000,
 });
 
