@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 // eslint-disable-next-line import/no-extraneous-dependencies
 import PropTypes from "prop-types";
-import profileImg01 from "../img/profile_img_01.svg";
-import profileImg02 from "../img/profile_img_02.svg";
-import profileImg03 from "../img/profile_img_03.svg";
-import defaultProfile from "../img/default_profile.svg";
+import profileImg01 from "../assets/php1.svg";
+import profileImg02 from "../assets/php2.svg";
+import profileImg03 from "../assets/php3.svg";
+import defaultProfile from "../assets/default_profile.svg";
 
 function ProfileImageSelector({ onSelectImage }) {
   const [selectedImage, setSelectedImage] = useState(defaultProfile);
