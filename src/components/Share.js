@@ -1,29 +1,49 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
+import { toast } from 'react-toastify';
 import { ReactComponent as ShareIcon } from '../assets/share.svg';
 
 function Share() {
   const [isDropdownVisible, setIsDropdownVisible] = useState(false);
-  const [isToastVisible, setIsToastVisible] = useState(false);
+  const dropdownRef = useRef(null);
 
   const toggleDropdown = () => {
     setIsDropdownVisible((prev) => !prev);
   };
 
+  const handleClickOutside = (e) => {
+    if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
+      setIsDropdownVisible(false);
+    }
+  };
+
+  useEffect(() => {
+    if (isDropdownVisible) {
+      document.addEventListener('mousedown', handleClickOutside);
+    } else {
+      document.removeEventListener('mousedown', handleClickOutside);
+    }
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside); // cleanup
+    };
+  }, [isDropdownVisible]);
+
   const copyToClipboard = async () => {
     try {
       const url = window.location.href;
       await navigator.clipboard.writeText(url);
-      setIsToastVisible(true);
-      setTimeout(() => {
-        setIsToastVisible(false);
-      }, 5000);
+      toast.success('URL이 복사 되었습니다.', {
+        position: 'bottom-center',
+        autoClose: 5000,
+        className:
+          'bg-black opacity-80 text-white font-regular text-[16px] leading-[26px] rounded-[8px]',
+      });
     } catch (error) {
       console.error('Failed to copy: ', error);
     }
   };
 
   return (
-    <div className="relative">
+    <div className="relative" ref={dropdownRef}>
       <button
         type="button"
         className="px-[6px] py-2 border rounded-[6px] border-gray300"
@@ -49,11 +69,6 @@ function Share() {
               URL 공유
             </button>
           </div>
-        </div>
-      )}
-      {isToastVisible && (
-        <div className="fixed bottom-5 right-5 px-4 py-2 bg-black text-white rounded-md shadow-lg">
-          URL이 클립보드에 복사되었습니다!
         </div>
       )}
     </div>

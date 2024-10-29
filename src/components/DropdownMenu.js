@@ -1,15 +1,36 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { ReactComponent as Dropdown } from '../assets/ic_drop.svg';
 
 function DropdownMenu({ reactions }) {
   const [isDropdownVisible, setIsDropdownVisible] = useState(false);
+  const dropdownRef = useRef(null);
 
   const toggleDropdown = () => {
     setIsDropdownVisible((prev) => !prev);
   };
 
+  const handleClickOutside = (e) => {
+    if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
+      setIsDropdownVisible(false);
+    }
+  };
+
+  useEffect(() => {
+    if (isDropdownVisible) {
+      document.addEventListener('mousedown', handleClickOutside);
+    } else {
+      document.removeEventListener('mousedown', handleClickOutside);
+    }
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside); // cleanup
+    };
+  }, [isDropdownVisible]);
+
   return (
-    <div className="relative flex flex-row justify-center items-center">
+    <div
+      className="relative flex flex-row justify-center items-center"
+      ref={dropdownRef}
+    >
       <button type="button" onClick={toggleDropdown}>
         <Dropdown />
       </button>
