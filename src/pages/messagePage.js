@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import FromInput from "../components/FromInput";
-import ProfileImageSelector from "../components/ProfileImageSelector";
-import RelationSelector from "../components/RelationSelector";
-import TextEditor from "../components/TextEditor";
-import FontSelector from "../components/FontSelector";
-import CreateButton from "../components/CreateButton";
+import FromInput from "../components/messagePage/FromInput";
+import ProfileImageSelector from "../components/messagePage/ProfileImageSelector";
+import RelationSelector from "../components/messagePage/RelationSelector";
+import TextEditor from "../components/messagePage/TextEditor";
+import FontSelector from "../components/messagePage/FontSelector";
+import CreateButton from "../components/messagePage/CreateButton";
 
 function MessagePage() {
   const [from, setFrom] = useState("");
