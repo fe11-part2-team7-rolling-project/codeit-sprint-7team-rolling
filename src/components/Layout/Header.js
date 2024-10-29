@@ -1,6 +1,6 @@
 import React from 'react';
 import Logo from './Logo';
-import CreateButton from './CreateButton';
+import CreateRollingButton from './CreateRollingButton';
 
 function Header() {
   return (
@@ -8,7 +8,7 @@ function Header() {
       <div className="flex justify-between items-center max-w-7xl mx-auto">
         <Logo />
         <div className="flex-shrink-0 ml-auto">
-          <CreateButton />
+          <CreateRollingButton />
         </div>
       </div>
     </header>

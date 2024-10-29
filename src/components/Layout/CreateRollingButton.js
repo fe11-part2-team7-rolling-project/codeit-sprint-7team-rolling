@@ -1,7 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
-function CreateButton() {
+function CreateRollingButton() {
   const navigate = useNavigate();
 
   const handleClick = () => {
@@ -19,4 +19,4 @@ function CreateButton() {
   );
 }
 
-export default CreateButton;
+export default CreateRollingButton;
