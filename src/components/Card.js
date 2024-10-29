@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import plusCircle from '../../../assets/images/pluscircle.svg';
+import plusCircle from '../assets/pluscircle.svg';
 
 function Card({ from, text, date, profileImage }) {
   return (

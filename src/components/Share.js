@@ -6,7 +6,7 @@ function Share() {
   const [isToastVisible, setIsToastVisible] = useState(false);
 
   const toggleDropdown = () => {
-    setIsDropdownVisible(!isDropdownVisible);
+    setIsDropdownVisible((prev) => !prev);
   };
 
   const copyToClipboard = async () => {
