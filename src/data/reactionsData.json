@@ -1,0 +1,57 @@
+{
+  "count": 10,
+  "next": "https://rolling-api.vercel.app/0-3/recipients/2/reactions/?limit=2&offset=2",
+  "previous": null,
+  "results": [
+    {
+      "id": 34,
+      "emoji": "🥰",
+      "count": 8
+    },
+    {
+      "id": 28,
+      "emoji": "😄",
+      "count": 7
+    },
+    {
+      "id": 45,
+      "emoji": "👍",
+      "count": 5
+    },
+    {
+      "id": 39,
+      "emoji": "😍",
+      "count": 4
+    },
+    {
+      "id": 52,
+      "emoji": "😭",
+      "count": 3
+    },
+    {
+      "id": 61,
+      "emoji": "❤️",
+      "count": 3
+    },
+    {
+      "id": 72,
+      "emoji": "😂",
+      "count": 2
+    },
+    {
+      "id": 85,
+      "emoji": "🥳",
+      "count": 2
+    },
+    {
+      "id": 93,
+      "emoji": "😎",
+      "count": 1
+    },
+    {
+      "id": 101,
+      "emoji": "😢",
+      "count": 1
+    }
+  ]
+}

@@ -1,0 +1,47 @@
+{
+  "count": 4,
+  "next": null,
+  "previous": "https://rolling-api.vercel.app/0-3/recipients/2/messages/?limit=3",
+  "results": [
+    {
+      "id": 32,
+      "recipientId": 2,
+      "sender": "김하은",
+      "profileImageURL": "https://fastly.picsum.photos/id/311/200/200.jpg?hmac=CHiYGYQ3Xpesshw5eYWH7U0Kyl9zMTZLQuRDU4OtyH8",
+      "relationship": "가족",
+      "content": "열심히 일하는 모습 멋있습니다.",
+      "font": "Pretendard",
+      "createdAt": "2023-11-01T08:05:25.399056Z"
+    },
+    {
+      "id": 31,
+      "recipientId": 2,
+      "sender": "이영준",
+      "profileImageURL": "https://fastly.picsum.photos/id/314/200/200.jpg?hmac=kGFiB4cYHFYqzHLu5bBGr9MQUkZwtPx-Y9_Q9blLVRQ",
+      "relationship": "지인",
+      "content": "항상 응원합니다",
+      "font": "Noto Sans",
+      "createdAt": "2023-11-01T08:04:12.852691Z"
+    },
+    {
+      "id": 30,
+      "recipientId": 2,
+      "sender": "박소윤",
+      "profileImageURL": "https://fastly.picsum.photos/id/312/200/200.jpg?hmac=XwA2BbNxA9H2wPzsmjkeb3Q6RG57F3U6b3kfvkZykFw",
+      "relationship": "친구",
+      "content": "좋은 하루 보내세요!",
+      "font": "Roboto",
+      "createdAt": "2023-11-01T08:03:00.123456Z"
+    },
+    {
+      "id": 29,
+      "recipientId": 2,
+      "sender": "최민수",
+      "profileImageURL": "https://fastly.picsum.photos/id/315/200/200.jpg?hmac=ptWzB4T6aFYqk5fsUuMf0HuQkQ7bPptTtlgjjyFIEpg",
+      "relationship": "동료",
+      "content": "멋진 프로젝트 기대할게요.",
+      "font": "Arial",
+      "createdAt": "2023-11-01T08:02:45.678912Z"
+    }
+  ]
+}
