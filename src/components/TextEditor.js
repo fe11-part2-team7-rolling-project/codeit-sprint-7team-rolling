@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const TextEditor = () => {
+function TextEditor() {
   const [content, setContent] = useState("");
   const [isBold, setIsBold] = useState(false);
   const [isItalic, setIsItalic] = useState(false);
@@ -16,34 +16,39 @@ const TextEditor = () => {
 
   return (
     <div>
-      <label>내용을 입력해 주세요</label>
-      <div>
-        <button
-          onClick={() => setIsBold(!isBold)}
-          style={{ fontWeight: "bold" }}
-        >
-          B
-        </button>
-        <button
-          onClick={() => setIsItalic(!isItalic)}
-          style={{ fontStyle: "italic" }}
-        >
-          I
-        </button>
-        <button
-          onClick={() => setIsUnderline(!isUnderline)}
-          style={{ textDecoration: "underline" }}
-        >
-          U
-        </button>
-      </div>
-      <textarea
-        value={content}
-        onChange={(e) => setContent(e.target.value)}
-        style={{ width: "100%", height: "150px", ...applyStyle() }}
-      />
+      <label htmlFor="textContent">
+        내용을 입력해 주세요
+        <div>
+          <button
+            type="button"
+            onClick={() => setIsBold(!isBold)}
+            style={{ fontWeight: "bold" }}
+          >
+            B
+          </button>
+          <button
+            type="button"
+            onClick={() => setIsItalic(!isItalic)}
+            style={{ fontStyle: "italic" }}
+          >
+            I
+          </button>
+          <button
+            type="button"
+            onClick={() => setIsUnderline(!isUnderline)}
+            style={{ textDecoration: "underline" }}
+          >
+            U
+          </button>
+        </div>
+        <textarea
+          value={content}
+          onChange={(e) => setContent(e.target.value)}
+          style={{ width: "100%", height: "150px", ...applyStyle() }}
+        />
+      </label>
     </div>
   );
-};
+}
 
 export default TextEditor;

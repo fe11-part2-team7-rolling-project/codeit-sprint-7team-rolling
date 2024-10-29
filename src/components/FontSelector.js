@@ -1,21 +1,29 @@
 import React, { useState } from "react";
 
-const FontSelector = () => {
+const fonts = ["Noto Sans", "Arial", "Roboto"];
+
+function FontSelector() {
   const [font, setFont] = useState("Noto Sans");
-  const fonts = ["Noto Sans", "Arial", "Roboto"];
 
   return (
     <div>
-      <label>폰트 선택</label>
-      <select value={font} onChange={(e) => setFont(e.target.value)}>
-        {fonts.map((font) => (
-          <option key={font} value={font}>
-            {font}
-          </option>
-        ))}
-      </select>
+      <label htmlFor="fontname">
+        폰트 선택
+        <select
+          value={font}
+          onChange={(e) => setFont(e.target.value)}
+          id="fontname"
+          name="fontname"
+        >
+          {fonts.map((fontOption) => (
+            <option key={fontOption} value={fontOption}>
+              {fontOption}
+            </option>
+          ))}
+        </select>
+      </label>
     </div>
   );
-};
+}
 
 export default FontSelector;

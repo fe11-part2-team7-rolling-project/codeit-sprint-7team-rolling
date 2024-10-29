@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
+// eslint-disable-next-line import/no-extraneous-dependencies
+import PropTypes from "prop-types";
 
-const CreateButton = ({ from, content }) => {
+function CreateButton({ from, content }) {
   const [isDisabled, setIsDisabled] = useState(true);
 
   useEffect(() => {
@@ -20,10 +22,16 @@ const CreateButton = ({ from, content }) => {
   };
 
   return (
-    <button onClick={handleSubmit} disabled={isDisabled}>
+    <button type="button" onClick={handleSubmit} disabled={isDisabled}>
       생성하기
     </button>
   );
+}
+
+// Correct usage of PropTypes
+CreateButton.propTypes = {
+  from: PropTypes.string.isRequired,
+  content: PropTypes.string.isRequired,
 };
 
 export default CreateButton;
