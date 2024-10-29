@@ -1,6 +1,8 @@
 import React, { useState } from "react";
+// eslint-disable-next-line import/no-extraneous-dependencies
+import PropTypes from "prop-types";
 
-function TextEditor() {
+function TextEditor({ onContentChange }) {
   const [content, setContent] = useState("");
   const [isBold, setIsBold] = useState(false);
   const [isItalic, setIsItalic] = useState(false);
@@ -12,6 +14,11 @@ function TextEditor() {
     if (isItalic) style += "font-style: italic; ";
     if (isUnderline) style += "text-decoration: underline; ";
     return style;
+  };
+
+  const handleContentChange = (e) => {
+    setContent(e.target.value);
+    onContentChange(e.target.value); // 부모 컴포넌트에 전달
   };
 
   return (
@@ -43,12 +50,16 @@ function TextEditor() {
         </div>
         <textarea
           value={content}
-          onChange={(e) => setContent(e.target.value)}
+          onChange={handleContentChange}
           style={{ width: "100%", height: "150px", ...applyStyle() }}
         />
       </label>
     </div>
   );
 }
+
+TextEditor.propTypes = {
+  onContentChange: PropTypes.func.isRequired,
+};
 
 export default TextEditor;

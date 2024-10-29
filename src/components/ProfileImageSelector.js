@@ -1,15 +1,18 @@
 import React, { useState } from "react";
+// eslint-disable-next-line import/no-extraneous-dependencies
+import PropTypes from "prop-types";
 import profileImg01 from "../img/profile_img_01.svg";
 import profileImg02 from "../img/profile_img_02.svg";
 import profileImg03 from "../img/profile_img_03.svg";
 import defaultProfile from "../img/default_profile.svg";
 
-function ProfileImageSelector() {
+function ProfileImageSelector({ onSelectImage }) {
   const [selectedImage, setSelectedImage] = useState(defaultProfile);
   const imagePaths = [profileImg01, profileImg02, profileImg03];
 
   const handleImageSelect = (image) => {
     setSelectedImage(image);
+    onSelectImage(image); // 부모 컴포넌트에 전달
   };
 
   return (
@@ -59,5 +62,9 @@ function ProfileImageSelector() {
     </div>
   );
 }
+
+ProfileImageSelector.propTypes = {
+  onSelectImage: PropTypes.func.isRequired,
+};
 
 export default ProfileImageSelector;
