@@ -6,7 +6,7 @@ import TextEditor from "../components/TextEditor";
 import FontSelector from "../components/FontSelector";
 import CreateButton from "../components/CreateButton";
 
-const MessagePage = () => {
+function MessagePage() {
   const [from, setFrom] = useState("");
   const [content, setContent] = useState("");
 
@@ -33,6 +33,6 @@ const MessagePage = () => {
       <CreateButton from={from} content={content} />
     </div>
   );
-};
+}
 
 export default MessagePage;
