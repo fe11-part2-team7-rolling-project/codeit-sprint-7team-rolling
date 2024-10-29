@@ -1,0 +1,52 @@
+.backgroundOptions {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(200px, 288px));
+    gap: 16px;
+    max-width: 1200px;
+  }
+  
+  .option {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    border-radius: 16px;
+    width: 100%;
+    padding: 50% 0;
+  }  
+     
+  .colorBeige {
+    background-color: var(--orange-200);
+  }
+  
+  .colorPurple {
+    background-color: var(--purple-200);
+  }
+  
+  .colorBlue {
+    background-color: var(--blue-200);
+  }
+  
+  .colorGreen {
+    background-color: var(--green-200);
+  }
+  
+  
+  .backgroundChecked {
+    position: absolute;
+  }
+  
+  @media screen and (min-width: 769px) and (max-width: 1248px) {
+    .backgroundOptions {
+      grid-template-columns: repeat(4, minmax(168px, 200px));
+      max-width: 720px;
+    }
+  }
+  
+  @media screen and (max-width: 768px) {
+    .backgroundOptions {
+      grid-template-columns: repeat(2,  minmax(150px, 168px));
+      max-width: 320px;
+    }
+  }
