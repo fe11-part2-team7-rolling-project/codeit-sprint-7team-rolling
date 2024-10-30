@@ -15,47 +15,46 @@ function ProfileImageSelector({ onSelectImage }) {
   };
 
   return (
-    <div>
-      <label htmlFor="profile">
-        프로필 이미지
-        <div>
-          <img
-            src={selectedImage}
-            alt="Profile"
-            style={{ width: "50px", height: "50px", borderRadius: "50%" }}
-          />
-        </div>
-        <p>프로필 이미지를 선택해 주세요!</p>
-        <div style={{ display: "flex", gap: "10px" }}>
-          {imagePaths.map((image, index) => (
-            <button
-              type="button"
-              key={image}
-              onClick={() => handleImageSelect(image)}
-              onKeyDown={(e) => {
-                if (e.key === "Enter" || e.key === " ") {
-                  handleImageSelect(image);
-                }
-              }}
-              style={{
-                border: "none",
-                background: "none",
-                padding: 0,
-                cursor: "pointer",
-                outline: selectedImage === image ? "2px solid #000" : "none",
-              }}
-            >
-              <img
-                src={image}
-                alt={`Profile ${index + 1}`}
-                style={{
-                  width: "50px",
-                  height: "50px",
-                  borderRadius: "50%",
-                }}
-              />
-            </button>
-          ))}
+    <div className="mb-6">
+      <label
+        htmlFor="ProfileImageSelector"
+        className="block text-2xl font-semibold mb-2"
+      >
+        <div className="mb-4">프로필 이미지</div>
+
+        <div className="flex items-center gap-8">
+          <div>
+            <img
+              src={selectedImage}
+              alt="Profile"
+              className="w-16 h-16 rounded-full"
+            />
+          </div>
+          <div>
+            <p className="text-gray500 text-sm">
+              프로필 이미지를 선택해 주세요!
+            </p>
+            <div className="flex gap-4 mt-2">
+              {imagePaths.map((image, index) => (
+                <button
+                  type="button"
+                  key={image}
+                  onClick={() => handleImageSelect(image)}
+                  className={`rounded-full p-0 border-none ${
+                    selectedImage === image
+                      ? "border-purple-500"
+                      : "border-transparent"
+                  }`}
+                >
+                  <img
+                    src={image}
+                    alt={`Profile ${index + 1}`}
+                    className="w-12 h-12 rounded-full"
+                  />
+                </button>
+              ))}
+            </div>
+          </div>
         </div>
       </label>
     </div>
