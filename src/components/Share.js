@@ -1,13 +1,16 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { ReactComponent as ShareIcon } from '../assets/share.svg';
 
 function Share() {
+  const { id } = useParams();
   const [isDropdownVisible, setIsDropdownVisible] = useState(false);
   const dropdownRef = useRef(null);
 
   const toggleDropdown = () => {
     setIsDropdownVisible((prev) => !prev);
+    console.log(id);
   };
 
   const handleClickOutside = (e) => {
@@ -42,6 +45,15 @@ function Share() {
     }
   };
 
+  const shareOnKakao = () => {
+    window.Kakao.Share.sendCustom({
+      templateId: 113686,
+      templateArgs: {
+        id: id,
+      },
+    });
+  };
+
   return (
     <div className="relative" ref={dropdownRef}>
       <button
@@ -53,11 +65,11 @@ function Share() {
       </button>
       {isDropdownVisible && (
         <div className="absolute top-full right-1 mt-2">
-          <div className="flex flex-col justify-center items-center w-[140px] h-[120px] bg-white border rounded-[8px] border-[#B6B6B6]">
+          <div className="flex flex-col justify-center items-center w-[140px] h-[120px] bg-white border rounded-[8px] border-gray300">
             <button
               type="button"
-              className="w-full px-4 py-3 font-regular text-[16px] leading-[26px] border-b cursor-pointer hover:bg-gray100"
-              onClick={() => console.log('카카오톡 공유')}
+              className="w-full px-4 py-3 font-regular text-[16px] leading-[26px] border-b border-gray300 cursor-pointer hover:bg-gray100"
+              onClick={shareOnKakao} // 카카오톡 공유 함수 연결
             >
               카카오톡 공유
             </button>

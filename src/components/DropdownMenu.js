@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
+import PropTypes from 'prop-types'; // import 추가
 import { ReactComponent as Dropdown } from '../assets/ic_drop.svg';
 
 function DropdownMenu({ reactions }) {
@@ -55,5 +56,15 @@ function DropdownMenu({ reactions }) {
     </div>
   );
 }
+
+DropdownMenu.propTypes = {
+  reactions: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      emoji: PropTypes.string.isRequired,
+      count: PropTypes.number.isRequired,
+    }),
+  ).isRequired,
+};
 
 export default DropdownMenu;
