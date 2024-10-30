@@ -7,6 +7,7 @@ import reactionData from '../data/reactionsData.json';
 function Reactions() {
   const [showEmojiPicker, setShowEmojiPicker] = useState(false);
   const [reactions, setReactions] = useState([]);
+  const [inputStr, setInputStr] = useState('');
 
   useEffect(() => {
     setReactions(reactionData.results);
@@ -17,7 +18,9 @@ function Reactions() {
   };
 
   const onEmojiClick = (event, emojiObject) => {
-    console.log('Selected emoji:', emojiObject.emoji);
+    setInputStr((prevInput) => prevInput + emojiObject.emoji);
+    console.log('Selected emoji:', event.emoji);
+    console.log(event);
     setShowEmojiPicker(false);
   };
 

@@ -7,9 +7,20 @@ import Message from '../components/Message';
 import Share from '../components/Share';
 import getRecipents from '../api/recipients';
 
-function PostIdPage() {
+const INITIAL_VALUES = {
+  backgroundColor: '',
+  backgroundImageURL: null,
+  createdAt: '',
+  id: 0,
+  messageCount: 0,
+  name: '',
+  recentMessages: [],
+  topReactions: [],
+};
+
+function PostIdPage({ initialValues = INITIAL_VALUES }) {
   const { id } = useParams();
-  const [images, setImages] = useState('');
+  const [items, setItems] = useState(initialValues);
   const colorClassMap = {
     purple: 'bg-purple200',
     blue: 'bg-blue200',
@@ -18,16 +29,16 @@ function PostIdPage() {
   };
 
   useEffect(() => {
-    async function fetchBackgroundImageData() {
+    async function fetchBackgroundColorData() {
       try {
         const data = await getRecipents(id);
-        setImages(data.backgroundColor);
+        setItems(data);
       } catch (error) {
         console.error('Error fetching data:', error);
       }
     }
 
-    fetchBackgroundImageData();
+    fetchBackgroundColorData();
   }, [id]);
 
   return (
@@ -43,7 +54,7 @@ function PostIdPage() {
       <div className="sticky top-0 z-20">
         <div className="bg-white text-black w-full h-[52px] border-b border-gray200">
           <div className="flex flex-row items-center px-6 w-full h-full text-[18px] leading-[26px] font-regular">
-            To. Ashley Kim
+            To. {items.name}
           </div>
         </div>
         <div className="flex flex-row items-center justify-between bg-white text-black w-full h-[52px] border-b border-gray200">
@@ -51,11 +62,22 @@ function PostIdPage() {
           <Share />
         </div>
       </div>
-      <div className={`w-full h-full bg-cover z-0 ${colorClassMap[images]}`}>
+      <div
+        className={`w-full h-full bg-cover z-0 ${
+          items.backgroundImageURL ? '' : colorClassMap[items.backgroundColor]
+        }`}
+        style={{
+          backgroundImage: items.backgroundImageURL
+            ? `url(${items.backgroundImageURL})`
+            : 'none',
+          backgroundSize: items.backgroundImageURL ? 'cover' : 'auto',
+          backgroundPosition: 'center',
+        }}
+      >
         <div className="flex flex-col gap-4 items-center justify-center p-4 z-10">
           <div className="w-full h-full min-h-[230px] bg-white flex items-center justify-center rounded-[16px] shadow-lg">
             <Link
-              to="/post/1/message"
+              to={`/post/${id}/message`}
               className="w-[56px] h-[56px] bg-gray500 rounded-full text-[24px] text-white flex justify-center items-center"
             >
               +
