@@ -3,16 +3,18 @@ import PropTypes from "prop-types";
 
 function TextEditor({ onContentChange }) {
   const [content, setContent] = useState("");
-  const [isBold, setIsBold] = useState(false);
-  const [isItalic, setIsItalic] = useState(false);
-  const [isUnderline, setIsUnderline] = useState(false);
+  const [textStyle, setTextStyle] = useState({
+    isBold: false,
+    isItalic: false,
+    isUnderline: false,
+  });
 
   const applyStyle = () => {
-    let style = "";
-    if (isBold) style += "font-weight: bold; ";
-    if (isItalic) style += "font-style: italic; ";
-    if (isUnderline) style += "text-decoration: underline; ";
-    return style;
+    const classes = [];
+    classes.push(textStyle.isBold ? "font-bold" : "font-thin"); // Bold or thin
+    if (textStyle.isItalic) classes.push("italic"); // Italic if active
+    if (textStyle.isUnderline) classes.push("underline"); // Underline if active
+    return classes.join(" ");
   };
 
   const handleContentChange = (e) => {
@@ -31,23 +33,36 @@ function TextEditor({ onContentChange }) {
           <div className="flex gap-[10px] w-[718px] h-[49px] bg-[#EEEEEE] p-1">
             <button
               type="button"
-              onClick={() => setIsBold(!isBold)}
-              className={`font-bold ${isBold ? "bg-gray-200" : ""} p-2 rounded`}
+              onClick={() =>
+                setTextStyle({ ...textStyle, isBold: !textStyle.isBold })
+              }
+              className={`font-bold ${
+                textStyle.isBold ? "bg-gray-200" : ""
+              } p-2 rounded`}
             >
               B
             </button>
             <button
               type="button"
-              onClick={() => setIsItalic(!isItalic)}
-              className={`italic ${isItalic ? "bg-gray-200" : ""} p-2 rounded`}
+              onClick={() =>
+                setTextStyle({ ...textStyle, isItalic: !textStyle.isItalic })
+              }
+              className={`italic ${
+                textStyle.isItalic ? "bg-gray-200" : ""
+              } p-2 rounded`}
             >
               I
             </button>
             <button
               type="button"
-              onClick={() => setIsUnderline(!isUnderline)}
+              onClick={() =>
+                setTextStyle({
+                  ...textStyle,
+                  isUnderline: !textStyle.isUnderline,
+                })
+              }
               className={`underline ${
-                isUnderline ? "bg-gray-200" : ""
+                textStyle.isUnderline ? "bg-gray-200" : ""
               } p-2 rounded`}
             >
               U
@@ -57,8 +72,7 @@ function TextEditor({ onContentChange }) {
             id="TextEditor"
             value={content}
             onChange={handleContentChange}
-            className="w-[720px] h-[178px] p-4 border border-[#CCCCCC] text-[#181818] font-normal text-[16px] leading-[26px] tracking-tight"
-            style={{ ...applyStyle() }}
+            className={`w-[720px] h-[178px] p-4 border border-[#CCCCCC] text-[#181818] text-[16px] leading-[26px] tracking-tight ${applyStyle()}`}
             placeholder="I am your reach text editor."
           />
         </div>
