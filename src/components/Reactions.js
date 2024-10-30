@@ -1,26 +1,38 @@
 import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import EmojiPicker from 'emoji-picker-react';
 import { ReactComponent as AddIcon } from '../assets/add-24.svg';
 import DropdownMenu from './DropdownMenu';
-import reactionData from '../data/reactionsData.json';
+import { getRecipientsReactions } from '../api/recipientsApi';
 
 function Reactions() {
+  const { id } = useParams();
   const [showEmojiPicker, setShowEmojiPicker] = useState(false);
   const [reactions, setReactions] = useState([]);
   const [inputStr, setInputStr] = useState('');
 
   useEffect(() => {
-    setReactions(reactionData.results);
-  }, []);
+    async function fetchRecipientReactions() {
+      try {
+        const data = await getRecipientsReactions(id);
+        setReactions(data.results);
+        console.log(data);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    }
+
+    fetchRecipientReactions();
+  }, [id]);
 
   const toggleEmojiPicker = () => {
     setShowEmojiPicker((prev) => !prev);
   };
 
-  const onEmojiClick = (event, emojiObject) => {
-    setInputStr((prevInput) => prevInput + emojiObject.emoji);
+  const onEmojiClick = (event) => {
+    setInputStr(event.emoji);
     console.log('Selected emoji:', event.emoji);
-    console.log(event);
+    console.log(inputStr);
     setShowEmojiPicker(false);
   };
 
