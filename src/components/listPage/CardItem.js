@@ -1,8 +1,9 @@
-import React from "react";
-import purpleShape from "../../assets/pattern_01.png";
-import beigeShape from "../../assets/pattern_02.png";
-import greenShape from "../../assets/pattern_04.png";
-import blueShape from "../../assets/pattern_03.png";
+import React from 'react';
+import PropTypes from 'prop-types';
+import purpleShape from '../../assets/pattern_01.png';
+import beigeShape from '../../assets/pattern_02.png';
+import greenShape from '../../assets/pattern_04.png';
+import blueShape from '../../assets/pattern_03.png';
 
 function CardItem({ item, nav, colorClassMap }) {
   const shapeImageMap = {
@@ -18,15 +19,15 @@ function CardItem({ item, nav, colorClassMap }) {
       onClick={() => nav(`/post/${item.id}`)}
       className={` relative flex overflow-hidden flex-col items-start justify-start border-black/[.10] border-[1px] gap-3 pt-[30px] pl-[24px] rounded-2xl min-w-[208px] h-[232px] min-[376px]:min-w-[275px] min-[376px]:min-h-[260px] shadow-md ${
         item.backgroundImageURL
-          ? "text-white"
+          ? 'text-white'
           : colorClassMap[item.backgroundColor]
       }`}
       style={{
         backgroundImage: item.backgroundImageURL
           ? `url(${item.backgroundImageURL})`
           : undefined,
-        backgroundSize: "cover",
-        backgroundPosition: "center",
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
       }}
     >
       {item.backgroundImageURL && (
@@ -36,7 +37,7 @@ function CardItem({ item, nav, colorClassMap }) {
         {/* 받는 사람 */}
         <div
           className={`font-bold text-lg leading-7 min-[376px]:text-2xl ${
-            item.backgroundImageURL ? "text-white" : "text-gray900"
+            item.backgroundImageURL ? 'text-white' : 'text-gray900'
           }`}
         >
           To. {item.name}
@@ -89,5 +90,31 @@ function CardItem({ item, nav, colorClassMap }) {
     </button>
   );
 }
+
+CardItem.propTypes = {
+  item: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    name: PropTypes.string.isRequired,
+    backgroundColor: PropTypes.string,
+    backgroundImageURL: PropTypes.string,
+    recentMessages: PropTypes.arrayOf(
+      PropTypes.shape({
+        id: PropTypes.number.isRequired,
+        sender: PropTypes.string.isRequired,
+        profileImageURL: PropTypes.string,
+      }),
+    ),
+    messageCount: PropTypes.number,
+    topReactions: PropTypes.arrayOf(
+      PropTypes.shape({
+        id: PropTypes.number.isRequired,
+        emoji: PropTypes.string.isRequired,
+        count: PropTypes.number.isRequired,
+      }),
+    ),
+  }).isRequired,
+  nav: PropTypes.func.isRequired,
+  colorClassMap: PropTypes.objectOf(PropTypes.string).isRequired,
+};
 
 export default CardItem;
