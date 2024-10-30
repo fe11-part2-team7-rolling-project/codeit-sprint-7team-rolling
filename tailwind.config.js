@@ -42,6 +42,8 @@ module.exports = {
       purple900: "#5603A7",
     },
     fontFamily: {
+      extraLight: ["Pretendard-ExtraLight"],
+      light: ["Pretendard-Light"],
       regular: ["Pretendard-Regular"],
       bold: ["Pretendard-Bold"],
     },
