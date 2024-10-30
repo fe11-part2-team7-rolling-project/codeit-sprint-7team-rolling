@@ -5,7 +5,7 @@ import arrowLeft from "../assets/arrow_left.svg";
 import arrowRight from "../assets/arrow_right.svg";
 import CardItem from "./CardItem";
 
-function ListCard({ type }) {
+function ListCard({ type, sortType }) {
   const [list, setList] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -29,7 +29,18 @@ function ListCard({ type }) {
       try {
         setLoading(true);
         const data = await getList(1000, 0);
-        setList(data);
+
+        let sortedData;
+        if (sortType === "messageCount") {
+          // messageCount 기준 내림차순 정렬
+          sortedData = data.sort((a, b) => b.messageCount - a.messageCount);
+        } else if (sortType === "latest") {
+          // 최신순 정렬 (예: createdDate 필드 기준)
+          sortedData = data.sort(
+            (a, b) => new Date(b.createdDate) - new Date(a.createdDate)
+          );
+        }
+        setList(sortedData);
       } catch (err) {
         setError("데이터를 불러오는데 실패했습니다.");
       } finally {
@@ -38,7 +49,7 @@ function ListCard({ type }) {
     }
 
     fetchData();
-  }, [type]);
+  }, [type, sortType]);
 
   if (loading) return <div>로딩 중...</div>;
   if (error) return <div>{error}</div>;
@@ -85,7 +96,7 @@ function ListCard({ type }) {
       </div>
 
       {/* 모바일 및 태블릿 환경에서 가로 스크롤 */}
-      <div className="flex gap-3 overflow-x-auto scrollbar-hide min-[1025px]:hidden min-[376px]:gap-5">
+      <div className="flex pl-5 gap-3 overflow-x-auto scrollbar-hide min-[1025px]:hidden min-[376px]:gap-5">
         {list.map((item) => (
           <CardItem
             key={item.id}

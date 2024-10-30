@@ -5,7 +5,7 @@ function CardItem({ item, nav, colorClassMap }) {
     <button
       type="button"
       onClick={() => nav(`/post/${item.id}`)}
-      className={`relative flex flex-col items-start justify-start border-black/[.10] border-[1px] gap-3 pt-[30px] pl-[24px] rounded-2xl min-w-[208px] h-[232px] min-[376px]:min-w-[275px] min-[376px]:min-h-[260px] shadow-md ${
+      className={` relative flex flex-col items-start justify-start border-black/[.10] border-[1px] gap-3 pt-[30px] pl-[24px] rounded-2xl min-w-[208px] h-[232px] min-[376px]:min-w-[275px] min-[376px]:min-h-[260px] shadow-md ${
         item.backgroundImageURL
           ? "text-white"
           : colorClassMap[item.backgroundColor]
@@ -52,7 +52,7 @@ function CardItem({ item, nav, colorClassMap }) {
         </div>
 
         {/* 리액션 섹션 */}
-        <div className="flex w-[162px] space-x-1 border-black/[.12] border-t-[1px] pt-[17px] mt-[30px] min-[376px]:w-[227px] min-[376px]:space-x-1.5">
+        <div className="flex w-[162px] gap-1 space-x-1 border-black/[.12] mt-[18px] border-t-[1px] pt-[17px] min-[376px]:mt-[30px] min-[376px]:w-[227px] min-[376px]:space-x-1.5">
           {item.topReactions.map((reaction) => (
             <div
               key={reaction.id}
