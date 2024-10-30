@@ -1,10 +1,21 @@
 import React, { useState } from "react";
-import FromInput from "../components/FromInput";
-import ProfileImageSelector from "../components/ProfileImageSelector";
-import RelationSelector from "../components/RelationSelector";
-import TextEditor from "../components/TextEditor";
-import FontSelector from "../components/FontSelector";
-import CreateButton from "../components/CreateButton";
+import FromInput from "../components/messagePage/FromInput";
+import ProfileImageSelector from "../components/messagePage/ProfileImageSelector";
+import RelationSelector from "../components/messagePage/RelationSelector";
+import TextEditor from "../components/messagePage/TextEditor";
+import FontSelector from "../components/messagePage/FontSelector";
+import CreateButton from "../components/messagePage/CreateButton";
+import Logo from "../components/Layout/Logo";
+
+function PostHeader() {
+  return (
+    <header className="bg-white shadow-md w-full py-4 px-6 md:px-24 lg:px-48">
+      <div className="flex justify-between items-center max-w-7xl mx-auto">
+        <Logo />
+      </div>
+    </header>
+  );
+}
 
 function MessagePage() {
   const [from, setFrom] = useState("");
@@ -14,32 +25,33 @@ function MessagePage() {
   const [profileImageURL, setProfileImageURL] = useState(""); // 기본 프로필 이미지 설정
 
   return (
-    <div style={{ padding: "20px", maxWidth: "600px", margin: "auto" }}>
-      <h1>Rolling</h1>
+    <div className="bg-gray-100 min-h-screen H flex flex-col items-center gap-10">
+      <PostHeader />
+      <div className="w-[720px] flex flex-col gap-10">
+        {/* From Input */}
+        <FromInput onInputChange={setFrom} />
 
-      {/* From Input */}
-      <FromInput onInputChange={setFrom} />
+        {/* Profile Image Selector */}
+        <ProfileImageSelector onSelectImage={setProfileImageURL} />
 
-      {/* Profile Image Selector */}
-      <ProfileImageSelector onSelectImage={setProfileImageURL} />
+        {/* Relation Selector */}
+        <RelationSelector onSelectRelation={setRelation} />
 
-      {/* Relation Selector */}
-      <RelationSelector onSelectRelation={setRelation} />
+        {/* Text Editor */}
+        <TextEditor onContentChange={setContent} />
 
-      {/* Text Editor */}
-      <TextEditor onContentChange={setContent} />
+        {/* Font Selector */}
+        <FontSelector onSelectFont={setFont} />
 
-      {/* Font Selector */}
-      <FontSelector onSelectFont={setFont} />
-
-      {/* Create Button */}
-      <CreateButton
-        from={from}
-        content={content}
-        relation={relation}
-        font={font}
-        profileImageURL={profileImageURL}
-      />
+        {/* Create Button */}
+        <CreateButton
+          from={from}
+          content={content}
+          relation={relation}
+          font={font}
+          profileImageURL={profileImageURL}
+        />
+      </div>
     </div>
   );
 }
