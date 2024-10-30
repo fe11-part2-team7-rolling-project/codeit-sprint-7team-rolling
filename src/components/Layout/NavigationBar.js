@@ -1,4 +1,3 @@
-// src/components/Layout/NavigationBar.js
 import React, { useState } from 'react';
 import { FaRegSmile } from 'react-icons/fa';
 import PropTypes from 'prop-types';

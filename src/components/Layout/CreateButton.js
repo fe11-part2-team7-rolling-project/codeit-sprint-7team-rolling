@@ -1,21 +1,14 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 function CreateButton() {
-  const navigate = useNavigate();
-
-  const handleClick = () => {
-    navigate('/post');
-  };
-
   return (
-    <button
-      type="button"
-      onClick={handleClick}
-      className="text-gray-700 border border-gray-400 px-4 py-2 rounded-md"
+    <Link
+      to="/post"
+      className="text-gray700 border border-gray-400 px-4 py-2 rounded-md"
     >
       롤링 페이지 만들기
-    </button>
+    </Link>
   );
 }
 
