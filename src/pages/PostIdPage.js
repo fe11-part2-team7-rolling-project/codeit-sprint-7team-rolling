@@ -1,28 +1,34 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import axiosInstance from '../axiosInstance';
 import Reactions from '../components/Reactions';
 import Message from '../components/Message';
 import Share from '../components/Share';
+import getRecipents from '../api/recipients';
 
 function PostIdPage() {
-  const [images, setImages] = useState([]);
+  const { id } = useParams();
+  const [images, setImages] = useState('');
+  const colorClassMap = {
+    purple: 'bg-purple200',
+    blue: 'bg-blue200',
+    green: 'bg-green200',
+    beige: 'bg-beige200',
+  };
 
   useEffect(() => {
     async function fetchBackgroundImageData() {
       try {
-        const response = await axiosInstance.get('/background-images/');
-        console.log(response.data.imageUrls);
-        setImages(response.data.imageUrls);
+        const data = await getRecipents(id);
+        setImages(data.backgroundColor);
       } catch (error) {
         console.error('Error fetching data:', error);
       }
     }
 
     fetchBackgroundImageData();
-  }, []);
+  }, [id]);
 
   return (
     <div className="w-full h-full">
@@ -45,14 +51,7 @@ function PostIdPage() {
           <Share />
         </div>
       </div>
-      <div
-        className="w-full h-full bg-cover z-0"
-        style={{
-          backgroundImage: `url(${images[3]})`,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-        }}
-      >
+      <div className={`w-full h-full bg-cover z-0 ${colorClassMap[images]}`}>
         <div className="flex flex-col gap-4 items-center justify-center p-4 z-10">
           <div className="w-full h-full min-h-[230px] bg-white flex items-center justify-center rounded-[16px] shadow-lg">
             <Link
