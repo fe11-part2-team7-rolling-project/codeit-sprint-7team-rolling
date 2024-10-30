@@ -31,13 +31,6 @@ function CreateButton({ from, content, relation, font, profileImageURL }) {
             }),
           }
         );
-
-        // 응답 내용을 로그로 출력하여 HTML 오류 페이지인지 확인
-        console.log("Response status:", response.status);
-        console.log("Response headers:", response.headers);
-        const responseBody = await response.text();
-        console.log("Response body:", responseBody);
-
         if (response.ok) {
           window.location.href = `/post/${Id}`;
         } else {
