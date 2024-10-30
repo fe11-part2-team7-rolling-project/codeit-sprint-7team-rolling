@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-// eslint-disable-next-line import/no-extraneous-dependencies
 import PropTypes from "prop-types";
 
 function TextEditor({ onContentChange }) {
@@ -18,41 +17,51 @@ function TextEditor({ onContentChange }) {
 
   const handleContentChange = (e) => {
     setContent(e.target.value);
-    onContentChange(e.target.value); // 부모 컴포넌트에 전달
+    onContentChange(e.target.value);
   };
 
   return (
-    <div>
-      <label htmlFor="textContent">
-        내용을 입력해 주세요
+    <div className="mb-6 w-[720px] h-[260px] flex flex-col gap-[12px]">
+      <label
+        htmlFor="TextEditor"
+        className="text-[#181818] font-bold text-[24px] leading-[36px] tracking-tight"
+      >
+        <div className="mb-3">내용을 입력해 주세요</div>
         <div>
-          <button
-            type="button"
-            onClick={() => setIsBold(!isBold)}
-            style={{ fontWeight: "bold" }}
-          >
-            B
-          </button>
-          <button
-            type="button"
-            onClick={() => setIsItalic(!isItalic)}
-            style={{ fontStyle: "italic" }}
-          >
-            I
-          </button>
-          <button
-            type="button"
-            onClick={() => setIsUnderline(!isUnderline)}
-            style={{ textDecoration: "underline" }}
-          >
-            U
-          </button>
+          <div className="flex gap-[10px] w-[718px] h-[49px] bg-[#EEEEEE] p-1">
+            <button
+              type="button"
+              onClick={() => setIsBold(!isBold)}
+              className={`font-bold ${isBold ? "bg-gray-200" : ""} p-2 rounded`}
+            >
+              B
+            </button>
+            <button
+              type="button"
+              onClick={() => setIsItalic(!isItalic)}
+              className={`italic ${isItalic ? "bg-gray-200" : ""} p-2 rounded`}
+            >
+              I
+            </button>
+            <button
+              type="button"
+              onClick={() => setIsUnderline(!isUnderline)}
+              className={`underline ${
+                isUnderline ? "bg-gray-200" : ""
+              } p-2 rounded`}
+            >
+              U
+            </button>
+          </div>
+          <textarea
+            id="TextEditor"
+            value={content}
+            onChange={handleContentChange}
+            className="w-[720px] h-[178px] p-4 border border-[#CCCCCC] text-[#181818] font-normal text-[16px] leading-[26px] tracking-tight"
+            style={{ ...applyStyle() }}
+            placeholder="I am your reach text editor."
+          />
         </div>
-        <textarea
-          value={content}
-          onChange={handleContentChange}
-          style={{ width: "100%", height: "150px", ...applyStyle() }}
-        />
       </label>
     </div>
   );
