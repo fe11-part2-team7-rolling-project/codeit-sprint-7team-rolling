@@ -3,13 +3,15 @@ import { useParams } from 'react-router-dom';
 import EmojiPicker from 'emoji-picker-react';
 import { ReactComponent as AddIcon } from '../assets/add-24.svg';
 import DropdownMenu from './DropdownMenu';
-import { getRecipientsReactions } from '../api/recipientsApi';
+import {
+  addRecipientReaction,
+  getRecipientsReactions,
+} from '../api/recipientsApi';
 
 function Reactions() {
   const { id } = useParams();
   const [showEmojiPicker, setShowEmojiPicker] = useState(false);
   const [reactions, setReactions] = useState([]);
-  const [inputStr, setInputStr] = useState('');
 
   useEffect(() => {
     async function fetchRecipientReactions() {
@@ -29,11 +31,21 @@ function Reactions() {
     setShowEmojiPicker((prev) => !prev);
   };
 
-  const onEmojiClick = (event) => {
-    setInputStr(event.emoji);
-    console.log('Selected emoji:', event.emoji);
-    console.log(inputStr);
-    setShowEmojiPicker(false);
+  const onEmojiClick = async (event) => {
+    const reactionData = {
+      emoji: event.emoji,
+      type: 'increase',
+    };
+
+    try {
+      await addRecipientReaction(id, reactionData);
+      const updatedData = await getRecipientsReactions(id);
+      setReactions(updatedData.results);
+    } catch (error) {
+      console.error('Error posting reaction:', error);
+    } finally {
+      setShowEmojiPicker(false);
+    }
   };
 
   const visibleReactions = reactions.slice(0, 3);

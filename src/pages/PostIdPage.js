@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import { Link, useParams } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -89,5 +90,39 @@ function PostIdPage({ initialValues = INITIAL_VALUES }) {
     </div>
   );
 }
+
+PostIdPage.propTypes = {
+  initialValues: PropTypes.shape({
+    backgroundColor: PropTypes.string,
+    backgroundImageURL: PropTypes.string,
+    createdAt: PropTypes.string,
+    id: PropTypes.number,
+    messageCount: PropTypes.number,
+    name: PropTypes.string,
+    recentMessages: PropTypes.arrayOf(
+      PropTypes.shape({
+        id: PropTypes.number,
+        recipientId: PropTypes.number,
+        sender: PropTypes.string,
+        profileImageURL: PropTypes.string,
+        relationship: PropTypes.string,
+        content: PropTypes.string,
+        font: PropTypes.string,
+        createdAt: PropTypes.string,
+      }),
+    ),
+    topReactions: PropTypes.arrayOf(
+      PropTypes.shape({
+        id: PropTypes.number,
+        emoji: PropTypes.string,
+        count: PropTypes.number,
+      }),
+    ),
+  }),
+};
+
+PostIdPage.defaultProps = {
+  initialValues: INITIAL_VALUES,
+};
 
 export default PostIdPage;

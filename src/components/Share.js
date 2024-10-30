@@ -49,7 +49,7 @@ function Share() {
     window.Kakao.Share.sendCustom({
       templateId: 113686,
       templateArgs: {
-        id: id,
+        id,
       },
     });
   };

@@ -1,32 +1,52 @@
 import axiosInstance from '../axiosInstance';
 
-export async function getRecipients(id) {
+async function apiRequest({
+  method = 'GET',
+  endpoint,
+  data = null,
+  errorMessage,
+}) {
   try {
-    const { data } = await axiosInstance.get(`/11-7/recipients/${id}/`);
-    return data;
+    const response = await axiosInstance({
+      method,
+      url: endpoint,
+      data,
+    });
+    return response.data;
   } catch (error) {
-    throw new Error('롤링 페이퍼를 불러오는데 실패했습니다.');
+    throw new Error(errorMessage);
   }
+}
+
+export async function getRecipients(id) {
+  return apiRequest({
+    method: 'GET',
+    endpoint: `/11-7/recipients/${id}/`,
+    errorMessage: '롤링 페이퍼를 불러오는데 실패했습니다.',
+  });
 }
 
 export async function getRecipientsMessage(id) {
-  try {
-    const { data } = await axiosInstance.get(
-      `/11-7/recipients/${id}/messages/`,
-    );
-    return data;
-  } catch (error) {
-    throw new Error('롤링 페이퍼의 메시지를 불러오는데 실패했습니다.');
-  }
+  return apiRequest({
+    method: 'GET',
+    endpoint: `/11-7/recipients/${id}/messages/`,
+    errorMessage: '롤링 페이퍼의 메시지를 불러오는데 실패했습니다.',
+  });
 }
 
 export async function getRecipientsReactions(id) {
-  try {
-    const { data } = await axiosInstance.get(
-      `/11-7/recipients/${id}/reactions/`,
-    );
-    return data;
-  } catch (error) {
-    throw new Error('롤링 페이퍼의 리액션을 불러오는데 실패했습니다.');
-  }
+  return apiRequest({
+    method: 'GET',
+    endpoint: `/11-7/recipients/${id}/reactions/`,
+    errorMessage: '롤링 페이퍼의 리액션을 불러오는데 실패했습니다.',
+  });
+}
+
+export async function addRecipientReaction(id, data) {
+  return apiRequest({
+    method: 'POST',
+    endpoint: `/11-7/recipients/${id}/reactions/`,
+    data,
+    errorMessage: '롤링 페이퍼 추가에 실패했습니다.',
+  });
 }
