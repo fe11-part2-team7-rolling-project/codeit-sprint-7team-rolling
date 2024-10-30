@@ -25,9 +25,9 @@ function MessagePage() {
   const [profileImageURL, setProfileImageURL] = useState(""); // 기본 프로필 이미지 설정
 
   return (
-    <div className="bg-gray-100 min-h-screen">
+    <div className="bg-gray-100 min-h-screen H flex flex-col items-center gap-10">
       <PostHeader />
-      <div>
+      <div className="w-[720px] flex flex-col gap-10">
         {/* From Input */}
         <FromInput onInputChange={setFrom} />
 
