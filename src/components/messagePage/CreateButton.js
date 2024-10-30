@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-// eslint-disable-next-line import/no-extraneous-dependencies
 import PropTypes from "prop-types";
 
 function CreateButton({ from, content, relation, font, profileImageURL }) {
@@ -45,13 +44,21 @@ function CreateButton({ from, content, relation, font, profileImageURL }) {
   };
 
   return (
-    <button type="button" onClick={handleSubmit} disabled={isDisabled}>
+    <button
+      type="button"
+      onClick={handleSubmit}
+      disabled={isDisabled}
+      className={`w-[720px] h-[56px] text-white font-semibold rounded-[12px] px-[24px] py-[14px] ${
+        isDisabled
+          ? "bg-[#CCCCCC] cursor-not-allowed"
+          : "bg-[#9935FF] hover:bg-[#861DEE] active:bg-[#6E0AD1] focus:bg-[#6E0AD1]"
+      } mb-10`}
+    >
       생성하기
     </button>
   );
 }
 
-// Correct usage of PropTypes
 CreateButton.propTypes = {
   from: PropTypes.string.isRequired,
   content: PropTypes.string.isRequired,
