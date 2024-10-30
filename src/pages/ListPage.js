@@ -7,8 +7,8 @@ function ListPage() {
   return (
     <div>
       <Header />
-      <div className="flex flex-col gap-[66px] min-[376px]:gap-[156px] min-[769px]:gap-[64px]">
-        <div className="flex flex-col gap-[74px] min-[376px]:gap-[50px] min-[1025px]:items-center">
+      <div className="flex flex-col gap-[66px] min-[376px]:gap-[156px] min-[769px]:gap-[64px] min-[1025px]:items-center">
+        <div className="flex flex-col gap-[74px] min-[376px]:gap-[50px] min-[1025px]:items-start min-[1025px]:w-[1160px] ">
           <div className="pt-10 flex flex-col gap-3 min-[376px]:gap-4">
             <div className="pl-5 font-bold text-Black text-xl leading-9 min-[376px]:text-2xl">
               인기 롤링 페이퍼🔥

@@ -6,7 +6,9 @@ function ListCard({ type }) {
   const [list, setList] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [currentPage, setCurrentPage] = useState(0);
   const nav = useNavigate();
+
   const colorClassMap = {
     purple: "bg-purple200",
     blue: "bg-blue200",
@@ -14,13 +16,16 @@ function ListCard({ type }) {
     beige: "bg-beige200",
   };
 
+  const CARDS_PER_PAGE = 4;
+  const totalPages = Math.ceil(list.length / CARDS_PER_PAGE);
+  const startIndex = currentPage * CARDS_PER_PAGE;
+  const currentCards = list.slice(startIndex, startIndex + CARDS_PER_PAGE);
+
   useEffect(() => {
     async function fetchData() {
       try {
         setLoading(true);
-        // const sort = type === "hot" ? "desc" : "asc"; // 인기순은 내림차순, 최신순은 오름차순
-        const data = await getList(8, 0); // sort 파라미터 없이 요청
-
+        const data = await getList(1000, 0);
         setList(data);
       } catch (err) {
         setError("데이터를 불러오는데 실패했습니다.");
@@ -36,71 +41,131 @@ function ListCard({ type }) {
   if (error) return <div>{error}</div>;
 
   return (
-    <div className="pl-5 flex gap-3 overflow-x-auto scrollbar-hide min-[376px]:gap-5 min-[1025px]:overflow-x-hidden min-[1025px]:max-w-[1190px]">
-      {list.map((item) => (
-        <button
-          type="button"
-          key={item.id}
-          onClick={() => nav(`/post/${item.id}`)}
-          className={`relative flex flex-col items-start justify-start border-black/[.10] border-[1px] gap-3 pt-[30px] pl-[24px] rounded-2xl min-w-[208px] h-[232px] min-[376px]:min-w-[275px] min-[376px]:min-h-[260px] shadow-md ${
-            item.backgroundImageURL
-              ? "text-white"
-              : colorClassMap[item.backgroundColor]
-          }`}
-          style={{
-            backgroundImage: item.backgroundImageURL
-              ? `url(${item.backgroundImageURL})`
-              : undefined,
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-          }}
-        >
-          {/* 배경 이미지 오버레이 - 80% 투명도 */}
-          {item.backgroundImageURL && (
-            <div className="absolute inset-0 bg-black opacity-20 rounded-2xl" />
-          )}
+    <div className="relative flex items-center">
+      {/* PC 환경에서만 페이지네이션 */}
+      <div className="hidden lg:flex lg:gap-5 px-[24px] lg:overflow-hidden lg:max-w-[1190px]">
+        {/* 좌측 화살표 버튼 */}
+        {currentPage > 0 && (
+          <button
+            type="button"
+            onClick={() => setCurrentPage(currentPage - 1)}
+            className="absolute left-0 z-10 bg-white rounded-full w-10 h-10 flex items-center justify-center shadow-md hover:bg-gray-100"
+          >
+            <span className="text-lg font-bold">&lt;</span>
+          </button>
+        )}
 
-          <div className="relative z-10 text-start">
-            {/* 받는 사람 */}
-            <div className="font-bold text-lg leading-7 min-[376px]:text-2xl min-[376px]:leading-9">
-              To. {item.name}
-            </div>
-
-            {/* 프로필 이미지 섹션 */}
-            <div className="flex -space-x-3 mt-2">
-              {item.recentMessages.slice(0, 3).map((message) => (
-                <img
-                  key={message.id}
-                  src={message.profileImageURL}
-                  alt={message.sender}
-                  className="w-7 h-7 rounded-full border-2 border-white"
-                />
-              ))}
-              {item.recentMessages.length > 3 && (
-                <span className="w-8 h-7 rounded-[30px] bg-white text-gray-500 text-xs flex justify-center items-center">
-                  +{item.recentMessages.length - 3}
-                </span>
-              )}
-            </div>
-            <div className="text-sm font-regular mt-2 min-[376px]:text-base">
-              {item.messageCount}명이 작성했어요!
-            </div>
-          </div>
-
-          {/* 리액션 섹션 */}
-          <div className="relative z-10 flex w-[162px] space-x-1 border-black/[.12] border-t-[1px] pt-[17px] mt-[21px] min-[376px]:w-[227px] min-[376px]:space-x-1.5">
-            {item.topReactions.map((reaction) => (
-              <div
-                key={reaction.id}
-                className="flex items-center justify-center space-x-1 bg-black/50 w-[53px] h-[32px] rounded-full text-white text-sm min-[376px]:text-base min-[376px]:w-[65px] min-[376px]:h-[36px]"
-              >
-                <span>{reaction.emoji}</span>
-                <span>{reaction.count}</span>
+        {/* 현재 페이지에 해당하는 카드들만 표시 */}
+        {currentCards.map((item) => (
+          <button
+            type="button"
+            key={item.id}
+            onClick={() => nav(`/post/${item.id}`)}
+            className={`relative flex flex-col items-start justify-start border-black/[.10] border-[1px] gap-5 pt-[30px] pl-[24px] rounded-2xl min-w-[208px] h-[232px] min-[376px]:min-w-[275px] min-[376px]:min-h-[260px] shadow-md ${
+              item.backgroundImageURL
+                ? "text-white"
+                : colorClassMap[item.backgroundColor]
+            }`}
+            style={{
+              backgroundImage: item.backgroundImageURL
+                ? `url(${item.backgroundImageURL})`
+                : undefined,
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+            }}
+          >
+            {item.backgroundImageURL && (
+              <div className="absolute inset-0 bg-black opacity-50 rounded-2xl" />
+            )}
+            <div className="relative z-10 text-start">
+              <div className="font-bold text-2xl leading-7">
+                To. {item.name}
               </div>
-            ))}
-          </div>
-        </button>
-      ))}
+              <div className="flex -space-x-3 mt-2">
+                {item.recentMessages.slice(0, 3).map((message) => (
+                  <img
+                    key={message.id}
+                    src={message.profileImageURL}
+                    alt={message.sender}
+                    className="w-7 h-7 rounded-full border-2 border-white"
+                  />
+                ))}
+                {item.recentMessages.length > 3 && (
+                  <span className="w-8 h-7 rounded-[30px] bg-white text-gray-500 text-xs flex justify-center items-center">
+                    +{item.recentMessages.length - 3}
+                  </span>
+                )}
+              </div>
+              <div className="text-base font-regular mt-2">
+                <span className="font-bold">{item.messageCount}</span>명이
+                작성했어요!
+              </div>
+            </div>
+          </button>
+        ))}
+
+        {/* 우측 화살표 버튼 */}
+        {currentPage < totalPages - 1 && (
+          <button
+            type="button"
+            onClick={() => setCurrentPage(currentPage + 1)}
+            className="absolute right-0 z-10 bg-white rounded-full w-10 h-10 flex items-center justify-center shadow-md hover:bg-gray-100"
+          >
+            <span className="text-lg font-bold">&gt;</span>
+          </button>
+        )}
+      </div>
+
+      {/* 모바일 및 태블릿 환경에서 가로 스크롤 */}
+      <div className="flex px-[20px] gap-3 overflow-x-auto scrollbar-hide lg:hidden min-[376px]:gap-5">
+        {list.map((item) => (
+          <button
+            type="button"
+            key={item.id}
+            onClick={() => nav(`/post/${item.id}`)}
+            className={`relative flex flex-col items-start justify-start border-black/[.10] border-[1px] gap-3 pt-[30px] pl-[24px] rounded-2xl min-w-[208px] h-[232px] min-[376px]:min-w-[275px] min-[376px]:min-h-[260px] shadow-md ${
+              item.backgroundImageURL
+                ? "text-white"
+                : colorClassMap[item.backgroundColor]
+            }`}
+            style={{
+              backgroundImage: item.backgroundImageURL
+                ? `url(${item.backgroundImageURL})`
+                : undefined,
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+            }}
+          >
+            {item.backgroundImageURL && (
+              <div className="absolute inset-0 bg-black opacity-50 rounded-2xl" />
+            )}
+            <div className="relative z-10 text-start">
+              <div className="font-bold text-lg leading-7 min-[376px]:text-2xl">
+                To. {item.name}
+              </div>
+              <div className="flex -space-x-3 mt-2">
+                {item.recentMessages.slice(0, 3).map((message) => (
+                  <img
+                    key={message.id}
+                    src={message.profileImageURL}
+                    alt={message.sender}
+                    className="w-7 h-7 rounded-full border-2 border-white"
+                  />
+                ))}
+                {item.recentMessages.length > 3 && (
+                  <span className="w-8 h-7 rounded-[30px] bg-white text-gray-500 text-xs flex justify-center items-center">
+                    +{item.recentMessages.length - 3}
+                  </span>
+                )}
+              </div>
+              <div className="text-sm font-regular mt-2 min-[376px]:text-base">
+                <span className="font-bold">{item.messageCount}</span>명이
+                작성했어요!
+              </div>
+            </div>
+          </button>
+        ))}
+      </div>
     </div>
   );
 }
