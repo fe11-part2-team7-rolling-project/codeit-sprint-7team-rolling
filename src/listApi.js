@@ -9,7 +9,9 @@ async function getList(limit, offset, sort) {
         sort,
       },
     });
-    return data;
+
+    // 'results' 필드의 배열 반환
+    return data.results || [];
   } catch (error) {
     throw new Error("리스트를 불러오는데 실패했습니다.");
   }
