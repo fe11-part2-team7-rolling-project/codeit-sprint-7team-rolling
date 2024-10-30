@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import EmojiPicker from 'emoji-picker-react';
-import { ReactComponent as AddIcon } from '../assets/add-24.svg';
+import { ReactComponent as AddIcon } from '../../assets/add-24.svg';
 import DropdownMenu from './DropdownMenu';
 import {
   addRecipientReaction,
   getRecipientsReactions,
-} from '../api/recipientsApi';
+} from '../../api/recipientsApi';
 
 function Reactions() {
   const { id } = useParams();

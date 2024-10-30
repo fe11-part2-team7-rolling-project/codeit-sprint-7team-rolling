@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
-import PropTypes from 'prop-types'; // import 추가
-import { ReactComponent as Dropdown } from '../assets/ic_drop.svg';
+import PropTypes from 'prop-types';
+import { ReactComponent as Dropdown } from '../../assets/ic_drop.svg';
 
 function DropdownMenu({ reactions }) {
   const [isDropdownVisible, setIsDropdownVisible] = useState(false);

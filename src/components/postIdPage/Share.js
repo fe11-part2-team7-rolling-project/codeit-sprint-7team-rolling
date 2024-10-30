@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import { ReactComponent as ShareIcon } from '../assets/share.svg';
+import { ReactComponent as ShareIcon } from '../../assets/share.svg';
 
 function Share() {
   const { id } = useParams();

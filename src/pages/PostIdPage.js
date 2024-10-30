@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 import { useParams } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import Reactions from '../components/Reactions';
-import Message from '../components/Message';
-import Share from '../components/Share';
+import Reactions from '../components/postIdPage/Reactions';
+import Message from '../components/postIdPage/Message';
+import Share from '../components/postIdPage/Share';
 import { getRecipients } from '../api/recipientsApi';
 
 const INITIAL_VALUES = {

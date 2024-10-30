@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import dayjs from 'dayjs';
-import { getRecipientsMessage } from '../api/recipientsApi';
+import { getRecipientsMessage } from '../../api/recipientsApi';
 
 function Message() {
   const { id } = useParams();
