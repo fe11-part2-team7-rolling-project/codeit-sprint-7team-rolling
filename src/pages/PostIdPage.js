@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { Link, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Reactions from '../components/Reactions';
@@ -75,16 +75,6 @@ function PostIdPage({ initialValues = INITIAL_VALUES }) {
           backgroundPosition: 'center',
         }}
       >
-        <div className="flex flex-col gap-4 items-center justify-center p-4 z-10">
-          <div className="w-full h-full min-h-[230px] bg-white flex items-center justify-center rounded-[16px] shadow-lg">
-            <Link
-              to={`/post/${id}/message`}
-              className="w-[56px] h-[56px] bg-gray500 rounded-full text-[24px] text-white flex justify-center items-center"
-            >
-              +
-            </Link>
-          </div>
-        </div>
         <Message />
       </div>
     </div>

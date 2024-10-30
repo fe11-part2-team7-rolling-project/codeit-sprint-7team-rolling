@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import dayjs from 'dayjs';
 import { getRecipientsMessage } from '../api/recipientsApi';
 
@@ -22,7 +22,17 @@ function Message() {
   }, [id]);
 
   return (
-    <div>
+    <div className="max-w-[1200px] mx-auto grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+      <div className="flex flex-col gap-4 items-center justify-center p-4 z-10">
+        <div className="w-full h-full min-h-[230px] bg-white flex items-center justify-center rounded-[16px] shadow-lg">
+          <Link
+            to={`/post/${id}/message`}
+            className="w-[56px] h-[56px] bg-gray500 rounded-full text-[24px] text-white flex justify-center items-center"
+          >
+            +
+          </Link>
+        </div>
+      </div>
       {messages.map((message) => (
         <div
           key={message.id}
