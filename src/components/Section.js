@@ -13,8 +13,8 @@ function Section({ point, title, description, imageName, align }) {
           <p className="text-white font-bold mb-2 px-3 py-1 bg-purple500 rounded-full inline-block">
             {point}
           </p>
-          <h2 className="text-2xl font-semibold mb-2 text-gray800">{title}</h2>
-          <p className="text-gray600 mb-4">{description}</p>
+          <h2 className="text-2xl font-semibold mb-2 text-gray800 leading-snug whitespace-pre-line">{title}</h2>
+          <p className="text-gray600 mb-4 whitespace-pre-line">{description}</p>
         </div>
         <div className="md:w-1/2 flex justify-center p-4">
           <img
