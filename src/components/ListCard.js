@@ -43,7 +43,7 @@ function ListCard({ type }) {
   return (
     <div className="relative flex items-center">
       {/* PC 환경에서만 페이지네이션 */}
-      <div className="hidden lg:flex lg:gap-5 px-[24px] lg:overflow-hidden lg:max-w-[1190px]">
+      <div className="hidden min-[1025px]:flex min-[1025px]:gap-5 min-[1025px]:overflow-hidden min-[1025px]:max-w-[1190px]">
         {/* 좌측 화살표 버튼 */}
         {currentPage > 0 && (
           <button
@@ -117,7 +117,7 @@ function ListCard({ type }) {
       </div>
 
       {/* 모바일 및 태블릿 환경에서 가로 스크롤 */}
-      <div className="flex px-[20px] gap-3 overflow-x-auto scrollbar-hide lg:hidden min-[376px]:gap-5">
+      <div className="flex gap-3 overflow-x-auto scrollbar-hide min-[1025px]:hidden min-[376px]:gap-5">
         {list.map((item) => (
           <button
             type="button"
