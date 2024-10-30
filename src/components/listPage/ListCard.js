@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import getList from "../listApi";
-import arrowLeft from "../assets/arrow_left.svg";
-import arrowRight from "../assets/arrow_right.svg";
+import getList from "../../listApi";
+import arrowLeft from "../../assets/arrow_left.svg";
+import arrowRight from "../../assets/arrow_right.svg";
 import CardItem from "./CardItem";
 
 function ListCard({ type, sortType }) {

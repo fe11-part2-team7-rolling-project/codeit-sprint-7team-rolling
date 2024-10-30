@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import ListCard from "../components/ListCard";
+import ListCard from "../components/listPage/ListCard";
 import Header from "../components/Layout/Header";
 
 function ListPage() {
