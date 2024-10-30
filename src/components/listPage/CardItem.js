@@ -1,11 +1,22 @@
 import React from "react";
+import purpleShape from "../../assets/pattern_01.png";
+import beigeShape from "../../assets/pattern_02.png";
+import greenShape from "../../assets/pattern_04.png";
+import blueShape from "../../assets/pattern_03.png";
 
 function CardItem({ item, nav, colorClassMap }) {
+  const shapeImageMap = {
+    purple: purpleShape,
+    beige: beigeShape,
+    green: greenShape,
+    blue: blueShape,
+  };
+
   return (
     <button
       type="button"
       onClick={() => nav(`/post/${item.id}`)}
-      className={` relative flex flex-col items-start justify-start border-black/[.10] border-[1px] gap-3 pt-[30px] pl-[24px] rounded-2xl min-w-[208px] h-[232px] min-[376px]:min-w-[275px] min-[376px]:min-h-[260px] shadow-md ${
+      className={` relative flex overflow-hidden flex-col items-start justify-start border-black/[.10] border-[1px] gap-3 pt-[30px] pl-[24px] rounded-2xl min-w-[208px] h-[232px] min-[376px]:min-w-[275px] min-[376px]:min-h-[260px] shadow-md ${
         item.backgroundImageURL
           ? "text-white"
           : colorClassMap[item.backgroundColor]
@@ -47,7 +58,7 @@ function CardItem({ item, nav, colorClassMap }) {
             </span>
           )}
         </div>
-        <div className="text-sm font-regular min-[376px]:text-base">
+        <div className="text-sm font-extraLight min-[376px]:text-base">
           <span className="font-bold">{item.messageCount}</span>명이 작성했어요!
         </div>
 
@@ -59,11 +70,22 @@ function CardItem({ item, nav, colorClassMap }) {
               className="flex items-center justify-center space-x-1 bg-black/50 w-[53px] h-[32px] rounded-full text-white text-sm min-[376px]:text-base min-[376px]:w-[65px] min-[376px]:h-[36px]"
             >
               <span>{reaction.emoji}</span>
-              <span>{reaction.count}</span>
+              <span className="text-sm font-extraLight min-[376px]:text-base">
+                {reaction.count}
+              </span>
             </div>
           ))}
         </div>
       </div>
+
+      {/* 색상에 따른 도형 이미지 추가 (backgroundImageURL이 없을 때만 표시) */}
+      {!item.backgroundImageURL && shapeImageMap[item.backgroundColor] && (
+        <img
+          src={shapeImageMap[item.backgroundColor]}
+          alt={`${item.backgroundColor} shape`}
+          className="absolute w-36 h-28 left-[100px] top-[120px] min-[376px]:w-36 min-[376px]:h-36 min-[376px]:left-[130px] min-[376px]:top-[120px]"
+        />
+      )}
     </button>
   );
 }
