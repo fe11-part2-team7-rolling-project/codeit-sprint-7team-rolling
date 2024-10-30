@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-// eslint-disable-next-line import/no-extraneous-dependencies
 import PropTypes from "prop-types";
 
 const options = ["친구", "지인", "동료", "가족"];
@@ -9,14 +8,22 @@ function RelationSelector({ onSelectRelation }) {
 
   const handleRelationChange = (e) => {
     setRelation(e.target.value);
-    onSelectRelation(e.target.value); // 부모 컴포넌트에 전달
+    onSelectRelation(e.target.value);
   };
 
   return (
-    <div>
-      <label htmlFor="relation">
-        상대와의 관계
-        <select value={relation} onChange={handleRelationChange}>
+    <div className="mb-6 w-[320px] h-[98px] flex flex-col gap-[12px]">
+      <label
+        htmlFor="RelationSelector"
+        className="text-[#181818] font-bold text-[24px] leading-[36px] tracking-tight"
+      >
+        <div className="mb-3">상대와의 관계</div>
+        <select
+          id="RelationSelector"
+          value={relation}
+          onChange={handleRelationChange}
+          className="w-[320px] h-[50px] rounded-[8px] border border-[#CCCCCC] px-4 py-3 text-[#555555] font-normal text-[16px] leading-[26px] tracking-tight"
+        >
           {options.map((option) => (
             <option key={option} value={option}>
               {option}
