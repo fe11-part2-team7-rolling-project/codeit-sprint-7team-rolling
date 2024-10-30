@@ -29,10 +29,10 @@ function SubmitButton({ onClick, disabled, text }) {
 
 function PostPage() {
   const colors = [
-    { idx: 0, cls: "bg-beige300", name: "beige" },
-    { idx: 1, cls: "bg-purple300", name: "purple" },
-    { idx: 2, cls: "bg-blue300", name: "blue" },
-    { idx: 3, cls: "bg-green300", name: "green" },
+    { idx: 0, cls: "bg-beige200", name: "beige" },
+    { idx: 1, cls: "bg-purple200", name: "purple" },
+    { idx: 2, cls: "bg-blue200", name: "blue" },
+    { idx: 3, cls: "bg-green200", name: "green" },
   ];
   const images = [
     { idx: 0, link: "https://picsum.photos/id/14/2500/1667" },
