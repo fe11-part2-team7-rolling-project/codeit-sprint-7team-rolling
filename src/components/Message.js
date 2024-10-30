@@ -1,13 +1,25 @@
 import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import dayjs from 'dayjs';
-import messageData from '../data/messageData.json';
+import { getRecipientsMessage } from '../api/recipientsApi';
 
 function Message() {
+  const { id } = useParams();
   const [messages, setMessages] = useState([]);
 
   useEffect(() => {
-    setMessages(messageData.results);
-  }, []);
+    async function fetchRecipientMessageData() {
+      try {
+        const data = await getRecipientsMessage(id);
+        setMessages(data.results);
+        console.log(data);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    }
+
+    fetchRecipientMessageData();
+  }, [id]);
 
   return (
     <div>

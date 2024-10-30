@@ -5,7 +5,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import Reactions from '../components/Reactions';
 import Message from '../components/Message';
 import Share from '../components/Share';
-import getRecipents from '../api/recipients';
+import { getRecipients } from '../api/recipientsApi';
 
 const INITIAL_VALUES = {
   backgroundColor: '',
@@ -29,16 +29,16 @@ function PostIdPage({ initialValues = INITIAL_VALUES }) {
   };
 
   useEffect(() => {
-    async function fetchBackgroundColorData() {
+    async function fetchRecipientData() {
       try {
-        const data = await getRecipents(id);
+        const data = await getRecipients(id);
         setItems(data);
       } catch (error) {
         console.error('Error fetching data:', error);
       }
     }
 
-    fetchBackgroundColorData();
+    fetchRecipientData();
   }, [id]);
 
   return (
@@ -63,7 +63,7 @@ function PostIdPage({ initialValues = INITIAL_VALUES }) {
         </div>
       </div>
       <div
-        className={`w-full h-full bg-cover z-0 ${
+        className={`w-full min-h-screen h-full bg-cover z-0 ${
           items.backgroundImageURL ? '' : colorClassMap[items.backgroundColor]
         }`}
         style={{
