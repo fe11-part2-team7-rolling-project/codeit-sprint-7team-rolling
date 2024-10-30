@@ -5,16 +5,12 @@ function CreateButton({ from, content, relation, font, profileImageURL }) {
   const [isDisabled, setIsDisabled] = useState(true);
 
   useEffect(() => {
-    if (from && content) {
-      setIsDisabled(false);
-    } else {
-      setIsDisabled(true);
-    }
+    setIsDisabled(!(from && content));
   }, [from, content]);
 
   const handleSubmit = async () => {
     if (!isDisabled) {
-      const id = Math.random().toString(36).substr(2, 9); // 임시 ID 생성
+      const id = 9144;
       try {
         const response = await fetch(
           `https://rolling-api.vercel.app/11-7/recipients/${id}/messages/`,
@@ -24,6 +20,8 @@ function CreateButton({ from, content, relation, font, profileImageURL }) {
               "Content-Type": "application/json",
             },
             body: JSON.stringify({
+              team: "11-7",
+              recipientId: id, // 정수로 전달
               sender: from,
               relationship: relation,
               content,
@@ -35,7 +33,8 @@ function CreateButton({ from, content, relation, font, profileImageURL }) {
         if (response.ok) {
           window.location.href = `/post/${id}`;
         } else {
-          console.error("POST 요청 실패:", response.status);
+          const errorData = await response.json();
+          console.error("POST 요청 실패:", response.status, errorData);
         }
       } catch (error) {
         console.error("POST 요청 중 오류 발생:", error);
