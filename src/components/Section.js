@@ -1,28 +1,27 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Card from './Card';
-import EmojiSection from './EmojiSection';
 
-function Section({ point, title, description, cards, emojiSection }) {
+function Section({ point, title, description, imageName, align }) {
   return (
-    <div className="bg-purple-50 shadow-lg rounded-lg p-6 mb-8 w-full max-w-4xl">
-      <div className="flex flex-col md:flex-row items-start md:items-center">
-        <div className="md:w-3/5">
-          <p className="text-purple-500 font-bold mb-2">{point}</p>
-          <h2 className="text-xl font-semibold mb-2">{title}</h2>
-          <p className="text-gray-600 mb-4">{description}</p>
-          <div className="flex space-x-4 overflow-x-scroll md:overflow-hidden">
-            {cards.map((card, index) => (
-              <Card
-                key={card.id || index}
-                from={card.from}
-                text={card.text}
-                date={card.date}
-                profileImage={card.profileImage}
-              />
-            ))}
-          </div>
-          {emojiSection && <EmojiSection />}
+    <div className="bg-surface p-6 rounded-lg w-full max-w-4xl mb-8">
+      <div
+        className={`flex flex-col ${
+          align === 'left' ? 'md:flex-row' : 'md:flex-row-reverse'
+        } items-center`}
+      >
+        <div className="md:w-1/2 p-4">
+          <p className="text-white font-bold mb-2 px-3 py-1 bg-purple500 rounded-full inline-block">
+            {point}
+          </p>
+          <h2 className="text-2xl font-semibold mb-2 text-gray800 leading-snug whitespace-pre-line">{title}</h2>
+          <p className="text-gray600 mb-4 whitespace-pre-line">{description}</p>
+        </div>
+        <div className="md:w-1/2 flex justify-center p-4">
+          <img
+            src={imageName}
+            alt={`${point} 이미지`}
+            className="w-full max-w-xs md:max-w-md"
+          />
         </div>
       </div>
     </div>
@@ -33,19 +32,12 @@ Section.propTypes = {
   point: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
-  cards: PropTypes.arrayOf(
-    PropTypes.shape({
-      from: PropTypes.string,
-      text: PropTypes.string,
-      date: PropTypes.string,
-      profileImage: PropTypes.string,
-    }),
-  ).isRequired,
-  emojiSection: PropTypes.bool,
+  imageName: PropTypes.string.isRequired,
+  align: PropTypes.oneOf(['left', 'right']),
 };
 
 Section.defaultProps = {
-  emojiSection: false,
+  align: 'left',
 };
 
 export default Section;
