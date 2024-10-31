@@ -24,10 +24,20 @@ function MessagePage() {
   const [font, setFont] = useState("Noto Sans"); // 기본 폰트 설정
   const [profileImageURL, setProfileImageURL] = useState(""); // 기본 프로필 이미지 설정
 
+  // 선택된 폰트를 전체 컴포넌트에 적용하기 위한 클래스
+  const fontClasses = {
+    "Noto Sans": "font-noto",
+    Pretendard: "font-pretendard",
+    나눔명조: "font-custom",
+    "나눔손글씨 손편지체": "font-custom",
+  };
+
+  const fontClass = fontClasses[font] || "font-custom";
+
   return (
     <div className="bg-gray-100 min-h-screen H flex flex-col items-center gap-10">
       <PostHeader />
-      <div className="w-[720px] flex flex-col gap-10">
+      <div className={`w-[720px] flex flex-col gap-10  ${fontClass}`}>
         {/* From Input */}
         <FromInput onInputChange={setFrom} />
 
