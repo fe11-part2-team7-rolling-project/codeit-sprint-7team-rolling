@@ -48,7 +48,7 @@ function MessagePage() {
         <RelationSelector onSelectRelation={setRelation} />
 
         {/* Text Editor */}
-        <TextEditor onContentChange={setContent} />
+        <TextEditor onContentChange={setContent} font={fontClass} />
 
         {/* Font Selector */}
         <FontSelector onSelectFont={setFont} />

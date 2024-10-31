@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 
-function TextEditor({ onContentChange }) {
+function TextEditor({ onContentChange, font }) {
   const [content, setContent] = useState("");
   const [textStyle, setTextStyle] = useState({
     isBold: false,
@@ -11,9 +11,10 @@ function TextEditor({ onContentChange }) {
 
   const applyStyle = () => {
     const classes = [];
-    classes.push(textStyle.isBold ? "font-bold" : "font-thin"); // Bold or thin
-    if (textStyle.isItalic) classes.push("italic"); // Italic if active
-    if (textStyle.isUnderline) classes.push("underline"); // Underline if active
+    classes.push(font);
+    if (textStyle.isBold) classes.push("font-bold");
+    if (textStyle.isItalic) classes.push("italic");
+    if (textStyle.isUnderline) classes.push("underline");
     return classes.join(" ");
   };
 
@@ -82,6 +83,7 @@ function TextEditor({ onContentChange }) {
 
 TextEditor.propTypes = {
   onContentChange: PropTypes.func.isRequired,
+  font: PropTypes.string.isRequired,
 };
 
 export default TextEditor;
