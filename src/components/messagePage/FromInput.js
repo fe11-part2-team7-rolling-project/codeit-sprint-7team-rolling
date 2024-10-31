@@ -17,11 +17,11 @@ function FromInput({ onInputChange }) {
 
   return (
     <div className="w-[720px] h-[98px] flex flex-col gap-3">
-      <label
-        htmlFor="FromInput"
-        className="text-[#181818] font-bold text-[24px] leading-[36px] tracking-tight"
-      >
-        From.
+      <label htmlFor="FromInput">
+        <div className="text-[#181818] font-bold text-[24px] leading-[36px] tracking-tight">
+          From.
+        </div>
+
         <input
           value={value}
           type="text"

@@ -13,11 +13,10 @@ function RelationSelector({ onSelectRelation }) {
 
   return (
     <div className="mb-6 w-[320px] h-[98px] flex flex-col gap-[12px]">
-      <label
-        htmlFor="RelationSelector"
-        className="text-[#181818] font-bold text-[24px] leading-[36px] tracking-tight"
-      >
-        <div className="mb-3">상대와의 관계</div>
+      <label htmlFor="RelationSelector">
+        <div className="text-[#181818] font-bold text-[24px] leading-[36px] tracking-tight mb-3">
+          상대와의 관계
+        </div>
         <select
           id="RelationSelector"
           value={relation}
