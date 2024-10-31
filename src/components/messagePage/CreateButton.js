@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { useParams } from "react-router-dom";
 
 function CreateButton({ from, content, relation, font, profileImageURL }) {
-  const { Id } = useParams(); // URL에서 id 값을 가져옴
+  const { Id } = useParams();
   const [isDisabled, setIsDisabled] = useState(true);
 
   useEffect(() => {
@@ -14,7 +14,7 @@ function CreateButton({ from, content, relation, font, profileImageURL }) {
     if (!isDisabled) {
       try {
         const response = await fetch(
-          `https://rolling-api.vercel.app/11-7/recipients/${Id}/messages/`, // URL의 id 사용
+          `https://rolling-api.vercel.app/11-7/recipients/${Id}/messages/`,
           {
             method: "POST",
             headers: {
@@ -22,7 +22,7 @@ function CreateButton({ from, content, relation, font, profileImageURL }) {
             },
             body: JSON.stringify({
               team: "11-7",
-              recipientId: Id, // URL에서 가져온 id 전달
+              recipientId: Id,
               sender: from,
               relationship: relation,
               content,
@@ -51,7 +51,7 @@ function CreateButton({ from, content, relation, font, profileImageURL }) {
         isDisabled
           ? "bg-[#CCCCCC] cursor-not-allowed"
           : "bg-[#9935FF] hover:bg-[#861DEE] active:bg-[#6E0AD1] focus:bg-[#6E0AD1]"
-      } mb-10`}
+      } mb-10 max-md:w-[320px] max-md:h-[56px]`}
     >
       생성하기
     </button>
