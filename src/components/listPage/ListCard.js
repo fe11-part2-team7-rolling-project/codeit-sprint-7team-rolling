@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import getList from "../../listApi";
-import arrowLeft from "../../assets/arrow_left.svg";
-import arrowRight from "../../assets/arrow_right.svg";
-import CardItem from "./CardItem";
+import React, { useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
+import { useNavigate } from 'react-router-dom';
+import getList from '../../listApi';
+import arrowLeft from '../../assets/arrow_left.svg';
+import arrowRight from '../../assets/arrow_right.svg';
+import CardItem from './CardItem';
 
 function ListCard({ type, sortType }) {
   const [list, setList] = useState([]);
@@ -13,10 +14,10 @@ function ListCard({ type, sortType }) {
   const nav = useNavigate();
 
   const colorClassMap = {
-    purple: "bg-purple200",
-    blue: "bg-blue200",
-    green: "bg-green200",
-    beige: "bg-beige200",
+    purple: 'bg-purple200',
+    blue: 'bg-blue200',
+    green: 'bg-green200',
+    beige: 'bg-beige200',
   };
 
   const CARDS_PER_PAGE = 4;
@@ -31,18 +32,18 @@ function ListCard({ type, sortType }) {
         const data = await getList(1000, 0);
 
         let sortedData;
-        if (sortType === "messageCount") {
+        if (sortType === 'messageCount') {
           // messageCount 기준 내림차순 정렬
           sortedData = data.sort((a, b) => b.messageCount - a.messageCount);
-        } else if (sortType === "latest") {
+        } else if (sortType === 'latest') {
           // 최신순 정렬 (예: createdDate 필드 기준)
           sortedData = data.sort(
-            (a, b) => new Date(b.createdDate) - new Date(a.createdDate)
+            (a, b) => new Date(b.createdDate) - new Date(a.createdDate),
           );
         }
         setList(sortedData);
       } catch (err) {
-        setError("데이터를 불러오는데 실패했습니다.");
+        setError('데이터를 불러오는데 실패했습니다.');
       } finally {
         setLoading(false);
       }
@@ -109,5 +110,16 @@ function ListCard({ type, sortType }) {
     </div>
   );
 }
+
+ListCard.propTypes = {
+  type: PropTypes.string,
+  sortType: PropTypes.string,
+};
+
+// 기본 props 설정
+ListCard.defaultProps = {
+  type: 'defaultType', // 필요에 따라 기본값 설정
+  sortType: 'messageCount', // 필요에 따라 기본값 설정
+};
 
 export default ListCard;

@@ -1,33 +1,61 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import axiosInstance from '../axiosInstance';
-import Reactions from '../components/Reactions';
-import Message from '../components/Message';
-import Share from '../components/Share';
+import PropTypes from 'prop-types';
+import { useParams } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import Reactions from '../components/postIdPage/Reactions';
+import Message from '../components/postIdPage/Message';
+import Share from '../components/postIdPage/Share';
+import { getRecipients } from '../api/recipientsApi';
 
-function PostIdPage() {
-  const [images, setImages] = useState([]);
+const INITIAL_VALUES = {
+  backgroundColor: '',
+  backgroundImageURL: null,
+  createdAt: '',
+  id: 0,
+  messageCount: 0,
+  name: '',
+  recentMessages: [],
+  topReactions: [],
+};
 
-  async function fetchBackgroundImageData() {
-    try {
-      const response = await axiosInstance.get('/background-images/');
-      console.log(response.data.imageUrls);
-      setImages(response.data.imageUrls);
-    } catch (error) {
-      console.error('Error fetching data:', error);
-    }
-  }
+function PostIdPage({ initialValues = INITIAL_VALUES }) {
+  const { id } = useParams();
+  const [items, setItems] = useState(initialValues);
+  const colorClassMap = {
+    purple: 'bg-purple200',
+    blue: 'bg-blue200',
+    green: 'bg-green200',
+    beige: 'bg-beige200',
+  };
 
   useEffect(() => {
-    fetchBackgroundImageData();
-  }, []);
+    async function fetchRecipientData() {
+      try {
+        const data = await getRecipients(id);
+        setItems(data);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    }
+
+    fetchRecipientData();
+  }, [id]);
 
   return (
     <div className="w-full h-full">
+      <ToastContainer
+        position="bottom-center"
+        autoClose={5000}
+        hideProgressBar={false}
+        closeOnClick
+        draggable
+        className="p-4"
+      />
       <div className="sticky top-0 z-20">
         <div className="bg-white text-black w-full h-[52px] border-b border-gray200">
           <div className="flex flex-row items-center px-6 w-full h-full text-[18px] leading-[26px] font-regular">
-            To. Ashley Kim
+            To. {items.name}
           </div>
         </div>
         <div className="flex flex-row items-center justify-between bg-white text-black w-full h-[52px] border-b border-gray200">
@@ -36,27 +64,55 @@ function PostIdPage() {
         </div>
       </div>
       <div
-        className="w-full h-full bg-cover z-0"
+        className={`w-full min-h-screen h-full bg-cover z-0 ${
+          items.backgroundImageURL ? '' : colorClassMap[items.backgroundColor]
+        }`}
         style={{
-          backgroundImage: `url(${images[3]})`,
-          backgroundSize: 'cover',
+          backgroundImage: items.backgroundImageURL
+            ? `url(${items.backgroundImageURL})`
+            : 'none',
+          backgroundSize: items.backgroundImageURL ? 'cover' : 'auto',
           backgroundPosition: 'center',
         }}
       >
-        <div className="flex flex-col gap-4 items-center justify-center p-4 z-10">
-          <div className="w-full h-full min-h-[230px] bg-white flex items-center justify-center rounded-[16px] shadow-lg">
-            <Link
-              to="/post/1/message"
-              className="w-[56px] h-[56px] bg-gray500  rounded-full text-[24px] text-white flex justify-center items-center"
-            >
-              +
-            </Link>
-          </div>
-        </div>
         <Message />
       </div>
     </div>
   );
 }
+
+PostIdPage.propTypes = {
+  initialValues: PropTypes.shape({
+    backgroundColor: PropTypes.string,
+    backgroundImageURL: PropTypes.string,
+    createdAt: PropTypes.string,
+    id: PropTypes.number,
+    messageCount: PropTypes.number,
+    name: PropTypes.string,
+    recentMessages: PropTypes.arrayOf(
+      PropTypes.shape({
+        id: PropTypes.number,
+        recipientId: PropTypes.number,
+        sender: PropTypes.string,
+        profileImageURL: PropTypes.string,
+        relationship: PropTypes.string,
+        content: PropTypes.string,
+        font: PropTypes.string,
+        createdAt: PropTypes.string,
+      }),
+    ),
+    topReactions: PropTypes.arrayOf(
+      PropTypes.shape({
+        id: PropTypes.number,
+        emoji: PropTypes.string,
+        count: PropTypes.number,
+      }),
+    ),
+  }),
+};
+
+PostIdPage.defaultProps = {
+  initialValues: INITIAL_VALUES,
+};
 
 export default PostIdPage;
