@@ -24,11 +24,10 @@ function TextEditor({ onContentChange }) {
 
   return (
     <div className="mb-6 w-[720px] h-[260px] flex flex-col gap-[12px]">
-      <label
-        htmlFor="TextEditor"
-        className="text-[#181818] font-bold text-[24px] leading-[36px] tracking-tight"
-      >
-        <div className="mb-3">내용을 입력해 주세요</div>
+      <label htmlFor="TextEditor">
+        <div className="mb-3 text-[#181818] font-bold text-[24px] leading-[36px] tracking-tight">
+          내용을 입력해 주세요
+        </div>
         <div>
           <div className="flex gap-[10px] w-[718px] h-[49px] bg-[#EEEEEE] p-1">
             <button
