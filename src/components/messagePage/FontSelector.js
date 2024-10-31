@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 
-const fonts = ["Noto Sans", "Arial", "Roboto"];
+const fonts = ["Noto Sans", "Pretendard", "나눔명조", "나눔손글씨 손편지체"];
 
 function FontSelector({ onSelectFont }) {
   const [font, setFont] = useState("Noto Sans");
