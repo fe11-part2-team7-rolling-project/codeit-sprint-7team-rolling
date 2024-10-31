@@ -12,7 +12,7 @@ function FontSelector({ onSelectFont }) {
   };
 
   return (
-    <div className="mb-6 w-[320px] h-[98px] flex flex-col gap-[12px]">
+    <div className="mb-24 w-[320px] h-[98px] flex flex-col gap-[12px]">
       <label
         htmlFor="FontSelector"
         className="text-[#181818] font-bold text-[24px] leading-[36px] tracking-tight"

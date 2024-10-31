@@ -12,7 +12,7 @@ function RelationSelector({ onSelectRelation }) {
   };
 
   return (
-    <div className="mb-6 w-[320px] h-[98px] flex flex-col gap-[12px]">
+    <div className="mb-24 w-[320px] h-[98px] flex flex-col gap-[12px]">
       <label htmlFor="RelationSelector">
         <div className="text-[#181818] font-bold text-[24px] leading-[36px] tracking-tight mb-3">
           상대와의 관계

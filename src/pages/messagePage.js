@@ -20,11 +20,10 @@ function PostHeader() {
 function MessagePage() {
   const [from, setFrom] = useState("");
   const [content, setContent] = useState("");
-  const [relation, setRelation] = useState("지인"); // 기본값 설정
-  const [font, setFont] = useState("Noto Sans"); // 기본 폰트 설정
-  const [profileImageURL, setProfileImageURL] = useState(""); // 기본 프로필 이미지 설정
+  const [relation, setRelation] = useState("지인");
+  const [font, setFont] = useState("Noto Sans");
+  const [profileImageURL, setProfileImageURL] = useState("");
 
-  // 선택된 폰트를 전체 컴포넌트에 적용하기 위한 클래스
   const fontClasses = {
     "Noto Sans": "font-noto",
     Pretendard: "font-pretendard",
@@ -35,9 +34,11 @@ function MessagePage() {
   const fontClass = fontClasses[font] || "font-custom";
 
   return (
-    <div className="bg-gray-100 min-h-screen H flex flex-col items-center gap-10">
+    <div className="bg-gray-100 min-h-screen flex flex-col items-center gap-10">
       <PostHeader />
-      <div className={`w-[720px] flex flex-col gap-10  ${fontClass}`}>
+      <div
+        className={`w-[720px] flex flex-col gap-10 ${fontClass} max-md:w-[320px]`}
+      >
         {/* From Input */}
         <FromInput onInputChange={setFrom} />
 
