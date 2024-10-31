@@ -39,11 +39,8 @@ function ProfileImageSelector({ onSelectImage }) {
 
   return (
     <div className="mb-6">
-      <label
-        htmlFor="ProfileImageSelector"
-        className="block text-2xl font-semibold mb-2"
-      >
-        <div className="mb-4">프로필 이미지</div>
+      <label htmlFor="ProfileImageSelector">
+        <div className="mb-4 block text-2xl font-bold">프로필 이미지</div>
 
         <div className="flex items-center gap-8">
           <div>
