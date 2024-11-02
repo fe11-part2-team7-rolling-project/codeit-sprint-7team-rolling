@@ -1,9 +1,9 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import purpleShape from '../../assets/pattern_01.png';
-import beigeShape from '../../assets/pattern_02.png';
-import greenShape from '../../assets/pattern_04.png';
-import blueShape from '../../assets/pattern_03.png';
+import React from "react";
+import PropTypes from "prop-types";
+import purpleShape from "../../assets/pattern_01.png";
+import beigeShape from "../../assets/pattern_02.png";
+import greenShape from "../../assets/pattern_04.png";
+import blueShape from "../../assets/pattern_03.png";
 
 function CardItem({ item, nav, colorClassMap }) {
   const shapeImageMap = {
@@ -17,17 +17,17 @@ function CardItem({ item, nav, colorClassMap }) {
     <button
       type="button"
       onClick={() => nav(`/post/${item.id}`)}
-      className={` relative flex overflow-hidden flex-col items-start justify-start border-black/[.10] border-[1px] gap-3 pt-[30px] pl-[24px] rounded-2xl min-w-[208px] h-[232px] min-[376px]:min-w-[275px] min-[376px]:min-h-[260px] shadow-md ${
+      className={` relative flex overflow-hidden flex-col items-start justify-start border-black/[.10] border-[1px] gap-3 pt-[30px] pl-[24px] rounded-2xl min-w-[208px] h-[232px] mobile:min-w-[275px] mobile:min-h-[260px] shadow-md ${
         item.backgroundImageURL
-          ? 'text-white'
+          ? "text-white"
           : colorClassMap[item.backgroundColor]
       }`}
       style={{
         backgroundImage: item.backgroundImageURL
           ? `url(${item.backgroundImageURL})`
           : undefined,
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
+        backgroundSize: "cover",
+        backgroundPosition: "center",
       }}
     >
       {item.backgroundImageURL && (
@@ -35,13 +35,13 @@ function CardItem({ item, nav, colorClassMap }) {
       )}
       <div className="relative z-10 text-start flex flex-col gap-3">
         {/* 받는 사람 */}
-        <div
-          className={`font-bold text-lg leading-7 min-[376px]:text-2xl ${
-            item.backgroundImageURL ? 'text-white' : 'text-gray900'
+        <h2
+          className={`font-bold text-lg leading-7 mobile:text-2xl ${
+            item.backgroundImageURL ? "text-white" : "text-gray900"
           }`}
         >
           To. {item.name}
-        </div>
+        </h2>
 
         {/* 프로필 이미지 섹션 */}
         <div className="flex -space-x-3">
@@ -59,19 +59,19 @@ function CardItem({ item, nav, colorClassMap }) {
             </span>
           )}
         </div>
-        <div className="text-sm font-extraLight min-[376px]:text-base">
+        <div className="text-sm font-extraLight mobile:text-base">
           <span className="font-bold">{item.messageCount}</span>명이 작성했어요!
         </div>
 
         {/* 리액션 섹션 */}
-        <div className="flex w-[162px] gap-1 space-x-1 border-black/[.12] mt-[18px] border-t-[1px] pt-[17px] min-[376px]:mt-[30px] min-[376px]:w-[227px] min-[376px]:space-x-1.5">
+        <div className="flex w-[162px] gap-1 space-x-1 border-black/[.12] mt-[18px] border-t-[1px] pt-[17px] mobile:mt-[30px] mobile:w-[227px] mobile:space-x-1.5">
           {item.topReactions.map((reaction) => (
             <div
               key={reaction.id}
-              className="flex items-center justify-center space-x-1 bg-black/50 w-[53px] h-[32px] rounded-full text-white text-sm min-[376px]:text-base min-[376px]:w-[65px] min-[376px]:h-[36px]"
+              className="flex items-center justify-center space-x-1 bg-black/50 w-[53px] h-[32px] rounded-full text-white text-sm mobile:text-base mobile:w-[65px] mobile:h-[36px]"
             >
               <span>{reaction.emoji}</span>
-              <span className="text-sm font-extraLight min-[376px]:text-base">
+              <span className="text-sm font-extraLight mobile:text-base">
                 {reaction.count}
               </span>
             </div>
@@ -84,7 +84,7 @@ function CardItem({ item, nav, colorClassMap }) {
         <img
           src={shapeImageMap[item.backgroundColor]}
           alt={`${item.backgroundColor} shape`}
-          className="absolute w-36 h-28 left-[100px] top-[120px] min-[376px]:w-36 min-[376px]:h-36 min-[376px]:left-[130px] min-[376px]:top-[120px]"
+          className="absolute w-36 h-28 left-[100px] top-[120px] mobile:w-36 mobile:h-36 mobile:left-[130px] mobile:top-[120px]"
         />
       )}
     </button>
@@ -102,7 +102,7 @@ CardItem.propTypes = {
         id: PropTypes.number.isRequired,
         sender: PropTypes.string.isRequired,
         profileImageURL: PropTypes.string,
-      }),
+      })
     ),
     messageCount: PropTypes.number,
     topReactions: PropTypes.arrayOf(
@@ -110,7 +110,7 @@ CardItem.propTypes = {
         id: PropTypes.number.isRequired,
         emoji: PropTypes.string.isRequired,
         count: PropTypes.number.isRequired,
-      }),
+      })
     ),
   }).isRequired,
   nav: PropTypes.func.isRequired,

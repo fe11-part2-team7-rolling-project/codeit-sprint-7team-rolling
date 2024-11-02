@@ -53,6 +53,10 @@ module.exports = {
         pretendard: ["Pretendard", "sans-serif"],
         custom: ["나눔명조", "나눔손글씨 손편지체", "serif"], // 다른 폰트를 추가하고 싶다면 여기에 추가
       },
+      screens: {
+        mobile: "376px",
+        tablet: "1025px",
+      },
     },
   },
   plugins: [require("tailwindcss"), require("autoprefixer")],
