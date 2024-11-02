@@ -18,9 +18,8 @@ function Reactions() {
       try {
         const data = await getRecipientsReactions(id);
         setReactions(data.results);
-        console.log(data);
       } catch (error) {
-        console.error('Error fetching data:', error);
+        console.error('데이터를 불러오는 중 오류 발생:', error);
       }
     }
 
@@ -32,17 +31,42 @@ function Reactions() {
   };
 
   const onEmojiClick = async (event) => {
-    const reactionData = {
-      emoji: event.emoji,
-      type: 'increase',
-    };
+    const clickedEmoji = event.emoji;
+
+    const previousReactions = [...reactions];
+
+    // 기존에 같은 이모지가 있는지 확인
+    const existingReactionIndex = reactions.findIndex(
+      (reaction) => reaction.emoji === clickedEmoji,
+    );
+
+    let updatedReactions;
+    if (existingReactionIndex !== -1) {
+      updatedReactions = [...reactions];
+      updatedReactions[existingReactionIndex].count += 1;
+    } else {
+      const newReaction = {
+        id: Date.now(), // Optimistic Update를 위한 임시 고유 ID
+        emoji: clickedEmoji,
+        count: 1,
+      };
+      updatedReactions = [...reactions, newReaction];
+    }
+
+    setReactions(updatedReactions);
 
     try {
+      const reactionData = {
+        emoji: clickedEmoji,
+        type: 'increase',
+      };
       await addRecipientReaction(id, reactionData);
+
       const updatedData = await getRecipientsReactions(id);
       setReactions(updatedData.results);
     } catch (error) {
-      console.error('Error posting reaction:', error);
+      setReactions(previousReactions);
+      alert('리액션 등록에 실패했습니다. 다시 시도해 주세요.');
     } finally {
       setShowEmojiPicker(false);
     }
