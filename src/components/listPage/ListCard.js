@@ -34,7 +34,13 @@ function ListCard({ type, sortType }) {
         let sortedData;
         if (sortType === "messageCount") {
           // messageCount 기준 내림차순 정렬
-          sortedData = data.sort((a, b) => b.messageCount - a.messageCount);
+          sortedData = data.sort((a, b) => {
+            if (b.messageCount === a.messageCount) {
+              // messageCount가 같으면 reactionCount 기준으로 내림차순 정렬
+              return b.reactionCount - a.reactionCount;
+            }
+            return b.messageCount - a.messageCount;
+          });
         } else if (sortType === "latest") {
           // 최신순 정렬 (예: createdDate 필드 기준)
           sortedData = data.sort(

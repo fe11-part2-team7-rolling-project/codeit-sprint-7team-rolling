@@ -54,11 +54,11 @@ function PostIdPage({ initialValues = INITIAL_VALUES }) {
       />
       <div className="sticky top-0 z-20">
         <div className="bg-white text-black w-full h-[52px] border-b border-gray200">
-          <div className="flex flex-row items-center px-6 w-full h-full text-[18px] leading-[26px] font-regular">
+          <h1 className="flex items-center px-6 w-full h-full text-[18px] leading-[26px] font-regular">
             To. {items.name}
-          </div>
+          </h1>
         </div>
-        <div className="flex flex-row items-center justify-between bg-white text-black w-full h-[52px] border-b border-gray200">
+        <div className="flex items-center justify-between bg-white text-black w-full h-[52px] border-b border-gray200">
           <Reactions />
           <Share />
         </div>

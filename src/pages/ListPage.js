@@ -27,7 +27,7 @@ function ListPage() {
           <Link to="/post">
             <button
               type="button"
-              className="bg-purple600 text-lg font-light text-white leading-7 rounded-xl w-80 h-14"
+              className="bg-purple600 text-lg font-light text-white leading-7 rounded-xl w-80 h-14 hover:bg-purple800"
             >
               나도 만들어보기
             </button>
