@@ -11,6 +11,10 @@ function CreateButton({ from, content, relation, font, profileImageURL }) {
   }, [from, content]);
 
   const handleSubmit = async () => {
+    if (!profileImageURL || profileImageURL.includes("default_avatar")) {
+      alert("프로필 이미지를 선택해주세요.");
+      return;
+    }
     if (!isDisabled) {
       try {
         const response = await fetch(
@@ -57,7 +61,6 @@ function CreateButton({ from, content, relation, font, profileImageURL }) {
     </button>
   );
 }
-
 CreateButton.propTypes = {
   from: PropTypes.string.isRequired,
   content: PropTypes.string.isRequired,

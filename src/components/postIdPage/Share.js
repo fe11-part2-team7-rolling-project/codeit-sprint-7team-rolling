@@ -1,7 +1,7 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { useParams } from 'react-router-dom';
-import { toast } from 'react-toastify';
-import { ReactComponent as ShareIcon } from '../../assets/share.svg';
+import React, { useState, useEffect, useRef } from "react";
+import { useParams } from "react-router-dom";
+import { toast } from "react-toastify";
+import { ReactComponent as ShareIcon } from "../../assets/share.svg";
 
 function Share() {
   const { id } = useParams();
@@ -21,12 +21,12 @@ function Share() {
 
   useEffect(() => {
     if (isDropdownVisible) {
-      document.addEventListener('mousedown', handleClickOutside);
+      document.addEventListener("mousedown", handleClickOutside);
     } else {
-      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener("mousedown", handleClickOutside);
     }
     return () => {
-      document.removeEventListener('mousedown', handleClickOutside); // cleanup
+      document.removeEventListener("mousedown", handleClickOutside); // cleanup
     };
   }, [isDropdownVisible]);
 
@@ -34,14 +34,14 @@ function Share() {
     try {
       const url = window.location.href;
       await navigator.clipboard.writeText(url);
-      toast.success('URL이 복사 되었습니다.', {
-        position: 'bottom-center',
+      toast.success("URL이 복사 되었습니다.", {
+        position: "bottom-center",
         autoClose: 5000,
         className:
-          'bg-black opacity-80 text-white font-regular text-[16px] leading-[26px] rounded-[8px]',
+          "bg-black opacity-80 text-white font-regular text-[16px] leading-[26px] rounded-[8px]",
       });
     } catch (error) {
-      console.error('Failed to copy: ', error);
+      console.error("Failed to copy: ", error);
     }
   };
 
