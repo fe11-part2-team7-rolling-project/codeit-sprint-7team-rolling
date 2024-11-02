@@ -58,7 +58,7 @@ function ListCard({ type, sortType }) {
     fetchData();
   }, [type, sortType]);
 
-  if (loading) return <div>로딩 중...</div>;
+  if (loading) return <div>로딩중</div>;
   if (error) return <div>{error}</div>;
 
   return (

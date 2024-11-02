@@ -4,6 +4,7 @@ import purpleShape from "../../assets/pattern_01.png";
 import beigeShape from "../../assets/pattern_02.png";
 import greenShape from "../../assets/pattern_04.png";
 import blueShape from "../../assets/pattern_03.png";
+import CardProfileImg from "./CardProfileImg";
 
 function CardItem({ item, nav, colorClassMap }) {
   const shapeImageMap = {
@@ -46,12 +47,7 @@ function CardItem({ item, nav, colorClassMap }) {
         {/* 프로필 이미지 섹션 */}
         <div className="flex -space-x-3">
           {item.recentMessages.slice(0, 3).map((message) => (
-            <img
-              key={message.id}
-              src={message.profileImageURL}
-              alt={message.sender}
-              className="w-7 h-7 rounded-full border-2 border-white"
-            />
+            <CardProfileImg key={message.id} message={message} />
           ))}
           {item.messageCount > 3 && (
             <span className="w-8 h-7 rounded-[30px] bg-white font-regular text-gray500 text-xs flex justify-center items-center">
