@@ -6,6 +6,7 @@ function ProfileImageSelector({ onSelectImage }) {
     "https://learn-codeit-kr-static.s3.ap-northeast-2.amazonaws.com/sprint-proj-image/default_avatar.png";
   const [selectedImage, setSelectedImage] = useState(defaultImageUrl);
   const [imageUrls, setImageUrls] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchImageUrls = async () => {
@@ -43,17 +44,13 @@ function ProfileImageSelector({ onSelectImage }) {
         </h1>
         <div className="flex items-center gap-8">
           <div className="w-[80px] rounded-full bg-[#CCCCCC]">
-            <img
-              src={selectedImage}
-              alt="Profile"
-              className="w-full h-full rounded-full"
-            />
+            <img src={selectedImage} alt="Profile" className="rounded-full" />
           </div>
           <div>
-            <p className="text-[#555555] text-[16px] leading-[26px]">
+            <h2 className="text-[#555555] text-[16px] leading-[26px] font-regular">
               프로필 이미지를 선택해 주세요!
-            </p>
-            <div className="flex gap-4 mt-2 flex-wrap max-w-[320px]">
+            </h2>
+            <div className="flex gap-1 mt-2 flex-wrap">
               {imageUrls.map((image, index) => (
                 <button
                   type="button"
@@ -65,10 +62,17 @@ function ProfileImageSelector({ onSelectImage }) {
                       : "border-transparent"
                   }`}
                 >
+                  {loading && (
+                    <div className="w-12 h-12 max-[767px]:w-10 max-[767px]:h-10 rounded-full border-none skeleton" />
+                  )}
                   <img
+                    style={{ display: loading ? "none" : "block" }}
+                    onLoad={() => {
+                      setLoading(false);
+                    }}
                     src={image}
                     alt={`Profile ${index + 1}`}
-                    className="w-12 h-12 rounded-full object-cover"
+                    className="w-12 h-12 rounded-full object-cover max-[767px]:w-10 max-[767px]:h-10"
                   />
                 </button>
               ))}
