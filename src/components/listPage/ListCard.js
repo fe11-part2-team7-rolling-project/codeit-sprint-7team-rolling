@@ -58,7 +58,15 @@ function ListCard({ type, sortType }) {
     fetchData();
   }, [type, sortType]);
 
-  if (loading) return <div>로딩중</div>;
+  if (loading) {
+    return (
+      <div className="flex flex-wrap gap-5">
+        {Array.from({ length: CARDS_PER_PAGE }).map(() => (
+          <div className="w-[275px] h-[260px] bg-white p-4 rounded-lg skeleton" />
+        ))}
+      </div>
+    );
+  }
   if (error) return <div>{error}</div>;
 
   return (
