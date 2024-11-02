@@ -17,10 +17,10 @@ function FromInput({ onInputChange }) {
 
   return (
     <div className="w-[720px] h-[98px] flex flex-col gap-3 max-md:w-[320px] max-md:gap-[12px]">
-      <label htmlFor="FromInput">
-        <div className="text-[#181818] font-bold text-[24px] leading-[36px] tracking-tight max-md:text-[24px] max-md:leading-[36px]">
+      <label htmlFor="FromInput" className="flex flex-col gap-3">
+        <h1 className="text-[#181818] font-bold text-[24px] leading-[36px] tracking-tight max-md:text-[24px] max-md:leading-[36px]">
           From.
-        </div>
+        </h1>
 
         <input
           value={value}

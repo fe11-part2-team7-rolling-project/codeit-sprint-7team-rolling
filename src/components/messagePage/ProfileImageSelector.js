@@ -37,10 +37,10 @@ function ProfileImageSelector({ onSelectImage }) {
 
   return (
     <div className="w-[720px] max-md:w-[320px] flex flex-col gap-3 mb-6">
-      <label htmlFor="ProfileImageSelector">
-        <div className="text-[#181818] font-bold text-[24px] leading-[36px] tracking-tight">
+      <label htmlFor="ProfileImageSelector" className="flex flex-col gap-3">
+        <h1 className="text-[#181818] font-bold text-[24px] leading-[36px] tracking-tight">
           프로필 이미지
-        </div>
+        </h1>
         <div className="flex items-center gap-8">
           <div className="w-[80px] rounded-full bg-[#CCCCCC]">
             <img

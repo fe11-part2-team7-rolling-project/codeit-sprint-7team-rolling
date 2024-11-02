@@ -26,9 +26,9 @@ function TextEditor({ onContentChange, font }) {
   return (
     <div className="w-[720px] h-[308px] flex flex-col gap-[12px] mb-6 max-md:w-[320px] max-md:h-[308px]">
       <label htmlFor="TextEditor">
-        <div className="text-[#181818] font-bold text-[24px] leading-[36px] tracking-tight mb-3">
+        <h1 className="text-[#181818] font-bold text-[24px] leading-[36px] tracking-tight mb-3">
           내용을 입력해 주세요
-        </div>
+        </h1>
         <div>
           <div className="flex gap-[10px] w-[718px] h-[49px] bg-[#EEEEEE] p-1 max-md:w-[320px]">
             <button

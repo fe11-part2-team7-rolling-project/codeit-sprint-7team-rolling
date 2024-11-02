@@ -15,9 +15,9 @@ function FontSelector({ onSelectFont }) {
     <div className="mb-24 w-[320px] h-[98px] flex flex-col gap-[12px]">
       <label
         htmlFor="FontSelector"
-        className="text-[#181818] font-bold text-[24px] leading-[36px] tracking-tight"
+        className="text-[#181818] font-bold text-[24px] leading-[36px] tracking-tight mt-7"
       >
-        <div className="mb-3">폰트 선택</div>
+        <h1 className="mb-3">폰트 선택</h1>
         <select
           id="FontSelector"
           value={font}
