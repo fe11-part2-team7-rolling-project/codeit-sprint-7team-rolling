@@ -53,7 +53,7 @@ function CreateButton({ from, content, relation, font, profileImageURL }) {
       disabled={isDisabled}
       className={`w-[720px] h-[56px] text-white font-semibold rounded-[12px] px-[24px] py-[14px] ${
         isDisabled
-          ? "bg-[#CCCCCC] cursor-not-allowed"
+          ? "bg-[#CCCCCC] cursor-not-allowed dark:bg-gray400"
           : "bg-[#9935FF] hover:bg-[#861DEE] active:bg-[#6E0AD1] focus:bg-[#6E0AD1]"
       } mb-10 max-md:w-[320px] max-md:h-[56px]`}
     >

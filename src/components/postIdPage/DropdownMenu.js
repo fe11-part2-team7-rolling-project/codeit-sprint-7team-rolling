@@ -32,13 +32,13 @@ function DropdownMenu({ reactions }) {
       className="relative flex flex-row justify-center items-center"
       ref={dropdownRef}
     >
-      <button type="button" onClick={toggleDropdown}>
+      <button type="button" className="text-[#101010] dark:text-gray200" onClick={toggleDropdown}>
         <Dropdown />
       </button>
 
       {isDropdownVisible && (
         <div className="absolute top-full mt-2">
-          <div className="flex flex-col p-4 gap-2 bg-white border rounded-[8px] border-[#B6B6B6]">
+          <div className="flex flex-col p-4 gap-2 bg-white dark:bg-dark2 border rounded-[8px] border-[#B6B6B6]">
             {reactions.map((reaction) => (
               <div
                 key={reaction.id}

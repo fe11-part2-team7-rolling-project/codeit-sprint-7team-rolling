@@ -2,12 +2,16 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import Logo from '../components/Layout/Logo';
 import checkIcon from '../assets/check_Icon.png';
+import ToggleButton from "../components/Layout/ToggleButton";
 
 function PostHeader() {
   return (
-    <header className="bg-white shadow-md w-full py-4 px-6 md:px-24 lg:px-48">
+    <header className="bg-white dark:bg-dark2 shadow-md w-full py-4 px-6 md:px-24 lg:px-48">
       <div className="flex justify-between items-center max-w-7xl mx-auto">
         <Logo />
+        <div className="flex-shrink-0 ml-auto">
+          <ToggleButton/>
+        </div>
       </div>
     </header>
   );
@@ -20,7 +24,7 @@ function SubmitButton({ onClick, disabled, text }) {
       onClick={() => onClick()}
       disabled={disabled}
       className={`w-full rounded-xl py-4 font-bold text-white mt-20 ${
-        disabled ? 'bg-gray300' : 'bg-purple600'
+        disabled ? 'bg-gray300 cursor-not-allowed dark:bg-gray400' : 'bg-purple600'
       }`}
     >
       {text}
@@ -94,7 +98,7 @@ function PostPage() {
     setUserStartTyping(true);
   };
   return (
-    <div className="bg-gray-100 min-h-screen">
+    <div className="bg-gray-100 dark:bg-dark1 dark:text-gray300 min-h-screen">
       <PostHeader />
       <main className="flex flex-col py-8 px-4 sm:px-6 md:px-16 lg:px-24 items-center">
         <div className="flex flex-col max-w-screen-sm w-full items-start">
@@ -105,7 +109,7 @@ function PostPage() {
             onChange={(e) => setName(e.target.value)}
             placeholder="받는 사람 이름을 입력해주세요"
             onBlur={() => handleFocusout()}
-            className={`w-full border-2 rounded-lg px-4 py-2 focus:outline-none mb-5 ${
+            className={`w-full border-2 rounded-lg px-4 py-2 focus:outline-none mb-5 dark:bg-dark4 ${
               userStartTyping && name.length === 0
                 ? 'border-error'
                 : 'border-gray300'
@@ -125,8 +129,8 @@ function PostPage() {
               type="button"
               className={`py-2 rounded-lg w-20 border-2 ${
                 isColor
-                  ? 'text-purple600 border-purple600 font-bold'
-                  : 'bg-gray200 border-gray200'
+                  ? 'text-purple600 dark:bg-dark4 border-purple600 font-bold'
+                  : 'bg-gray200 dark:bg-dark4 dark:border-gray600 dark:text-gray500 border-gray200'
               }`}
               onClick={() => setIsColor(true)}
             >
@@ -136,8 +140,8 @@ function PostPage() {
               type="button"
               className={`py-2 rounded-lg w-20 border-2 ${
                 !isColor
-                  ? 'text-purple600 border-purple600 font-bold'
-                  : 'bg-gray200 border-gray200'
+                  ? 'text-purple600 dark:bg-dark4 border-purple600 font-bold'
+                  : 'bg-gray200 dark:bg-dark4 dark:border-gray600 dark:text-gray500 border-gray200'
               }`}
               onClick={() => setIsColor(false)}
             >
