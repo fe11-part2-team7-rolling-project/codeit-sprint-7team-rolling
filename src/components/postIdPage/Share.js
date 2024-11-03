@@ -1,9 +1,10 @@
-import React, { useState, useEffect, useRef } from "react";
-import { useParams } from "react-router-dom";
-import { toast } from "react-toastify";
-import { ReactComponent as ShareIcon } from "../../assets/share.svg";
+import React, { useState, useEffect, useRef } from 'react';
+import PropTypes from 'prop-types';
+import { useParams } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import { ReactComponent as ShareIcon } from '../../assets/share.svg';
 
-function Share() {
+function Share({ items }) {
   const { id } = useParams();
   const [isDropdownVisible, setIsDropdownVisible] = useState(false);
   const dropdownRef = useRef(null);
@@ -21,12 +22,12 @@ function Share() {
 
   useEffect(() => {
     if (isDropdownVisible) {
-      document.addEventListener("mousedown", handleClickOutside);
+      document.addEventListener('mousedown', handleClickOutside);
     } else {
-      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener('mousedown', handleClickOutside);
     }
     return () => {
-      document.removeEventListener("mousedown", handleClickOutside); // cleanup
+      document.removeEventListener('mousedown', handleClickOutside); // cleanup
     };
   }, [isDropdownVisible]);
 
@@ -34,22 +35,31 @@ function Share() {
     try {
       const url = window.location.href;
       await navigator.clipboard.writeText(url);
-      toast.success("URL이 복사 되었습니다.", {
-        position: "bottom-center",
+      toast.success('URL이 복사 되었습니다.', {
+        position: 'bottom-center',
         autoClose: 5000,
         className:
-          "bg-black opacity-80 text-white font-regular text-[16px] leading-[26px] rounded-[8px]",
+          'bg-black opacity-80 text-white font-regular text-[16px] leading-[26px] rounded-[8px]',
       });
     } catch (error) {
-      console.error("Failed to copy: ", error);
+      console.error('Failed to copy: ', error);
     }
   };
 
   const shareOnKakao = () => {
+    const defaultContent =
+      '전통적인 롤링페이퍼 문화를 웹으로 구현한 커뮤니티형 플랫폼입니다.';
+    const content =
+      items.recentMessages && items.recentMessages[0]?.content
+        ? items.recentMessages[0].content
+        : defaultContent;
+
     window.Kakao.Share.sendCustom({
       templateId: 113686,
       templateArgs: {
         id,
+        name: items.name,
+        content,
       },
     });
   };
@@ -86,5 +96,23 @@ function Share() {
     </div>
   );
 }
+
+Share.propTypes = {
+  items: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    recentMessages: PropTypes.arrayOf(
+      PropTypes.shape({
+        id: PropTypes.number,
+        recipientId: PropTypes.number,
+        sender: PropTypes.string,
+        profileImageURL: PropTypes.string,
+        relationship: PropTypes.string,
+        content: PropTypes.string,
+        font: PropTypes.string,
+        createdAt: PropTypes.string,
+      }),
+    ),
+  }).isRequired,
+};
 
 export default Share;

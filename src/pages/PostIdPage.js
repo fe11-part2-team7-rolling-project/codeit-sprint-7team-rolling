@@ -60,7 +60,7 @@ function PostIdPage({ initialValues = INITIAL_VALUES }) {
         </div>
         <div className="flex flex-row items-center justify-between bg-white text-black w-full h-[52px] border-b border-gray200">
           <Reactions />
-          <Share />
+          <Share items={items} />
         </div>
       </div>
       <div
