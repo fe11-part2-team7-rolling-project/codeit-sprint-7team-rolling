@@ -1,7 +1,5 @@
-// src/components/TrashIcon.js
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-
 import enabledIcon from '../assets/trashbin/enabled.svg';
 import hoverIcon from '../assets/trashbin/hover.svg';
 import focusIcon from '../assets/trashbin/focus.svg';
@@ -22,6 +20,7 @@ function TrashIcon({ onDelete, isDisabled = false }) {
   const handleMouseEnter = () => !isDisabled && setIconState('hover');
   const handleMouseLeave = () => !isDisabled && setIconState('enabled');
   const handleFocus = () => !isDisabled && setIconState('focus');
+  const handleBlur = () => !isDisabled && setIconState('enabled'); 
   const handleClick = () => {
     if (!isDisabled) {
       setIconState('active');
@@ -34,6 +33,7 @@ function TrashIcon({ onDelete, isDisabled = false }) {
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       onFocus={handleFocus}
+      onBlur={handleBlur}
       onClick={handleClick}
       disabled={isDisabled}
       tabIndex={0}
