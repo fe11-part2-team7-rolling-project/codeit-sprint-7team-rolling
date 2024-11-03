@@ -100,14 +100,16 @@ function PostEditPage() {
     }
   };
 
-  // 변경사항 저장 후 이전 페이지로 이동
-  const saveAndGoBack = async () => {
+    // 변경사항 저장 후 이전 페이지로 이동
+    const saveAndGoBack = async () => {
     try {
-      navigate(`/post/${id}`);
+        await updateRecipient(id, { recentMessages: cards });
+        navigate(`/post/${id}`);
     } catch (error) {
-      console.error('Failed to save changes:', error);
+        console.error('Failed to save changes:', error);
     }
   };
+  
 
   return (
     <div className="w-full h-full">
