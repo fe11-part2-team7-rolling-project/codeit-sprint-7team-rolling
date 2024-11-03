@@ -1,22 +1,21 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import TrashIcon from '../components/TrashIcon';
 import DeleteButton from '../components/DeleteButton';
-import { getRecipients, deleteRecipient } from '../api/recipientsApi';
+import { getRecipients, deleteRecipient, deleteCard, updateRecipient } from '../api/recipientsApi';
 import Reactions from '../components/postIdPage/Reactions';
 import Share from '../components/postIdPage/Share';
 
 function PostEditPage() {
-  // 현재 URL에서 ID를 가져오기 위한 useParams와 페이지 이동을 위한 useNavigate
-  const { id } = useParams();
-  const navigate = useNavigate();
+  const { id } = useParams(); // 현재 URL에서 ID를 가져옴
+  const navigate = useNavigate(); // 페이지 이동을 위한 네비게이트
 
   // 상태 관리
-  const [cards, setCards] = useState([]); // 카드 리스트 상태
-  const [deletedCardIds, setDeletedCardIds] = useState([]); // 삭제된 카드 ID를 저장하는 상태
-  const [items, setItems] = useState({}); // 롤링페이퍼 정보 상태
-  const [page, setPage] = useState(1); // 현재 페이지 번호 (무한 스크롤에 필요)
-  const [hasMore, setHasMore] = useState(true); // 추가 데이터 로딩 여부
+  const [cards, setCards] = useState([]); // 카드 목록
+  const [deletedCardIds, setDeletedCardIds] = useState([]); // 삭제된 카드 ID 목록
+  const [items, setItems] = useState({}); // 롤링페이퍼 정보
+  const [page, setPage] = useState(1); // 현재 페이지 번호
+  const [hasMore, setHasMore] = useState(true); // 더 로드할 데이터가 있는지 여부
 
   // 배경색을 설정하기 위한 색상 맵
   const colorClassMap = {
@@ -26,11 +25,11 @@ function PostEditPage() {
     beige: 'bg-beige200',
   };
 
-  // 데이터 로딩: 롤링페이퍼와 관련된 카드 데이터를 가져오는 비동기 함수
+  // 데이터 로딩: 롤링페이퍼와 관련된 카드 데이터를 가져오는 함수
   useEffect(() => {
     async function fetchRecipientData() {
       try {
-        const data = await getRecipients(id, page); // API를 통해 데이터 가져오기
+        const data = await getRecipients(id, page);
         const newCards = data.recentMessages.filter(
           (card) => !deletedCardIds.includes(card.id) // 삭제된 카드 제외
         );
@@ -44,28 +43,28 @@ function PostEditPage() {
 
         setItems(data); // 롤링페이퍼 정보 업데이트
       } catch (error) {
-        console.error('Error fetching data:', error);
+        console.error('데이터를 불러오는데 실패했습니다:', error);
       }
     }
 
     fetchRecipientData();
   }, [id, page, deletedCardIds]);
 
-  // 무한 스크롤: 사용자가 페이지 하단에 도달할 때 추가 페이지 로딩
-  const handleScroll = () => {
+  // 스크롤: 사용자가 페이지 하단에 도달할 때 추가 페이지 로딩
+  const handleScroll = useCallback(() => {
     if (
       window.innerHeight + document.documentElement.scrollTop ===
-        document.documentElement.offsetHeight && hasMore
+      document.documentElement.offsetHeight && hasMore
     ) {
       setPage((prevPage) => prevPage + 1); // 페이지 번호 증가
     }
-  };
+  }, [hasMore]);
 
   // 스크롤 이벤트 리스너 추가 및 제거
   useEffect(() => {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
-  }, [hasMore]);
+  }, [handleScroll]);
 
   // 개별 카드 삭제 함수
   const handleDelete = async (cardId) => {
@@ -74,11 +73,11 @@ function PostEditPage() {
       if (response && response.success) {
         setDeletedCardIds((prevIds) => [...prevIds, cardId]); // 삭제된 카드 ID 추가
       } else {
-        console.error('카드 삭제 실패: 서버에서 오류가 발생했습니다.');
+        console.error('롤링페이퍼 삭제 실패: 서버에서 오류가 발생했습니다.');
       }
     } catch (error) {
-      console.error('카드 삭제 중 오류가 발생했습니다:', error);
-      alert('카드 삭제에 실패했습니다. 다시 시도해 주세요.');
+      console.error('롤링페이퍼 삭제 중 오류가 발생했습니다:', error);
+      alert('롤링페이퍼 삭제에 실패했습니다. 다시 시도해 주세요.');
     }
   };
 
@@ -100,16 +99,15 @@ function PostEditPage() {
     }
   };
 
-    // 변경사항 저장 후 이전 페이지로 이동
-    const saveAndGoBack = async () => {
+  // 변경사항 저장 후 이전 페이지로 이동
+  const saveAndGoBack = async () => {
     try {
-        await updateRecipient(id, { recentMessages: cards });
-        navigate(`/post/${id}`);
+      await updateRecipient(id, { recentMessages: cards });
+      navigate(`/post/${id}`);
     } catch (error) {
-        console.error('Failed to save changes:', error);
+      console.error('변경사항 저장 실패:', error);
     }
   };
-  
 
   return (
     <div className="w-full h-full">
