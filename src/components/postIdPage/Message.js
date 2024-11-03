@@ -17,6 +17,12 @@ function Message() {
     나눔명조: 'font-custom',
     '나눔손글씨 손편지체': 'font-custom',
   };
+  const relationMap = {
+    지인: 'bg-beige100 text-beige500',
+    동료: 'bg-purple100 text-purple500',
+    가족: 'bg-green100 text-green500',
+    친구: 'bg-blue100 text-blue500',
+  };
 
   const limit = 8;
 
@@ -114,7 +120,11 @@ function Message() {
                     {message.sender}
                   </div>
                 </div>
-                <div className="flex p-2 mr-auto rounded-[4px] bg-blue100 text-blue500 font-regular text-[14px] leading-[20px]">
+                <div
+                  className={`flex p-2 mr-auto rounded-[4px] ${
+                    relationMap[message.relationship]
+                  } font-regular text-[14px] leading-[20px]`}
+                >
                   {message.relationship}
                 </div>
               </div>
@@ -154,7 +164,11 @@ function Message() {
                       {selectedMessage.sender}
                     </div>
                   </div>
-                  <div className="flex p-2 mr-auto rounded-[4px] bg-blue100 text-blue500 font-regular text-[14px] leading-[20px]">
+                  <div
+                    className={`flex p-2 mr-auto rounded-[4px] ${
+                      relationMap[selectedMessage.relationship]
+                    } font-regular text-[14px] leading-[20px]`}
+                  >
                     {selectedMessage.relationship}
                   </div>
                 </div>
