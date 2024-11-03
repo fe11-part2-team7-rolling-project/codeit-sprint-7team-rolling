@@ -6,11 +6,9 @@ import PostEditPage from './pages/PostEditPage';
 import ListPage from './pages/ListPage';
 import MessagePage from './pages/messagePage';
 import PostPage from './pages/PostPage';
-import { CardProvider } from './components/CardContext';
 
 function App() {
   return (
-    <CardProvider>
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<MainPage />} />
@@ -21,7 +19,6 @@ function App() {
           <Route path="/post/:id/message" element={<MessagePage />} />
         </Routes>
       </BrowserRouter>
-    </CardProvider>
   );
 }
 
