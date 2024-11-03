@@ -111,8 +111,4 @@ PostIdPage.propTypes = {
   }),
 };
 
-PostIdPage.defaultProps = {
-  initialValues: INITIAL_VALUES,
-};
-
 export default PostIdPage;
