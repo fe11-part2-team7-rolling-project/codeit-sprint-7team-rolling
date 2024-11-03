@@ -62,11 +62,12 @@ export async function getCardList() {
 
 // 특정 recipient 삭제하기
 export async function deleteRecipient(id) {
-  return apiRequest({
-    method: 'DELETE',
-    endpoint: `/11-7/recipients/${id}/`,
-    errorMessage: '카드를 삭제하는데 실패했습니다.',
-  });
+  try {
+    const response = await axiosInstance.delete(`/11-7/recipients/${id}/`);
+    return response.data;
+  } catch (error) {
+    throw new Error('롤링페이퍼를 삭제하는 데 실패했습니다.');
+  }
 }
 
 // 특정 recipient 업데이트하기 (수정 기능)

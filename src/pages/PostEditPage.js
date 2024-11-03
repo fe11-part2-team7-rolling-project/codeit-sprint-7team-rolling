@@ -11,12 +11,15 @@ function PostEditPage() {
   const { id } = useParams();
   const navigate = useNavigate();
   const [cards, setCards] = useState([]);
+  const [recipient, setRecipient] = useState({ name: '' });
+
 
   useEffect(() => {
     async function fetchRecipientData() {
       try {
         const data = await getRecipients(id);
-        setCards(data.recentMessages); // 각 카드 데이터를 가져옴
+        setCards(data.recentMessages); // 카드 데이터를 설정
+        setRecipient(data); // 전체 롤링페이퍼 데이터에서 이름 등 필요한 정보 설정
       } catch (error) {
         console.error('Error fetching data:', error);
       }
@@ -31,9 +34,14 @@ function PostEditPage() {
   };
 
   // 전체 삭제 기능
-  const handleDeleteAll = () => {
+  const handleDeleteAll = async () => {
     if (window.confirm('정말 삭제하시겠습니까?')) {
-      setCards([]);
+      try {
+        await deleteRecipient(id); // 롤링페이퍼 삭제 API 호출
+        navigate('/list'); // 삭제 완료 후 /list 페이지로 이동
+      } catch (error) {
+        console.error('삭제 중 오류가 발생했습니다:', error);
+      }
     }
   };
 
@@ -51,20 +59,20 @@ function PostEditPage() {
       <div className="sticky top-0 z-20">
         <div className="bg-white text-black w-full h-[52px] border-b border-gray-200 flex justify-between items-center px-6">
           <div className="text-[18px] leading-[26px] font-regular">
-            To. Ashley Kim
+           To. {recipient.name}
           </div>
           <div className="flex space-x-2">
             <button
               onClick={() => navigate(`/post/${id}`)}
               type="button"
-              className="px-4 py-2 bg-blue500 text-white rounded-md shadow-md hover:bg-blue600"
+              className="px-2 py-1 sm:px-4 sm:py-2 text-sm sm:text-base bg-blue500 text-white rounded-md shadow-md hover:bg-blue700 transition"
             >
               Back
             </button>
             <button
               onClick={saveAndGoBack}
               type="button"
-              className="px-4 py-2 bg-purple500 text-white rounded-md shadow-md hover:bg-purple600"
+              className="px-2 py-1 sm:px-4 sm:py-2 text-sm sm:text-base bg-purple500 text-white rounded-md shadow-md hover:bg-purple600 transition"
             >
               Save and Go Back
             </button>
