@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import dayjs from 'dayjs';
 import { getRecipientsMessage } from '../../api/recipientsApi';
@@ -11,8 +11,14 @@ function Message() {
   const [loading, setLoading] = useState(false);
   const [selectedMessage, setSelectedMessage] = useState(null);
   const loadMoreRef = useRef(null);
+  const fontClasses = {
+    'Noto Sans': 'font-noto',
+    Pretendard: 'font-regular',
+    나눔명조: 'font-custom',
+    '나눔손글씨 손편지체': 'font-custom',
+  };
 
-  const limit = 8; // 한 번에 가져올 메시지 개수
+  const limit = 8;
 
   useEffect(() => {
     const fetchRecipientMessageData = async () => {
@@ -28,7 +34,8 @@ function Message() {
         setLoading(false);
       }
     };
-    fetchRecipientMessageData(); // 컴포넌트가 마운트될 때 데이터 가져오기
+
+    fetchRecipientMessageData();
   }, [id, offset]);
 
   useEffect(() => {
@@ -65,6 +72,7 @@ function Message() {
 
   const openModal = (message) => {
     setSelectedMessage(message);
+    console.log(message.font);
   };
 
   const closeModal = () => {
@@ -111,7 +119,11 @@ function Message() {
                 </div>
               </div>
             </div>
-            <p className="px-6 py-[16px] font-regular text-left text-[15px] leading-[22px] -tracking-[.01em]">
+            <p
+              className={`px-6 py-[16px] ${
+                fontClasses[message.font] || 'font-custom'
+              } text-left text-[15px] leading-[22px] -tracking-[.01em]`}
+            >
               {message.content}
             </p>
             <div className="px-6 font-regular text-gray500 text-left text-[12px] leading-[18px] -tracking-[.05em]">
@@ -151,7 +163,11 @@ function Message() {
                 {dayjs(selectedMessage.createdAt).format('YYYY.MM.DD')}
               </div>
             </div>
-            <p className="max-h-60 overflow-y-auto font-regular text-left text-[15px] leading-[22px] mb-4">
+            <p
+              className={`max-h-60 overflow-y-auto ${
+                fontClasses[selectedMessage.font] || 'font-custom'
+              } text-left text-[15px] leading-[22px] mb-4`}
+            >
               {selectedMessage.content}
             </p>
 
