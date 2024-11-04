@@ -47,7 +47,16 @@ function MessagePage() {
     []
   );
 
+  // API 전송용 폰트 이름 매핑 객체 추가
+  const fontApiValues = {
+    "Noto Sans": "Noto Sans",
+    Pretendard: "Pretendard",
+    나눔명조: "나눔명조",
+    "나눔손글씨 손편지체": "나눔손글씨 손편지체",
+  };
+
   const fontClass = fontClasses[font] || "font-custom";
+  const fontForApi = fontApiValues[font] || "Noto Sans"; // API에 사용할 폰트 이름
 
   const handleFromChange = useCallback((value) => setFrom(value), []);
   const handleContentChange = useCallback((value) => setContent(value), []);
@@ -58,31 +67,21 @@ function MessagePage() {
     []
   );
 
-  const memoizedFont = useMemo(() => fontClass, [fontClass]);
-  const memoizedFontForEditor = useMemo(() => fontClass, [fontClass]);
-
   return (
     <div className="bg-gray-100 dark:bg-dark1 min-h-screen flex flex-col items-center gap-10">
       <MemoizedLogo />
-      <div
-        className={`w-[720px] flex flex-col gap-10 ${fontClass} max-md:w-[320px]`}
-      >
+      <div className={`w-[720px] flex flex-col gap-10 ${fontClass} max-md:w-[320px]`}>
         {/* From Input */}
         <MemoizedFromInput onInputChange={handleFromChange} />
 
         {/* Profile Image Selector */}
-        <MemoizedProfileImageSelector
-          onSelectImage={handleProfileImageChange}
-        />
+        <MemoizedProfileImageSelector onSelectImage={handleProfileImageChange} />
 
         {/* Relation Selector */}
         <MemoizedRelationSelector onSelectRelation={handleRelationChange} />
 
         {/* Text Editor */}
-        <MemoizedTextEditor
-          onContentChange={handleContentChange}
-          font={memoizedFontForEditor}
-        />
+        <MemoizedTextEditor onContentChange={handleContentChange} font={fontClass} />
 
         {/* Font Selector */}
         <MemoizedFontSelector onSelectFont={handleFontChange} />
@@ -92,7 +91,7 @@ function MessagePage() {
           from={from}
           content={content}
           relation={relation}
-          font={memoizedFont}
+          font={fontForApi} 
           profileImageURL={profileImageURL}
         />
       </div>
