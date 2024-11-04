@@ -55,7 +55,7 @@ function Share() {
   };
 
   return (
-    <div className="relative" ref={dropdownRef}>
+    <div className="relative pr-4" ref={dropdownRef}>
       <button
         type="button"
         className="px-[6px] py-2 border rounded-[6px] border-gray300"

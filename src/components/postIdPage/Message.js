@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import { Link, useParams } from 'react-router-dom';
-import dayjs from 'dayjs';
-import { getRecipientsMessage } from '../../api/recipientsApi';
+import React, { useState, useEffect } from "react";
+import { Link, useParams } from "react-router-dom";
+import dayjs from "dayjs";
+import { getRecipientsMessage } from "../../api/recipientsApi";
 
 function Message() {
   const { id } = useParams();
@@ -14,7 +14,7 @@ function Message() {
         setMessages(data.results);
         console.log(data);
       } catch (error) {
-        console.error('Error fetching data:', error);
+        console.error("Error fetching data:", error);
       }
     }
 
@@ -27,7 +27,7 @@ function Message() {
         <div className="w-full h-full min-h-[230px] bg-white flex items-center justify-center rounded-[16px] shadow-lg">
           <Link
             to={`/post/${id}/message`}
-            className="w-[56px] h-[56px] bg-gray500 rounded-full text-[24px] text-white flex justify-center items-center"
+            className="w-14 h-14 bg-gray500 rounded-full text-[24px] text-white flex justify-center items-center"
           >
             +
           </Link>
@@ -38,12 +38,12 @@ function Message() {
           key={message.id}
           className="flex flex-col gap-4 items-center justify-center p-4 z-10"
         >
-          <div className="w-full h-full min-h-[230px] bg-white flex flex-col  rounded-[16px] shadow-lg">
-            <div className="flex flex-row gap-[14px] mx-6 pt-7 pb-4 border-b border-gray200">
+          <div className="w-full min-h-[285px] bg-white flex flex-col justify-between rounded-[16px] shadow-lg">
+            <head className="flex flex-row gap-[14px] mx-6 pt-7 pb-4 border-b border-gray200">
               <img
                 src={`${message.profileImageURL}`}
                 alt="프로필 이미지"
-                className="w-[56px] h-[56px] rounded-full"
+                className="w-14 h-14 rounded-full"
               />
               <div className="flex flex-col gap-[6px]">
                 <div className="flex flex-row gap-[6px] items-center">
@@ -54,16 +54,17 @@ function Message() {
                     {message.sender}
                   </div>
                 </div>
-                <div className="flex p-2 mr-auto rounded-[4px] bg-blue100 text-blue500 font-regular text-[14px] leading-[20px]">
+                <div className="flex px-2 py-1 mr-auto rounded-[4px] bg-blue100 text-blue500 font-regular text-[14px] leading-[20px]">
                   {message.relationship}
                 </div>
               </div>
-            </div>
-            <div className="px-6 py-[16px] font-regular text-left text-[15px] leading-[22px] -tracking-[.01em]">
+            </head>
+            <div className="px-6 py-[16px] h-[80px] font-regular text-gray600 text-left text-[15px] leading-[22px] -tracking-[.01em] overflow-hidden text-ellipsis">
               {message.content}
             </div>
-            <div className="px-6 font-regular text-gray500 text-[12px] leading-[18px] -tracking-[.05em]">
-              {dayjs(message.createdAt).format('YYYY.MM.DD')}
+
+            <div className="py-6 px-6 font-extraLight text-gray400 text-[12px] leading-[18px] -tracking-[.05em]">
+              {dayjs(message.createdAt).format("YYYY.MM.DD")}
             </div>
           </div>
         </div>

@@ -48,12 +48,36 @@ module.exports = {
       bold: ["Pretendard-Bold"],
     },
     extend: {
+      animation: {
+        shimmer: "shimmer 1.5s infinite linear",
+      },
+      keyframes: {
+        shimmer: {
+          "0%": { backgroundPosition: "200%" },
+          100: { backgroundPosition: "-200%" },
+        },
+      },
+      backgroundImage: {
+        "gradient-custom":
+          "linear-gradient(to right, #D9D9D9 0%, #EDEEF1 50%, #D9D9D9 100%)",
+      },
+      backgroundSize: {
+        custom: "300% 100%",
+      },
       fontFamily: {
         noto: ["Noto Sans", "sans-serif"],
         pretendard: ["Pretendard", "sans-serif"],
         custom: ["나눔명조", "나눔손글씨 손편지체", "serif"], // 다른 폰트를 추가하고 싶다면 여기에 추가
       },
+      screens: {
+        mobile: "376px",
+        tablet: "1025px",
+      },
     },
   },
-  plugins: [require("tailwindcss"), require("autoprefixer")],
+  plugins: [
+    require("tailwindcss"),
+    require("autoprefixer"),
+    require("@tailwindcss/line-clamp"),
+  ],
 };
