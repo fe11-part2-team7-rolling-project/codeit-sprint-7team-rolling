@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function FromInput({ onInputChange }) {
   const [value, setValue] = useState("");
@@ -10,9 +12,16 @@ function FromInput({ onInputChange }) {
   };
 
   const handleChange = (e) => {
-    setValue(e.target.value);
+    const inputValue = e.target.value;
+
+    if (inputValue.length > 40) {
+      toast.error("입력은 40자 이하여야 합니다.");
+      return;
+    }
+
+    setValue(inputValue);
     setError(false);
-    onInputChange(e.target.value);
+    onInputChange(inputValue);
   };
 
   return (
@@ -36,6 +45,7 @@ function FromInput({ onInputChange }) {
           </span>
         )}
       </label>
+      <ToastContainer position="bottom-center" />
     </div>
   );
 }

@@ -17,6 +17,7 @@ function FontSelector({ onSelectFont }) {
         htmlFor="FontSelector"
         className="text-[#181818] font-bold text-[24px] leading-[36px] tracking-tight mt-7"
       >
+
         <h1 className="mb-3 dark:text-gray200">폰트 선택</h1>
         <select
           id="FontSelector"
