@@ -1,5 +1,6 @@
 import React from 'react';
 import { Route, Routes, BrowserRouter } from 'react-router-dom';
+import { HelmetProvider } from 'react-helmet-async';
 import MainPage from './pages/MainPage';
 import PostIdPage from './pages/PostIdPage';
 import PostEditPage from './pages/PostEditPage';
@@ -9,6 +10,7 @@ import PostPage from './pages/PostPage';
 
 function App() {
   return (
+    <HelmetProvider>
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<MainPage />} />
@@ -16,9 +18,10 @@ function App() {
           <Route path="/post/:id" element={<PostIdPage />} />
           <Route path="/post/:id/edit" element={<PostEditPage />} />
           <Route path="/list" element={<ListPage />} />
-          <Route path="/post/:id/message" element={<MessagePage />} />
+          <Route path="/post/:Id/message" element={<MessagePage />} />
         </Routes>
       </BrowserRouter>
+    </HelmetProvider>
   );
 }
 

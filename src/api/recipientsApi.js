@@ -26,10 +26,10 @@ export async function getRecipients(id) {
   });
 }
 
-export async function getRecipientsMessage(id) {
+export async function getRecipientsMessage(id, limit = 8, offset = 0) {
   return apiRequest({
     method: 'GET',
-    endpoint: `/11-7/recipients/${id}/messages/`,
+    endpoint: `/11-7/recipients/${id}/messages/?limit=${limit}&offset=${offset}`,
     errorMessage: '롤링 페이퍼의 메시지를 불러오는데 실패했습니다.',
   });
 }
