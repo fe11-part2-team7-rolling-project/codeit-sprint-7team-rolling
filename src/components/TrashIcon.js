@@ -15,16 +15,28 @@ const trashBinImages = {
 };
 
 function TrashIcon({ onDelete, isDisabled = false }) {
-  const [iconState, setIconState] = useState('enabled');
+  const [iconState, setIconState] = useState(isDisabled ? 'disabled' : 'enabled');
 
-  const handleMouseEnter = () => !isDisabled && setIconState('hover');
-  const handleMouseLeave = () => !isDisabled && setIconState('enabled');
-  const handleFocus = () => !isDisabled && setIconState('focus');
-  const handleBlur = () => !isDisabled && setIconState('enabled'); 
+  const handleMouseEnter = () => {
+    if (!isDisabled) setIconState('hover');
+  };
+
+  const handleMouseLeave = () => {
+    if (!isDisabled) setIconState('enabled');
+  };
+
+  const handleFocus = () => {
+    if (!isDisabled) setIconState('focus');
+  };
+
+  const handleBlur = () => {
+    if (!isDisabled) setIconState('enabled');
+  };
+
   const handleClick = () => {
     if (!isDisabled) {
       setIconState('active');
-      onDelete();
+      onDelete(); // 삭제 함수 호출
     }
   };
 
@@ -38,7 +50,9 @@ function TrashIcon({ onDelete, isDisabled = false }) {
       disabled={isDisabled}
       tabIndex={0}
       type="button"
-      className={`w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 ${isDisabled ? 'cursor-not-allowed' : 'cursor-pointer'}`}
+      className={`w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 ${
+        isDisabled ? 'cursor-not-allowed' : 'cursor-pointer'
+      }`}
       style={{
         background: 'none',
         border: 'none',
