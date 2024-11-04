@@ -14,10 +14,10 @@ function PostEditPage() {
 
   // 배경색을 설정하기 위한 색상 맵
   const colorClassMap = {
-    purple: 'bg-purple200',
-    blue: 'bg-blue200',
-    green: 'bg-green200',
-    beige: 'bg-beige200',
+    purple: "bg-purple200",
+    blue: "bg-blue200",
+    green: "bg-green200",
+    beige: "bg-beige200",
   };
 
   // 데이터 로딩: 롤링페이퍼와 관련된 데이터를 가져오는 함수
@@ -27,7 +27,7 @@ function PostEditPage() {
         const data = await getRecipients(id);
         setItems(data); // 데이터 업데이트
       } catch (error) {
-        console.error('데이터를 불러오는데 실패했습니다:', error);
+        console.error("데이터를 불러오는데 실패했습니다:", error);
       }
     }
 
@@ -55,14 +55,14 @@ function PostEditPage() {
 
   // 전체 롤링페이퍼 삭제 함수
   const handleDeleteAll = async () => {
-    if (window.confirm('정말 삭제하시겠습니까?')) {
+    if (window.confirm("정말 삭제하시겠습니까?")) {
       try {
         const response = await deleteRecipient(id);
         console.log(response);
         navigate('/list');
       } catch (error) {
-        console.error('삭제 중 오류가 발생했습니다:', error);
-        alert('삭제에 실패했습니다. 다시 시도해 주세요.');
+        console.error("삭제 중 오류가 발생했습니다:", error);
+        alert("삭제에 실패했습니다. 다시 시도해 주세요.");
       }
     }
   };
@@ -95,14 +95,14 @@ function PostEditPage() {
       {/* 배경 설정 */}
       <div
         className={`w-full min-h-screen h-full bg-cover z-0 ${
-          items.backgroundImageURL ? '' : colorClassMap[items.backgroundColor]
+          items.backgroundImageURL ? "" : colorClassMap[items.backgroundColor]
         }`}
         style={{
           backgroundImage: items.backgroundImageURL
             ? `url(${items.backgroundImageURL})`
-            : 'none',
-          backgroundSize: items.backgroundImageURL ? 'cover' : 'auto',
-          backgroundPosition: 'center',
+            : "none",
+          backgroundSize: items.backgroundImageURL ? "cover" : "auto",
+          backgroundPosition: "center",
         }}
       >
         {/* 메시지 목록 및 삭제 버튼 영역 */}
