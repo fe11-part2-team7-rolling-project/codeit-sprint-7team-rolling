@@ -107,30 +107,29 @@ function Message() {
         >
           <div className="w-full min-h-[285px] bg-white dark:bg-dark2 flex flex-col justify-between rounded-[16px] shadow-lg">
             <head className="flex flex-row gap-[14px] mx-6 pt-7 pb-4 border-b border-gray200">
-                <img
-                  src={`${message.profileImageURL}`}
-                  alt="프로필 이미지"
-                  className="w-14 h-14 rounded-full"
-                />
-                <div className="flex flex-col gap-[6px]">
-                  <div className="flex flex-row gap-[6px] items-center">
-                    <div className="text-[18px] font-regular leading-[28px] text-black dark:text-gray200">
-                      From.
-                    </div>
-                    <div className="text-[16px] font-bold leading-[26px] text-black dark:text-gray200">
-                      {message.sender}
-                    </div>
+              <img
+                src={`${message.profileImageURL}`}
+                alt="프로필 이미지"
+                className="w-14 h-14 rounded-full"
+              />
+              <div className="flex flex-col gap-[6px]">
+                <div className="flex flex-row gap-[6px] items-center">
+                  <div className="text-[18px] font-regular leading-[28px] text-black dark:text-gray200">
+                    From.
                   </div>
-                  <div
-                    className={`flex px-2 py-1 mr-auto rounded-[4px] ${
-                      relationMap[message.relationship]
-                    } font-regular text-[14px] leading-[20px]`}
-                  >
-                    {message.relationship}
+                  <div className="text-[16px] font-bold leading-[26px] text-black dark:text-gray200">
+                    {message.sender}
                   </div>
                 </div>
-              </head>
-            </div>
+                <div
+                  className={`flex px-2 py-1 mr-auto rounded-[4px] ${
+                    relationMap[message.relationship]
+                  } font-regular text-[14px] leading-[20px]`}
+                >
+                  {message.relationship}
+                </div>
+              </div>
+            </head>
             <p
               className={`px-6 py-[16px] h-[80px] ${
                 fontClasses[message.font] || 'font-custom'
