@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { ReactComponent as ShareIcon } from '../../assets/share.svg';
-import SEO from '../SEO';
 
 function Share({ items }) {
   const { id } = useParams();
@@ -66,7 +65,6 @@ function Share({ items }) {
 
   return (
     <div className="relative pr-4" ref={dropdownRef}>
-      <SEO title={items.name} description={content} />
       <button
         type="button"
         className="px-[6px] py-2 border rounded-[6px] border-gray300"

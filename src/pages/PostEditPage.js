@@ -2,9 +2,13 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import TrashIcon from '../components/TrashIcon';
 import DeleteButton from '../components/DeleteButton';
-import { getRecipients, deleteRecipient, deleteCard, updateRecipient } from '../api/recipientsApi';
+import {
+  getRecipients,
+  deleteRecipient,
+  deleteCard,
+  updateRecipient,
+} from '../api/recipientsApi';
 import Reactions from '../components/postIdPage/Reactions';
-import Share from '../components/postIdPage/Share';
 
 function PostEditPage() {
   const { id } = useParams(); // 현재 URL에서 ID를 가져옴
@@ -31,7 +35,7 @@ function PostEditPage() {
       try {
         const data = await getRecipients(id, page);
         const newCards = data.recentMessages.filter(
-          (card) => !deletedCardIds.includes(card.id) // 삭제된 카드 제외
+          (card) => !deletedCardIds.includes(card.id), // 삭제된 카드 제외
         );
 
         // 새로운 카드가 있으면 상태 업데이트, 없으면 더 이상 로딩하지 않음
@@ -54,7 +58,8 @@ function PostEditPage() {
   const handleScroll = useCallback(() => {
     if (
       window.innerHeight + document.documentElement.scrollTop ===
-      document.documentElement.offsetHeight && hasMore
+        document.documentElement.offsetHeight &&
+      hasMore
     ) {
       setPage((prevPage) => prevPage + 1); // 페이지 번호 증가
     }
@@ -86,12 +91,7 @@ function PostEditPage() {
     if (window.confirm('정말 삭제하시겠습니까?')) {
       try {
         const response = await deleteRecipient(id); // 롤링페이퍼 삭제 API 호출
-        if (response && response.success) { // 삭제 성공 시
-          setCards([]); // 모든 카드 상태 비우기
-          navigate('/list'); // 삭제 완료 후 리스트 페이지로 이동
-        } else {
-          console.error('삭제 실패: 서버에서 오류가 발생했습니다.');
-        }
+        navigate('/list'); // 삭제 완료 후 리스트 페이지로 이동
       } catch (error) {
         console.error('삭제 중 오류가 발생했습니다:', error);
         alert('삭제에 실패했습니다. 다시 시도해 주세요.');
@@ -138,7 +138,6 @@ function PostEditPage() {
         {/* 공유 및 리액션 영역 */}
         <div className="flex flex-row items-center justify-between bg-white text-black w-full h-[52px] border-b border-gray-200">
           <Reactions />
-          <Share />
         </div>
       </div>
 
@@ -171,7 +170,7 @@ function PostEditPage() {
                 {/* 프로필 이미지와 발신자 정보 */}
                 <div className="flex flex-row gap-[14px] mx-6 pt-7 pb-4 border-b border-gray200 items-center">
                   <img
-                    src={card.profileImageURL || "/default_profile.png"}
+                    src={card.profileImageURL || '/default_profile.png'}
                     alt={card.sender}
                     className="w-[56px] h-[56px] rounded-full"
                   />
