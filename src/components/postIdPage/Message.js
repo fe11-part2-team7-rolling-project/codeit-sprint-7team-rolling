@@ -135,7 +135,6 @@ function Message() {
             >
               {message.content}
             </p>
-
             <div className="py-6 px-6 font-extraLight text-gray400 dark:text-gray300 text-[12px] leading-[18px] -tracking-[.05em]">
               {dayjs(message.createdAt).format('YYYY.MM.DD')}
             </div>
