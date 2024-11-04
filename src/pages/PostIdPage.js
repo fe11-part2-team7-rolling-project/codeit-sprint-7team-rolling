@@ -1,4 +1,3 @@
-/* eslint-disable react/require-default-props */
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useParams } from 'react-router-dom';
@@ -22,6 +21,7 @@ const INITIAL_VALUES = {
 
 function PostIdPage({ initialValues = INITIAL_VALUES }) {
   const { id } = useParams();
+  const navigate = useNavigate();
   const [items, setItems] = useState(initialValues);
   const colorClassMap = {
     purple: 'bg-purple200',
@@ -55,11 +55,11 @@ function PostIdPage({ initialValues = INITIAL_VALUES }) {
       />
       <div className="sticky top-0 z-20">
         <div className="bg-white text-black w-full h-[52px] border-b border-gray200">
-          <h1 className="flex flex-row items-center px-6 w-full h-full text-[18px] leading-[26px] font-regular">
+          <div className="flex flex-row items-center px-6 w-full h-full text-[18px] leading-[26px] font-regular">
             To. {items.name}
-          </h1>
+          </div>
         </div>
-        <div className="flex flex-row items-center justify-between bg-white text-black w-full h-[52px] border-b border-gray200">
+        <div className="dark:bg-dark2 flex items-center justify-between bg-white text-black w-full h-[52px] border-b border-gray200">
           <Reactions />
           <Share items={items} />
         </div>
