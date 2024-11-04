@@ -1,13 +1,15 @@
 /* eslint-disable react/require-default-props */
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
+
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Reactions from '../components/postIdPage/Reactions';
 import Message from '../components/postIdPage/Message';
 import Share from '../components/postIdPage/Share';
 import { getRecipients } from '../api/recipientsApi';
+import EditButton from '../components/EditButton';
 
 const INITIAL_VALUES = {
   backgroundColor: '',
@@ -22,6 +24,7 @@ const INITIAL_VALUES = {
 
 function PostIdPage({ initialValues = INITIAL_VALUES }) {
   const { id } = useParams();
+  const navigate = useNavigate();
   const [items, setItems] = useState(initialValues);
   const colorClassMap = {
     purple: 'bg-purple200',
@@ -54,12 +57,14 @@ function PostIdPage({ initialValues = INITIAL_VALUES }) {
         className="p-4"
       />
       <div className="sticky top-0 z-20">
-        <div className="bg-white text-black w-full h-[52px] border-b border-gray200">
-          <h1 className="flex flex-row items-center px-6 w-full h-full text-[18px] leading-[26px] font-regular">
+        <div className="bg-white dark:bg-dark2 text-black w-full h-[52px] border-b border-gray200">
+          <h1 className="flex items-center px-6 w-full h-full text-[18px] leading-[26px] font-regular dark:text-gray200">
             To. {items.name}
           </h1>
+          {/* EditButton 추가 */}
+          <EditButton onClick={() => navigate(`/post/${id}/edit`)} />
         </div>
-        <div className="flex flex-row items-center justify-between bg-white text-black w-full h-[52px] border-b border-gray200">
+        <div className="dark:bg-dark2 flex items-center justify-between bg-white text-black w-full h-[52px] border-b border-gray200">
           <Reactions />
           <Share items={items} />
         </div>

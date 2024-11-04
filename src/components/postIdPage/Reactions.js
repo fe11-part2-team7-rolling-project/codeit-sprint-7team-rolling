@@ -7,11 +7,14 @@ import {
   addRecipientReaction,
   getRecipientsReactions,
 } from '../../api/recipientsApi';
+import useDark from "../../hooks/useDark";
 
 function Reactions() {
   const { id } = useParams();
   const [showEmojiPicker, setShowEmojiPicker] = useState(false);
   const [reactions, setReactions] = useState([]);
+  const [isDark] = useDark();
+  const theme = isDark ? "dark" : "light";
 
   useEffect(() => {
     async function fetchRecipientReactions() {
@@ -98,12 +101,12 @@ function Reactions() {
         onClick={toggleEmojiPicker}
         className="px-[6px] py-2 border rounded-[6px] border-gray300"
       >
-        <AddIcon className="w-[20px] h-[20px]" />
+        <AddIcon className="w-[20px] h-[20px] text-[#181818] dark:text-gray200" />
       </button>
 
       {showEmojiPicker && (
         <div className="absolute top-full mt-2">
-          <EmojiPicker onEmojiClick={onEmojiClick} />
+          <EmojiPicker onEmojiClick={onEmojiClick} theme={theme} />
         </div>
       )}
     </div>
