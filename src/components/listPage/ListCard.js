@@ -72,13 +72,13 @@ function ListCard({ type, sortType }) {
   return (
     <div className="relative flex items-center">
       {/* PC 환경에서만 페이지네이션 */}
-      <div className="hidden tablet:flex tablet:gap-5 tablet:overflow-hidden tablet:max-w-[1190px]">
+      <div className="hidden tablet:flex tablet:gap-5 tablet:overflow-hidden">
         {/* 좌측 화살표 버튼 */}
         {currentPage > 0 && (
           <button
             type="button"
             onClick={() => setCurrentPage(currentPage - 1)}
-            className="absolute top-[110px] left-[-20px] z-10 bg-white rounded-full w-10 h-10 flex items-center justify-center shadow-md hover:bg-gray-100"
+            className="absolute top-[110px] left-[-20px] z-10 bg-white rounded-full w-10 h-10 flex items-center justify-center shadow-md border border-gray300"
           >
             <span>
               <img src={arrowLeft} alt="왼쪽 화살표" />
@@ -101,7 +101,7 @@ function ListCard({ type, sortType }) {
           <button
             type="button"
             onClick={() => setCurrentPage(currentPage + 1)}
-            className="absolute top-[110px] right-[-20px] z-10 bg-white rounded-full w-10 h-10 flex items-center justify-center shadow-md border border-gray300"
+            className="absolute top-[110px] right-[20px] z-10 bg-white rounded-full w-10 h-10 flex items-center justify-center shadow-md border border-gray300"
           >
             <span>
               <img src={arrowRight} alt="오른쪽 화살표" />

@@ -1,10 +1,14 @@
-import React, { useState, useEffect, useCallback } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
-import TrashIcon from '../components/TrashIcon';
-import DeleteButton from '../components/DeleteButton';
-import { getRecipients, deleteRecipient, deleteCard, updateRecipient } from '../api/recipientsApi';
-import Reactions from '../components/postIdPage/Reactions';
-import Share from '../components/postIdPage/Share';
+import React, { useState, useEffect, useCallback } from "react";
+import { useParams, useNavigate } from "react-router-dom";
+import TrashIcon from "../components/TrashIcon";
+import DeleteButton from "../components/DeleteButton";
+import {
+  getRecipients,
+  deleteRecipient,
+  deleteCard,
+  updateRecipient,
+} from "../api/recipientsApi";
+import Reactions from "../components/postIdPage/Reactions";
 
 function PostEditPage() {
   const { id } = useParams(); // 현재 URL에서 ID를 가져옴
@@ -19,10 +23,10 @@ function PostEditPage() {
 
   // 배경색을 설정하기 위한 색상 맵
   const colorClassMap = {
-    purple: 'bg-purple200',
-    blue: 'bg-blue200',
-    green: 'bg-green200',
-    beige: 'bg-beige200',
+    purple: "bg-purple200",
+    blue: "bg-blue200",
+    green: "bg-green200",
+    beige: "bg-beige200",
   };
 
   // 데이터 로딩: 롤링페이퍼와 관련된 카드 데이터를 가져오는 함수
@@ -43,7 +47,7 @@ function PostEditPage() {
 
         setItems(data); // 롤링페이퍼 정보 업데이트
       } catch (error) {
-        console.error('데이터를 불러오는데 실패했습니다:', error);
+        console.error("데이터를 불러오는데 실패했습니다:", error);
       }
     }
 
@@ -54,7 +58,8 @@ function PostEditPage() {
   const handleScroll = useCallback(() => {
     if (
       window.innerHeight + document.documentElement.scrollTop ===
-      document.documentElement.offsetHeight && hasMore
+        document.documentElement.offsetHeight &&
+      hasMore
     ) {
       setPage((prevPage) => prevPage + 1); // 페이지 번호 증가
     }
@@ -62,8 +67,8 @@ function PostEditPage() {
 
   // 스크롤 이벤트 리스너 추가 및 제거
   useEffect(() => {
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, [handleScroll]);
 
   // 개별 카드 삭제 함수
@@ -73,28 +78,29 @@ function PostEditPage() {
       if (response && response.success) {
         setDeletedCardIds((prevIds) => [...prevIds, cardId]); // 삭제된 카드 ID 추가
       } else {
-        console.error('롤링페이퍼 삭제 실패: 서버에서 오류가 발생했습니다.');
+        console.error("롤링페이퍼 삭제 실패: 서버에서 오류가 발생했습니다.");
       }
     } catch (error) {
-      console.error('롤링페이퍼 삭제 중 오류가 발생했습니다:', error);
-      alert('롤링페이퍼 삭제에 실패했습니다. 다시 시도해 주세요.');
+      console.error("롤링페이퍼 삭제 중 오류가 발생했습니다:", error);
+      alert("롤링페이퍼 삭제에 실패했습니다. 다시 시도해 주세요.");
     }
   };
 
   // 전체 롤링페이퍼 삭제 함수
   const handleDeleteAll = async () => {
-    if (window.confirm('정말 삭제하시겠습니까?')) {
+    if (window.confirm("정말 삭제하시겠습니까?")) {
       try {
         const response = await deleteRecipient(id); // 롤링페이퍼 삭제 API 호출
-        if (response && response.success) { // 삭제 성공 시
+        if (response && response.success) {
+          // 삭제 성공 시
           setCards([]); // 모든 카드 상태 비우기
-          navigate('/list'); // 삭제 완료 후 리스트 페이지로 이동
+          navigate("/list"); // 삭제 완료 후 리스트 페이지로 이동
         } else {
-          console.error('삭제 실패: 서버에서 오류가 발생했습니다.');
+          console.error("삭제 실패: 서버에서 오류가 발생했습니다.");
         }
       } catch (error) {
-        console.error('삭제 중 오류가 발생했습니다:', error);
-        alert('삭제에 실패했습니다. 다시 시도해 주세요.');
+        console.error("삭제 중 오류가 발생했습니다:", error);
+        alert("삭제에 실패했습니다. 다시 시도해 주세요.");
       }
     }
   };
@@ -105,7 +111,7 @@ function PostEditPage() {
       await updateRecipient(id, { recentMessages: cards });
       navigate(`/post/${id}`);
     } catch (error) {
-      console.error('변경사항 저장 실패:', error);
+      console.error("변경사항 저장 실패:", error);
     }
   };
 
@@ -138,21 +144,20 @@ function PostEditPage() {
         {/* 공유 및 리액션 영역 */}
         <div className="flex flex-row items-center justify-between bg-white text-black w-full h-[52px] border-b border-gray-200">
           <Reactions />
-          <Share />
         </div>
       </div>
 
       {/* 배경 설정 */}
       <div
         className={`w-full min-h-screen h-full bg-cover z-0 ${
-          items.backgroundImageURL ? '' : colorClassMap[items.backgroundColor]
+          items.backgroundImageURL ? "" : colorClassMap[items.backgroundColor]
         }`}
         style={{
           backgroundImage: items.backgroundImageURL
             ? `url(${items.backgroundImageURL})`
-            : 'none',
-          backgroundSize: items.backgroundImageURL ? 'cover' : 'auto',
-          backgroundPosition: 'center',
+            : "none",
+          backgroundSize: items.backgroundImageURL ? "cover" : "auto",
+          backgroundPosition: "center",
         }}
       >
         {/* 카드 목록 및 삭제 버튼 영역 */}
