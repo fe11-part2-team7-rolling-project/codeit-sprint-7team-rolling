@@ -1,7 +1,7 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { useParams } from 'react-router-dom';
-import { toast } from 'react-toastify';
-import { ReactComponent as ShareIcon } from '../../assets/share.svg';
+import React, { useState, useEffect, useRef } from "react";
+import { useParams } from "react-router-dom";
+import { toast } from "react-toastify";
+import { ReactComponent as ShareIcon } from "../../assets/share.svg";
 
 function Share() {
   const { id } = useParams();
@@ -21,12 +21,12 @@ function Share() {
 
   useEffect(() => {
     if (isDropdownVisible) {
-      document.addEventListener('mousedown', handleClickOutside);
+      document.addEventListener("mousedown", handleClickOutside);
     } else {
-      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener("mousedown", handleClickOutside);
     }
     return () => {
-      document.removeEventListener('mousedown', handleClickOutside); // cleanup
+      document.removeEventListener("mousedown", handleClickOutside); // cleanup
     };
   }, [isDropdownVisible]);
 
@@ -34,14 +34,14 @@ function Share() {
     try {
       const url = window.location.href;
       await navigator.clipboard.writeText(url);
-      toast.success('URL이 복사 되었습니다.', {
-        position: 'bottom-center',
+      toast.success("URL이 복사 되었습니다.", {
+        position: "bottom-center",
         autoClose: 5000,
         className:
-          'bg-black opacity-80 text-white font-regular text-[16px] leading-[26px] rounded-[8px]',
+          "bg-black opacity-80 text-white font-regular text-[16px] leading-[26px] rounded-[8px]",
       });
     } catch (error) {
-      console.error('Failed to copy: ', error);
+      console.error("Failed to copy: ", error);
     }
   };
 
@@ -55,27 +55,27 @@ function Share() {
   };
 
   return (
-    <div className="relative" ref={dropdownRef}>
+    <div className="relative pr-4" ref={dropdownRef}>
       <button
         type="button"
         className="px-[6px] py-2 border rounded-[6px] border-gray300"
         onClick={toggleDropdown}
       >
-        <ShareIcon className="w-[20px] h-[20px]" />
+        <ShareIcon className="w-[20px] h-[20px] dark:text-white text-[#101010]" />
       </button>
       {isDropdownVisible && (
         <div className="absolute top-full right-1 mt-2">
-          <div className="flex flex-col justify-center items-center w-[140px] h-[120px] bg-white border rounded-[8px] border-gray300">
+          <div className="flex flex-col justify-center items-center w-[140px] h-[120px] bg-white dark:bg-dark2 border rounded-[8px] border-gray300">
             <button
               type="button"
-              className="w-full px-4 py-3 font-regular text-[16px] leading-[26px] border-b border-gray300 cursor-pointer hover:bg-gray100"
+              className="w-full px-4 py-3 font-regular text-[16px] dark:text-gray200 leading-[26px] border-b border-gray300 cursor-pointer hover:bg-gray100 dark:hover:bg-gray600"
               onClick={shareOnKakao} // 카카오톡 공유 함수 연결
             >
               카카오톡 공유
             </button>
             <button
               type="button"
-              className="w-full px-4 py-3 font-regular text-[16px] leading-[26px] cursor-pointer hover:bg-gray100"
+              className="w-full px-4 py-3 font-regular text-[16px] dark:text-gray200 leading-[26px] cursor-pointer hover:bg-gray100 dark:hover:bg-gray600"
               onClick={copyToClipboard}
             >
               URL 공유

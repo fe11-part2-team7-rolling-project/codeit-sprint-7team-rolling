@@ -11,6 +11,10 @@ function CreateButton({ from, content, relation, font, profileImageURL }) {
   }, [from, content]);
 
   const handleSubmit = async () => {
+    if (!profileImageURL || profileImageURL.includes("default_avatar")) {
+      alert("프로필 이미지를 선택해주세요.");
+      return;
+    }
     if (!isDisabled) {
       try {
         const response = await fetch(
@@ -49,7 +53,7 @@ function CreateButton({ from, content, relation, font, profileImageURL }) {
       disabled={isDisabled}
       className={`w-[720px] h-[56px] text-white font-semibold rounded-[12px] px-[24px] py-[14px] ${
         isDisabled
-          ? "bg-[#CCCCCC] cursor-not-allowed"
+          ? "bg-[#CCCCCC] cursor-not-allowed dark:bg-gray400"
           : "bg-[#9935FF] hover:bg-[#861DEE] active:bg-[#6E0AD1] focus:bg-[#6E0AD1]"
       } mb-10 max-md:w-[320px] max-md:h-[56px]`}
     >
@@ -57,7 +61,6 @@ function CreateButton({ from, content, relation, font, profileImageURL }) {
     </button>
   );
 }
-
 CreateButton.propTypes = {
   from: PropTypes.string.isRequired,
   content: PropTypes.string.isRequired,
