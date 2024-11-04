@@ -28,7 +28,6 @@ function Message() {
 
   useEffect(() => {
     const fetchRecipientMessageData = async () => {
-      if (loading || !hasMore) return; // 이미 로딩 중이거나 더 가져올 데이터가 없으면 중단
       setLoading(true);
       try {
         const data = await getRecipientsMessage(id, limit, offset);
