@@ -1,23 +1,23 @@
 /* eslint-disable react/require-default-props */
-import React, { useState, useEffect } from 'react';
-import PropTypes from 'prop-types';
-import { useParams, useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from "react";
+import PropTypes from "prop-types";
+import { useParams, useNavigate } from "react-router-dom";
 
-import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import Reactions from '../components/postIdPage/Reactions';
-import Message from '../components/postIdPage/Message';
-import Share from '../components/postIdPage/Share';
-import { getRecipients } from '../api/recipientsApi';
-import EditButton from '../components/EditButton';
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import Reactions from "../components/postIdPage/Reactions";
+import Message from "../components/postIdPage/Message";
+import Share from "../components/postIdPage/Share";
+import { getRecipients } from "../api/recipientsApi";
+import EditButton from "../components/EditButton";
 
 const INITIAL_VALUES = {
-  backgroundColor: '',
+  backgroundColor: "",
   backgroundImageURL: null,
-  createdAt: '',
+  createdAt: "",
   id: 0,
   messageCount: 0,
-  name: '',
+  name: "",
   recentMessages: [],
   topReactions: [],
 };
@@ -27,10 +27,10 @@ function PostIdPage({ initialValues = INITIAL_VALUES }) {
   const navigate = useNavigate();
   const [items, setItems] = useState(initialValues);
   const colorClassMap = {
-    purple: 'bg-purple200',
-    blue: 'bg-blue200',
-    green: 'bg-green200',
-    beige: 'bg-beige200',
+    purple: "bg-purple200",
+    blue: "bg-blue200",
+    green: "bg-green200",
+    beige: "bg-beige200",
   };
 
   useEffect(() => {
@@ -39,7 +39,7 @@ function PostIdPage({ initialValues = INITIAL_VALUES }) {
         const data = await getRecipients(id);
         setItems(data);
       } catch (error) {
-        console.error('Error fetching data:', error);
+        console.error("Error fetching data:", error);
       }
     }
 
@@ -57,7 +57,7 @@ function PostIdPage({ initialValues = INITIAL_VALUES }) {
         className="p-4"
       />
       <div className="sticky top-0 z-20">
-        <div className="bg-white dark:bg-dark2 text-black w-full h-[52px] border-b border-gray200">
+        <div className="flex items-center bg-white dark:bg-dark2 text-black w-full h-[52px] border-b border-gray200">
           <h1 className="flex items-center px-6 w-full h-full text-[18px] leading-[26px] font-regular dark:text-gray200">
             To. {items.name}
           </h1>
@@ -71,14 +71,14 @@ function PostIdPage({ initialValues = INITIAL_VALUES }) {
       </div>
       <div
         className={`w-full min-h-screen h-full bg-cover z-0 ${
-          items.backgroundImageURL ? '' : colorClassMap[items.backgroundColor]
+          items.backgroundImageURL ? "" : colorClassMap[items.backgroundColor]
         }`}
         style={{
           backgroundImage: items.backgroundImageURL
             ? `url(${items.backgroundImageURL})`
-            : 'none',
-          backgroundSize: items.backgroundImageURL ? 'cover' : 'auto',
-          backgroundPosition: 'center',
+            : "none",
+          backgroundSize: items.backgroundImageURL ? "cover" : "auto",
+          backgroundPosition: "center",
         }}
       >
         <Message />
@@ -105,14 +105,14 @@ PostIdPage.propTypes = {
         content: PropTypes.string,
         font: PropTypes.string,
         createdAt: PropTypes.string,
-      }),
+      })
     ),
     topReactions: PropTypes.arrayOf(
       PropTypes.shape({
         id: PropTypes.number,
         emoji: PropTypes.string,
         count: PropTypes.number,
-      }),
+      })
     ),
   }),
 };
