@@ -61,21 +61,21 @@ function Share() {
         className="px-[6px] py-2 border rounded-[6px] border-gray300"
         onClick={toggleDropdown}
       >
-        <ShareIcon className="w-[20px] h-[20px]" />
+        <ShareIcon className="w-[20px] h-[20px] dark:text-white text-[#101010]" />
       </button>
       {isDropdownVisible && (
         <div className="absolute top-full right-1 mt-2">
-          <div className="flex flex-col justify-center items-center w-[140px] h-[120px] bg-white border rounded-[8px] border-gray300">
+          <div className="flex flex-col justify-center items-center w-[140px] h-[120px] bg-white dark:bg-dark2 border rounded-[8px] border-gray300">
             <button
               type="button"
-              className="w-full px-4 py-3 font-regular text-[16px] leading-[26px] border-b border-gray300 cursor-pointer hover:bg-gray100"
+              className="w-full px-4 py-3 font-regular text-[16px] dark:text-gray200 leading-[26px] border-b border-gray300 cursor-pointer hover:bg-gray100 dark:hover:bg-gray600"
               onClick={shareOnKakao} // 카카오톡 공유 함수 연결
             >
               카카오톡 공유
             </button>
             <button
               type="button"
-              className="w-full px-4 py-3 font-regular text-[16px] leading-[26px] cursor-pointer hover:bg-gray100"
+              className="w-full px-4 py-3 font-regular text-[16px] dark:text-gray200 leading-[26px] cursor-pointer hover:bg-gray100 dark:hover:bg-gray600"
               onClick={copyToClipboard}
             >
               URL 공유

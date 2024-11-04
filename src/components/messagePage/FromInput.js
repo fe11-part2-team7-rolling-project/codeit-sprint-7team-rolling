@@ -27,7 +27,7 @@ function FromInput({ onInputChange }) {
   return (
     <div className="w-[720px] h-[98px] flex flex-col gap-3 max-md:w-[320px] max-md:gap-[12px]">
       <label htmlFor="FromInput" className="flex flex-col gap-3">
-        <h1 className="text-[#181818] font-bold text-[24px] leading-[36px] tracking-tight max-md:text-[24px] max-md:leading-[36px]">
+        <h1 className="text-[#181818] dark:text-gray200 font-bold text-[24px] leading-[36px] tracking-tight max-md:text-[24px] max-md:leading-[36px]">
           From.
         </h1>
 
@@ -37,7 +37,7 @@ function FromInput({ onInputChange }) {
           onChange={handleChange}
           onBlur={handleBlur}
           placeholder="이름을 입력해 주세요."
-          className="w-[720px] h-[50px] rounded-[8px] border border-[#CCCCCC] px-4 py-3 text-[#555555] font-normal text-[16px] leading-[26px] tracking-tight placeholder:text-[#555555] placeholder:font-normal placeholder:text-[16px] placeholder:leading-[26px] max-md:w-[320px] max-md:h-[50px] max-md:px-[16px] max-md:py-[12px]"
+          className="w-[720px] h-[50px] dark:bg-dark4 dark:text-gray300 rounded-[8px] border border-[#CCCCCC] px-4 py-3 text-[#555555] font-normal text-[16px] leading-[26px] tracking-tight placeholder:text-[#555555] placeholder:font-normal placeholder:text-[16px] placeholder:leading-[26px] max-md:w-[320px] max-md:h-[50px] max-md:px-[16px] max-md:py-[12px]"
         />
         {error && (
           <span className="text-error text-sm max-md:text-xs">

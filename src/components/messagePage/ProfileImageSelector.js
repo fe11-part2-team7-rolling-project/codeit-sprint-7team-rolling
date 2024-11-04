@@ -39,7 +39,7 @@ function ProfileImageSelector({ onSelectImage }) {
   return (
     <div className="w-[720px] max-md:w-[320px] flex flex-col gap-3 mb-6">
       <label htmlFor="ProfileImageSelector" className="flex flex-col gap-3">
-        <h1 className="text-[#181818] font-bold text-[24px] leading-[36px] tracking-tight">
+        <h1 className="text-[#181818] dark:text-gray200 font-bold text-[24px] leading-[36px] tracking-tight">
           프로필 이미지
         </h1>
         <div className="flex items-center gap-8">
@@ -47,7 +47,7 @@ function ProfileImageSelector({ onSelectImage }) {
             <img src={selectedImage} alt="Profile" className="rounded-full" />
           </div>
           <div>
-            <h2 className="text-[#555555] text-[16px] leading-[26px] font-regular">
+            <h2 className="text-[#555555] dark:text-gray400 text-[16px] leading-[26px] font-regular">
               프로필 이미지를 선택해 주세요!
             </h2>
             <div className="flex gap-1 mt-2 flex-wrap">

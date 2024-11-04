@@ -1,5 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
+  darkMode: "class",
   content: ["./src/**/*.{html,js,tsx,ts}"],
   theme: {
     colors: {
@@ -40,6 +41,10 @@ module.exports = {
       purple700: "#861DEE",
       purple800: "#6E0AD1",
       purple900: "#5603A7",
+      dark1: "#121212",
+      dark2: "#1E1E1E",
+      dark3: "#252525",
+      dark4: "#2E2E2E",
     },
     fontFamily: {
       extraLight: ["Pretendard-ExtraLight"],
