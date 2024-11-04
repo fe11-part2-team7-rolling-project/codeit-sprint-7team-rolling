@@ -3,11 +3,18 @@ import PropTypes from 'prop-types';
 import { useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { ReactComponent as ShareIcon } from '../../assets/share.svg';
+import SEO from '../SEO';
 
 function Share({ items }) {
   const { id } = useParams();
   const [isDropdownVisible, setIsDropdownVisible] = useState(false);
   const dropdownRef = useRef(null);
+  const defaultContent =
+    '전통적인 롤링페이퍼 문화를 웹으로 구현한 커뮤니티형 플랫폼입니다.';
+  const content =
+    items.recentMessages && items.recentMessages[0]?.content
+      ? items.recentMessages[0].content
+      : defaultContent;
 
   const toggleDropdown = () => {
     setIsDropdownVisible((prev) => !prev);
@@ -47,13 +54,6 @@ function Share({ items }) {
   };
 
   const shareOnKakao = () => {
-    const defaultContent =
-      '전통적인 롤링페이퍼 문화를 웹으로 구현한 커뮤니티형 플랫폼입니다.';
-    const content =
-      items.recentMessages && items.recentMessages[0]?.content
-        ? items.recentMessages[0].content
-        : defaultContent;
-
     window.Kakao.Share.sendCustom({
       templateId: 113686,
       templateArgs: {
@@ -66,6 +66,7 @@ function Share({ items }) {
 
   return (
     <div className="relative" ref={dropdownRef}>
+      <SEO title={items.name} description={content} />
       <button
         type="button"
         className="px-[6px] py-2 border rounded-[6px] border-gray300"

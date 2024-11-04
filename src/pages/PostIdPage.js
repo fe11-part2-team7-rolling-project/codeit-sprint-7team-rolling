@@ -108,7 +108,7 @@ PostIdPage.propTypes = {
         count: PropTypes.number,
       }),
     ),
-  }),
+  }).isRequired,
 };
 
 export default PostIdPage;
