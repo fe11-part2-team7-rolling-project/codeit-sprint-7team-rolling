@@ -10,7 +10,12 @@ function PostEditPage() {
   const navigate = useNavigate();
 
   // 상태 관리
-  const [items, setItems] = useState({ name: '', recentMessages: [] });
+  const [items, setItems] = useState({
+    name: '', // 롤링페이퍼 이름
+    backgroundImageURL: '', // 배경 이미지 URL
+    backgroundColor: '', // 배경색
+    recentMessages: [], // 메시지 목록
+  });
 
   const colorClassMap = {
     purple: 'bg-purple200',
@@ -23,7 +28,7 @@ function PostEditPage() {
   useEffect(() => {
     async function fetchRecipientData() {
       try {
-        // 이름을 가져오기 위한 getRecipients 호출
+        // 롤링페이퍼의 이름과 배경 정보를 가져오기 위한 getRecipients 호출
         const recipientData = await getRecipients(id);
         
         // 메시지 목록을 가져오기 위한 getRecipientsMessage 호출
@@ -31,6 +36,8 @@ function PostEditPage() {
 
         setItems({
           name: recipientData.name, // 이름 업데이트
+          backgroundImageURL: recipientData.backgroundImageURL, // 배경 이미지 URL
+          backgroundColor: recipientData.backgroundColor, // 배경 색상
           recentMessages: messageData.results, // 메시지 목록 업데이트
         });
       } catch (error) {
