@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
-import PropTypes from 'prop-types';
-import Logo from '../components/Layout/Logo';
-import checkIcon from '../assets/check_Icon.png';
+import React, { useState } from "react";
+import PropTypes from "prop-types";
+import Logo from "../components/Layout/Logo";
+import checkIcon from "../assets/check_Icon.png";
 import ToggleButton from "../components/Layout/ToggleButton";
 
 function PostHeader() {
@@ -10,7 +10,7 @@ function PostHeader() {
       <div className="flex justify-between items-center max-w-7xl mx-auto">
         <Logo />
         <div className="flex-shrink-0 ml-auto">
-          <ToggleButton/>
+          <ToggleButton />
         </div>
       </div>
     </header>
@@ -24,7 +24,9 @@ function SubmitButton({ onClick, disabled, text }) {
       onClick={() => onClick()}
       disabled={disabled}
       className={`w-full rounded-xl py-4 font-bold text-white mt-20 ${
-        disabled ? 'bg-gray300 cursor-not-allowed dark:bg-gray400' : 'bg-purple600'
+        disabled
+          ? "bg-gray300 cursor-not-allowed dark:bg-gray400"
+          : "bg-purple600"
       }`}
     >
       {text}
@@ -45,18 +47,18 @@ SubmitButton.defaultProps = {
 
 function PostPage() {
   const colors = [
-    { idx: 0, cls: 'bg-beige200', name: 'beige' },
-    { idx: 1, cls: 'bg-purple200', name: 'purple' },
-    { idx: 2, cls: 'bg-blue200', name: 'blue' },
-    { idx: 3, cls: 'bg-green200', name: 'green' },
+    { idx: 0, cls: "bg-beige200", name: "beige" },
+    { idx: 1, cls: "bg-purple200", name: "purple" },
+    { idx: 2, cls: "bg-blue200", name: "blue" },
+    { idx: 3, cls: "bg-green200", name: "green" },
   ];
   const images = [
-    { idx: 0, link: 'https://picsum.photos/id/14/2500/1667' },
-    { idx: 1, link: 'https://picsum.photos/id/19/2500/1667' },
-    { idx: 2, link: 'https://picsum.photos/id/20/2500/1667' },
-    { idx: 3, link: 'https://picsum.photos/id/22/2500/1667' },
+    { idx: 0, link: "https://picsum.photos/id/14/2500/1667" },
+    { idx: 1, link: "https://picsum.photos/id/19/2500/1667" },
+    { idx: 2, link: "https://picsum.photos/id/20/2500/1667" },
+    { idx: 3, link: "https://picsum.photos/id/22/2500/1667" },
   ];
-  const [name, setName] = useState('');
+  const [name, setName] = useState("");
   const [userStartTyping, setUserStartTyping] = useState(false);
   const [selectedIdx, setSelectedIdx] = useState(0);
   const [isColor, setIsColor] = useState(true);
@@ -71,25 +73,25 @@ function PostPage() {
       const response = await fetch(
         `https://rolling-api.vercel.app/11-7/recipients/`,
         {
-          method: 'POST',
+          method: "POST",
           headers: {
-            'Content-Type': 'application/json',
+            "Content-Type": "application/json",
           },
           body: JSON.stringify({
             name,
             backgroundColor: colors[selectedIdx].name,
             backgroundImageURL: !isColor ? images[selectedIdx].link : null,
           }),
-        },
+        }
       );
       if (response.ok) {
         const data = await response.json();
         window.location.href = `/post/${data.id}`;
       } else {
-        console.error('POST 요청 실패:', response.status);
+        console.error("POST 요청 실패:", response.status);
       }
     } catch (error) {
-      console.error('POST 요청 중 오류 발생:', error);
+      console.error("POST 요청 중 오류 발생:", error);
     } finally {
       setIsProcessing(false);
     }
@@ -102,35 +104,33 @@ function PostPage() {
       <PostHeader />
       <main className="flex flex-col py-8 px-4 sm:px-6 md:px-16 lg:px-24 items-center">
         <div className="flex flex-col max-w-screen-sm w-full items-start">
-          <h2 className="text-xl font-semibold mb-2">To.</h2>
+          <h2 className="text-xl font-bold mb-4">To.</h2>
           <input
             type="text"
             value={name}
             onChange={(e) => setName(e.target.value)}
             placeholder="받는 사람 이름을 입력해주세요"
             onBlur={() => handleFocusout()}
-            className={`w-full border-2 rounded-lg px-4 py-2 focus:outline-none mb-5 dark:bg-dark4 ${
+            className={`w-full border-2 font-regular rounded-lg px-4 py-2 focus:outline-none mb-[50px] dark:bg-dark4 ${
               userStartTyping && name.length === 0
-                ? 'border-error'
-                : 'border-gray300'
+                ? "border-error"
+                : "border-gray300"
             }`}
           />
           {userStartTyping && name.length === 0 && (
             <p className="text-error mb-3 text-sm">값을 입력해 주세요</p>
           )}
-          <h2 className="text-xl font-semibold mb-2">
-            배경화면을 선택해 주세요.
-          </h2>
-          <div className="mb-4">
+          <h2 className="text-xl font-bold mb-2">배경화면을 선택해 주세요.</h2>
+          <div className="mb-7 font-regular">
             컬러를 선택하거나, 이미지를 선택할 수 있습니다.
           </div>
-          <div className="flex-row mb-3">
+          <div className="flex flex-row mb-[50px] gap-1">
             <button
               type="button"
-              className={`py-2 rounded-lg w-20 border-2 ${
+              className={`py-2 rounded-lg w-[122px] border-2 ${
                 isColor
-                  ? 'text-purple600 dark:bg-dark4 border-purple600 font-bold'
-                  : 'bg-gray200 dark:bg-dark4 dark:border-gray600 dark:text-gray500 border-gray200'
+                  ? "text-purple600 dark:bg-dark4 border-purple600 font-bold"
+                  : "bg-gray200 dark:bg-dark4 dark:border-gray600 font-regular dark:text-gray500 border-gray200"
               }`}
               onClick={() => setIsColor(true)}
             >
@@ -138,23 +138,23 @@ function PostPage() {
             </button>
             <button
               type="button"
-              className={`py-2 rounded-lg w-20 border-2 ${
+              className={`py-2 rounded-lg w-[122px] border-2 ${
                 !isColor
-                  ? 'text-purple600 dark:bg-dark4 border-purple600 font-bold'
-                  : 'bg-gray200 dark:bg-dark4 dark:border-gray600 dark:text-gray500 border-gray200'
+                  ? "text-purple600 dark:bg-dark4 border-purple600 font-bold"
+                  : "bg-gray200 dark:bg-dark4 dark:border-gray600 dark:text-gray500 font-regular border-gray200"
               }`}
               onClick={() => setIsColor(false)}
             >
               이미지
             </button>
           </div>
-          <div className="flex flex-row w-full space-x-2">
+          <div className="flex w-full space-x-2">
             {isColor &&
               colors.map((color) => (
                 <button
                   type="button"
                   onClick={() => setSelectedIdx(color.idx)}
-                  className={`${color.cls} flex-1 aspect-[1] w-1/4 rounded-lg items-center flex justify-center`}
+                  className={`${color.cls} flex-1 aspect-[1] w-1/4 rounded-lg items-center flex justify-center `}
                 >
                   {selectedIdx === color.idx && (
                     <img
@@ -167,7 +167,7 @@ function PostPage() {
               ))}
           </div>
 
-          <div className="flex flex-row w-full space-x-2">
+          <div className="flex w-full space-x-2">
             {!isColor &&
               images.map((image) => (
                 <button
