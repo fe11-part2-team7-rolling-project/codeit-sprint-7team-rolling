@@ -2,17 +2,16 @@ import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import TrashIcon from '../components/TrashIcon';
 import DeleteButton from '../components/DeleteButton';
-import { getRecipients, deleteRecipient, deleteMessage } from '../api/recipientsApi';
+import { getRecipients, getRecipientsMessage, deleteRecipient, deleteMessage } from '../api/recipientsApi';
 import Reactions from '../components/postIdPage/Reactions';
 
 function PostEditPage() {
-  const { id } = useParams(); // 현재 URL에서 ID를 가져옴
-  const navigate = useNavigate(); // 페이지 이동을 위한 네비게이트
+  const { id } = useParams();
+  const navigate = useNavigate();
 
   // 상태 관리
-  const [items, setItems] = useState({ recentMessages: [] }); // 롤링페이퍼 정보 및 메시지 목록
+  const [items, setItems] = useState({ name: '', recentMessages: [] });
 
-  // 배경색을 설정하기 위한 색상 맵
   const colorClassMap = {
     purple: 'bg-purple200',
     blue: 'bg-blue200',
@@ -20,12 +19,20 @@ function PostEditPage() {
     beige: 'bg-beige200',
   };
 
-  // 데이터 로딩: 롤링페이퍼와 관련된 데이터를 가져오는 함수
+  // 데이터 로딩: 롤링페이퍼 정보와 메시지를 가져오는 함수
   useEffect(() => {
     async function fetchRecipientData() {
       try {
-        const data = await getRecipients(id);
-        setItems(data); // 데이터 업데이트
+        // 이름을 가져오기 위한 getRecipients 호출
+        const recipientData = await getRecipients(id);
+        
+        // 메시지 목록을 가져오기 위한 getRecipientsMessage 호출
+        const messageData = await getRecipientsMessage(id, 1000, 0);
+
+        setItems({
+          name: recipientData.name, // 이름 업데이트
+          recentMessages: messageData.results, // 메시지 목록 업데이트
+        });
       } catch (error) {
         console.error('데이터를 불러오는데 실패했습니다:', error);
       }
@@ -38,8 +45,6 @@ function PostEditPage() {
   const handleDelete = async (messageId) => {
     try {
       await deleteMessage(messageId);
-      
-      // 삭제된 메시지를 recentMessages에서 제외하여 상태 업데이트 및 리렌더링 반영
       setItems((prevItems) => ({
         ...prevItems,
         recentMessages: prevItems.recentMessages.filter(
@@ -51,14 +56,12 @@ function PostEditPage() {
       alert('메시지 삭제에 실패했습니다. 다시 시도해 주세요.');
     }
   };
-  
 
   // 전체 롤링페이퍼 삭제 함수
   const handleDeleteAll = async () => {
     if (window.confirm('정말 삭제하시겠습니까?')) {
       try {
-        const response = await deleteRecipient(id);
-        console.log(response);
+        await deleteRecipient(id);
         navigate('/list');
       } catch (error) {
         console.error('삭제 중 오류가 발생했습니다:', error);
