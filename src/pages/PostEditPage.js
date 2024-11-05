@@ -2,7 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import TrashIcon from '../components/TrashIcon';
 import DeleteButton from '../components/DeleteButton';
-import { getRecipients, getRecipientsMessage, deleteRecipient, deleteMessage } from '../api/recipientsApi';
+import {
+  getRecipients,
+  getRecipientsMessage,
+  deleteRecipient,
+  deleteMessage,
+} from '../api/recipientsApi';
 import Reactions from '../components/postIdPage/Reactions';
 
 function PostEditPage() {
@@ -18,10 +23,10 @@ function PostEditPage() {
   });
 
   const colorClassMap = {
-    purple: "bg-purple200",
-    blue: "bg-blue200",
-    green: "bg-green200",
-    beige: "bg-beige200",
+    purple: 'bg-purple200',
+    blue: 'bg-blue200',
+    green: 'bg-green200',
+    beige: 'bg-beige200',
   };
 
   // 데이터 로딩: 롤링페이퍼 정보와 메시지를 가져오는 함수
@@ -30,7 +35,7 @@ function PostEditPage() {
       try {
         // 롤링페이퍼의 이름과 배경 정보를 가져오기 위한 getRecipients 호출
         const recipientData = await getRecipients(id);
-        
+
         // 메시지 목록을 가져오기 위한 getRecipientsMessage 호출
         const messageData = await getRecipientsMessage(id, 1000, 0);
 
@@ -41,7 +46,7 @@ function PostEditPage() {
           recentMessages: messageData.results, // 메시지 목록 업데이트
         });
       } catch (error) {
-        console.error("데이터를 불러오는데 실패했습니다:", error);
+        console.error('데이터를 불러오는데 실패했습니다:', error);
       }
     }
 
@@ -55,7 +60,7 @@ function PostEditPage() {
       setItems((prevItems) => ({
         ...prevItems,
         recentMessages: prevItems.recentMessages.filter(
-          (message) => message.id !== messageId
+          (message) => message.id !== messageId,
         ),
       }));
     } catch (error) {
@@ -66,13 +71,13 @@ function PostEditPage() {
 
   // 전체 롤링페이퍼 삭제 함수
   const handleDeleteAll = async () => {
-    if (window.confirm("정말 삭제하시겠습니까?")) {
+    if (window.confirm('정말 삭제하시겠습니까?')) {
       try {
         await deleteRecipient(id);
         navigate('/list');
       } catch (error) {
-        console.error("삭제 중 오류가 발생했습니다:", error);
-        alert("삭제에 실패했습니다. 다시 시도해 주세요.");
+        console.error('삭제 중 오류가 발생했습니다:', error);
+        alert('삭제에 실패했습니다. 다시 시도해 주세요.');
       }
     }
   };
@@ -105,14 +110,14 @@ function PostEditPage() {
       {/* 배경 설정 */}
       <div
         className={`w-full min-h-screen h-full bg-cover z-0 ${
-          items.backgroundImageURL ? "" : colorClassMap[items.backgroundColor]
+          items.backgroundImageURL ? '' : colorClassMap[items.backgroundColor]
         }`}
         style={{
           backgroundImage: items.backgroundImageURL
             ? `url(${items.backgroundImageURL})`
-            : "none",
-          backgroundSize: items.backgroundImageURL ? "cover" : "auto",
-          backgroundPosition: "center",
+            : 'none',
+          backgroundSize: items.backgroundImageURL ? 'cover' : 'auto',
+          backgroundPosition: 'center',
         }}
       >
         {/* 메시지 목록 및 삭제 버튼 영역 */}

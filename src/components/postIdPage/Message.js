@@ -1,7 +1,7 @@
-import React, { useState, useEffect, useRef } from "react";
-import { Link, useParams } from "react-router-dom";
-import dayjs from "dayjs";
-import { getRecipientsMessage } from "../../api/recipientsApi";
+import React, { useState, useEffect, useRef } from 'react';
+import { Link, useParams } from 'react-router-dom';
+import dayjs from 'dayjs';
+import { getRecipientsMessage } from '../../api/recipientsApi';
 
 function Message() {
   const { id } = useParams();
@@ -12,16 +12,16 @@ function Message() {
   const [selectedMessage, setSelectedMessage] = useState(null);
   const loadMoreRef = useRef(null);
   const fontClasses = {
-    "Noto Sans": "font-noto",
-    Pretendard: "font-regular",
-    나눔명조: "font-custom",
-    "나눔손글씨 손편지체": "font-custom",
+    'Noto Sans': 'font-noto',
+    Pretendard: 'font-regular',
+    나눔명조: 'font-custom',
+    '나눔손글씨 손편지체': 'font-custom',
   };
   const relationMap = {
-    지인: "bg-beige100 text-beige500",
-    동료: "bg-purple100 text-purple500",
-    가족: "bg-green100 text-green500",
-    친구: "bg-blue100 text-blue500",
+    지인: 'bg-beige100 text-beige500',
+    동료: 'bg-purple100 text-purple500',
+    가족: 'bg-green100 text-green500',
+    친구: 'bg-blue100 text-blue500',
   };
 
   const limit = 8;
@@ -34,7 +34,7 @@ function Message() {
         setMessages((prevMessages) => [...prevMessages, ...data.results]);
         setHasMore(data.next !== null);
       } catch (error) {
-        console.error("Error fetching data:", error);
+        console.error('Error fetching data:', error);
       } finally {
         setLoading(false);
       }
@@ -46,7 +46,7 @@ function Message() {
   useEffect(() => {
     const observerOptions = {
       root: null,
-      rootMargin: "20px",
+      rootMargin: '20px',
       threshold: 1.0,
     };
 
@@ -60,7 +60,7 @@ function Message() {
 
     const observerInstance = new IntersectionObserver(
       observerCallback,
-      observerOptions
+      observerOptions,
     );
     const currentRef = loadMoreRef.current;
 
@@ -130,13 +130,13 @@ function Message() {
             </head>
             <p
               className={`px-6 py-[16px] h-[80px] ${
-                fontClasses[message.font] || "font-custom"
+                fontClasses[message.font] || 'font-custom'
               } text-gray600 dark:text-gray300 text-left text-[15px] leading-[22px] -tracking-[.01em] overflow-hidden text-ellipsis`}
             >
               {message.content}
             </p>
             <div className="py-6 px-6 font-extraLight text-gray400 dark:text-gray300 text-[12px] leading-[18px] -tracking-[.05em] text-left">
-              {dayjs(message.createdAt).format("YYYY.MM.DD")}
+              {dayjs(message.createdAt).format('YYYY.MM.DD')}
             </div>
           </div>
         </button>
@@ -173,12 +173,12 @@ function Message() {
                 </div>
               </div>
               <div className="font-regular text-gray500 text-[12px] leading-[18px]">
-                {dayjs(selectedMessage.createdAt).format("YYYY.MM.DD")}
+                {dayjs(selectedMessage.createdAt).format('YYYY.MM.DD')}
               </div>
             </div>
             <p
               className={`max-h-60 overflow-y-auto ${
-                fontClasses[selectedMessage.font] || "font-custom"
+                fontClasses[selectedMessage.font] || 'font-custom'
               } text-left text-[15px] leading-[22px] mb-4`}
             >
               {selectedMessage.content}
