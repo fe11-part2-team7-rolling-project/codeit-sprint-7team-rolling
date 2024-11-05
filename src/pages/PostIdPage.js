@@ -2,7 +2,6 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Link, useParams, useNavigate } from 'react-router-dom';
-import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Reactions from '../components/postIdPage/Reactions';
 import Message from '../components/postIdPage/Message';
@@ -10,6 +9,7 @@ import Share from '../components/postIdPage/Share';
 import { getRecipients } from '../api/recipientsApi';
 import EditButton from '../components/EditButton';
 import SEO from '../components/SEO';
+import ToggleButton from '../components/Layout/ToggleButton';
 
 const INITIAL_VALUES = {
   backgroundColor: '',
@@ -22,18 +22,19 @@ const INITIAL_VALUES = {
   topReactions: [],
 };
 
+const colorClassMap = {
+  purple: 'bg-purple200',
+  blue: 'bg-blue200',
+  green: 'bg-green200',
+  beige: 'bg-beige200',
+};
+const defaultContent =
+  '전통적인 롤링페이퍼 문화를 웹으로 구현한 커뮤니티형 플랫폼입니다.';
+
 function PostIdPage({ initialValues = INITIAL_VALUES }) {
   const { id } = useParams();
   const navigate = useNavigate();
   const [items, setItems] = useState(initialValues);
-  const colorClassMap = {
-    purple: 'bg-purple200',
-    blue: 'bg-blue200',
-    green: 'bg-green200',
-    beige: 'bg-beige200',
-  };
-  const defaultContent =
-    '전통적인 롤링페이퍼 문화를 웹으로 구현한 커뮤니티형 플랫폼입니다.';
   const content =
     items.recentMessages && items.recentMessages[0]?.content
       ? items.recentMessages[0].content
@@ -56,25 +57,20 @@ function PostIdPage({ initialValues = INITIAL_VALUES }) {
     <>
       <SEO title={items.name} description={content} />
       <div className="w-full h-full">
-        <ToastContainer
-          position="bottom-center"
-          autoClose={5000}
-          hideProgressBar={false}
-          closeOnClick
-          draggable
-          className="p-4"
-        />
         <div className="sticky top-0 z-20">
           <div className="flex justify-between max-[768px]:pr-0 pr-4 items-center bg-white dark:bg-dark2 text-black w-full h-[52px] border-b border-gray200">
             <h1 className="flex items-center px-6 w-1/2 h-full text-[18px] leading-[26px] font-regular dark:text-gray200">
               To. {items.name}
             </h1>
-            <Link
-              to="/list"
-              className="flex w-40 justify-center items-center text-gray700 dark:text-white border border-gray300 px-2 py-1 rounded-md font-regular"
-            >
-              리스트로 돌아가기
-            </Link>
+            <div className="flex">
+              <ToggleButton />
+              <Link
+                to="/list"
+                className="flex w-40 justify-center items-center text-gray700 dark:text-white border border-gray300 px-2 py-1 rounded-md font-regular"
+              >
+                리스트로 돌아가기
+              </Link>
+            </div>
           </div>
           <div className="dark:bg-dark2 flex items-center justify-between bg-white text-black w-full h-[52px] border-b border-gray200">
             <Reactions />

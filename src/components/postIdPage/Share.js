@@ -17,7 +17,6 @@ function Share({ items }) {
 
   const toggleDropdown = () => {
     setIsDropdownVisible((prev) => !prev);
-    console.log(id);
   };
 
   const handleClickOutside = (e) => {

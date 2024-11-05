@@ -3,6 +3,21 @@ import { Link, useParams } from 'react-router-dom';
 import dayjs from 'dayjs';
 import { getRecipientsMessage } from '../../api/recipientsApi';
 
+const fontClasses = {
+  'Noto Sans': 'font-noto',
+  Pretendard: 'font-regular',
+  나눔명조: 'font-custom',
+  '나눔손글씨 손편지체': 'font-custom',
+};
+const relationMap = {
+  지인: 'bg-beige100 text-beige500',
+  동료: 'bg-purple100 text-purple500',
+  가족: 'bg-green100 text-green500',
+  친구: 'bg-blue100 text-blue500',
+};
+
+const LIMIT = 8;
+
 function Message() {
   const { id } = useParams();
   const [messages, setMessages] = useState([]);
@@ -11,26 +26,12 @@ function Message() {
   const [loading, setLoading] = useState(false);
   const [selectedMessage, setSelectedMessage] = useState(null);
   const loadMoreRef = useRef(null);
-  const fontClasses = {
-    'Noto Sans': 'font-noto',
-    Pretendard: 'font-regular',
-    나눔명조: 'font-custom',
-    '나눔손글씨 손편지체': 'font-custom',
-  };
-  const relationMap = {
-    지인: 'bg-beige100 text-beige500',
-    동료: 'bg-purple100 text-purple500',
-    가족: 'bg-green100 text-green500',
-    친구: 'bg-blue100 text-blue500',
-  };
-
-  const limit = 8;
 
   useEffect(() => {
     const fetchRecipientMessageData = async () => {
       setLoading(true);
       try {
-        const data = await getRecipientsMessage(id, limit, offset);
+        const data = await getRecipientsMessage(id, LIMIT, offset);
         setMessages((prevMessages) => [...prevMessages, ...data.results]);
         setHasMore(data.next !== null);
       } catch (error) {
@@ -53,7 +54,7 @@ function Message() {
     const observerCallback = (entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting && hasMore && !loading) {
-          setOffset((prevOffset) => prevOffset + limit);
+          setOffset((prevOffset) => prevOffset + LIMIT);
         }
       });
     };
@@ -77,7 +78,6 @@ function Message() {
 
   const openModal = (message) => {
     setSelectedMessage(message);
-    console.log(message.font);
   };
 
   const closeModal = () => {
@@ -104,7 +104,7 @@ function Message() {
           onClick={() => openModal(message)}
         >
           <div className="w-full min-h-[285px] bg-white dark:bg-dark2 flex flex-col justify-between rounded-[16px] shadow-lg">
-            <head className="flex flex-row gap-[14px] mx-6 pt-7 pb-4 border-b border-gray200">
+            <header className="flex flex-row gap-[14px] mx-6 pt-7 pb-4 border-b border-gray200">
               <img
                 src={`${message.profileImageURL}`}
                 alt="프로필 이미지"
@@ -127,7 +127,7 @@ function Message() {
                   {message.relationship}
                 </div>
               </div>
-            </head>
+            </header>
             <p
               className={`px-6 py-[16px] h-[80px] ${
                 fontClasses[message.font] || 'font-custom'
