@@ -132,9 +132,11 @@ function Message() {
               className={`px-6 py-[16px] h-[80px] ${
                 fontClasses[message.font] || 'font-custom'
               } text-gray600 dark:text-gray300 text-left text-[15px] leading-[22px] -tracking-[.01em] overflow-hidden text-ellipsis`}
+              style={{ textIndent: '1em' }}
             >
               {message.content}
             </p>
+
             <div className="py-6 px-6 font-extraLight text-gray400 dark:text-gray300 text-[12px] leading-[18px] -tracking-[.05em] text-left">
               {dayjs(message.createdAt).format('YYYY.MM.DD')}
             </div>
