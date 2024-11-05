@@ -70,7 +70,7 @@ function MessagePage() {
   return (
     <div className="bg-gray-100 dark:bg-dark1 min-h-screen flex flex-col items-center gap-10">
       <MemoizedLogo />
-      <div className={`w-[720px] flex flex-col gap-10 ${fontClass} max-md:w-[320px]`}>
+      <form className={`w-[720px] flex flex-col gap-10 ${fontClass} max-md:w-[320px]`}>
         {/* From Input */}
         <MemoizedFromInput onInputChange={handleFromChange} />
 
@@ -94,7 +94,7 @@ function MessagePage() {
           font={fontForApi} 
           profileImageURL={profileImageURL}
         />
-      </div>
+      </form>
     </div>
   );
 }
