@@ -66,7 +66,7 @@ function MessagePage() {
     (value) => setProfileImageURL(value),
     []
   );
-
+  
   return (
     <div className="bg-gray-100 dark:bg-dark1 min-h-screen flex flex-col items-center gap-10">
       <MemoizedLogo />
