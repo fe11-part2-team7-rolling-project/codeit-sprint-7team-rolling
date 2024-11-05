@@ -5,7 +5,7 @@ import Header from '../components/Layout/Header';
 
 function ListPage() {
   return (
-    <div className="w-full h-screen dark:bg-dark1 pb-20">
+    <div className="w-full  dark:bg-dark1 pb-20">
       <Header />
       <div className="flex flex-col gap-[66px] mobile:gap-[156px] min-[769px]:gap-[64px] tablet:items-center">
         <div className="gap-[74px] tablet:items-start tablet:w-[1200px] ">
