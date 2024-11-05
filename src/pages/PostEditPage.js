@@ -9,15 +9,15 @@ import {
   deleteMessage,
 } from '../api/recipientsApi';
 import Reactions from '../components/postIdPage/Reactions';
-import useDark from '../hooks/useDark';  // Dark Mode를 위한 훅 가져오기
-import ToggleButton from '../components/Layout/ToggleButton';
+import useDark from '../hooks/useDark'; // Dark Mode를 위한 훅 가져오기
+import ToggleButton from '../components/Layout/ToggleButton'; // 다크 모드 토글 버튼
 
 // 배경 색상 맵, 다크 모드 스타일 포함
 const colorClassMap = {
-  purple: 'bg-purple200 dark:bg-purple700',
-  blue: 'bg-blue200 dark:bg-blue700',
-  green: 'bg-green200 dark:bg-green700',
-  beige: 'bg-beige200 dark:bg-beige700',
+  purple: 'bg-purple200',
+  blue: 'bg-blue200',
+  green: 'bg-green200',
+  beige: 'bg-beige200',
 };
 
 function PostEditPage() {
@@ -93,28 +93,26 @@ function PostEditPage() {
   return (
     <div className={`w-full h-full ${isDark ? 'dark' : ''}`}>
       {/* 상단 네비게이션 바 */}
-      <div className="sticky top-0 z-20">
-        <div className="bg-white dark:bg-dark2 text-black dark:text-white w-full h-[52px] border-b border-gray200 dark:border-gray700 flex justify-between items-center px-6">
-          <div className="text-[18px] leading-[26px] font-regular">
-            To. {items.name} {/* 롤링페이퍼 이름 표시 */}
-             {/* 다크 모드 토글 버튼 */}
-        <ToggleButton/> 
-          </div>
-          <div className="flex space-x-2">
-            <button
-              onClick={() => navigate(`/post/${id}`)} // 목록 페이지로 돌아가기 버튼
-              type="button"
-              className="px-2 py-1 sm:px-4 sm:py-2 text-sm sm:text-base bg-blue500 dark:bg-blue600 text-white rounded-md shadow-md hover:bg-blue600 dark:hover:bg-blue700 transition"
-            >
-              Back
-            </button>
-          </div>
+      <div className="sticky top-0 z-20 flex justify-between items-center bg-white dark:bg-dark2 text-black dark:text-white h-[52px] border-b border-gray200 dark:border-gray700 px-6">
+        <div className="text-[18px] leading-[26px] font-regular">
+          To. {items.name} {/* 롤링페이퍼 이름 표시 */}
         </div>
 
-        {/* 공유 및 리액션 영역 */}
-        <div className="flex flex-row items-center justify-between bg-white dark:bg-dark2 text-black dark:text-white w-full h-[52px] border-b border-gray200 dark:border-gray700">
-          <Reactions />
-        </div>
+        {/* 다크 모드 토글 버튼 */}
+        <ToggleButton />
+      </div>
+
+      {/* 공유 및 리액션 영역 */}
+      <div className="flex flex-row items-center justify-between bg-white dark:bg-dark2 text-black dark:text-white w-full h-[52px] border-b border-gray200 dark:border-gray700 px-6">
+        <Reactions />
+        {/* Back 버튼을 아래 이모지 영역 우측에 배치 */}
+        <button
+          onClick={() => navigate(`/post/${id}`)} // 목록 페이지로 돌아가기 버튼
+          type="button"
+          className="px-2 py-1 sm:px-4 sm:py-2 text-sm sm:text-base bg-blue500 dark:bg-blue600 text-white rounded-md shadow-md hover:bg-blue600 dark:hover:bg-blue700 transition"
+        >
+          Back
+        </button>
       </div>
 
       {/* 배경 설정 */}
