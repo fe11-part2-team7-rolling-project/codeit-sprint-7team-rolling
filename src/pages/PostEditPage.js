@@ -20,6 +20,13 @@ const colorClassMap = {
   beige: 'bg-beige200',
 };
 
+const fontClasses = {
+    'Noto Sans': 'font-noto',
+    Pretendard: 'font-regular',
+    나눔명조: 'font-custom',
+    '나눔손글씨 손편지체': 'font-custom',
+  };
+
 function PostEditPage() {
   const { id } = useParams(); // URL에서 롤링페이퍼 ID를 추출
   const navigate = useNavigate(); // 페이지 이동 함수
@@ -92,28 +99,30 @@ function PostEditPage() {
 
   return (
     <div className={`w-full h-full ${isDark ? 'dark' : ''}`}>
-      {/* 상단 네비게이션 바 */}
-      <div className="sticky top-0 z-20 flex justify-between items-center bg-white dark:bg-dark2 text-black dark:text-white h-[52px] border-b border-gray200 dark:border-gray700 px-6">
+    <div className="sticky top-0 z-20">
+        {/* 상단 네비게이션 바 */}
+        <div className="flex justify-between items-center bg-white dark:bg-dark2 text-black dark:text-white border h-[52px] border-b-white border-gray200 px-6">
         <div className="text-[18px] leading-[26px] font-regular">
-          To. {items.name} {/* 롤링페이퍼 이름 표시 */}
+            To. {items.name} {/* 롤링페이퍼 이름 표시 */}
         </div>
 
         {/* 다크 모드 토글 버튼 */}
         <ToggleButton />
-      </div>
+        </div>
 
-      {/* 공유 및 리액션 영역 */}
-      <div className="flex flex-row items-center justify-between bg-white dark:bg-dark2 text-black dark:text-white w-full h-[52px] border-b border-gray200 dark:border-gray700 px-6">
+        {/* 공유 영역 */}
+        <div className="dark:bg-dark2 flex items-center justify-between bg-white text-black w-full h-[52px] border-b border-gray200">
         <Reactions />
         {/* Back 버튼을 아래 이모지 영역 우측에 배치 */}
         <button
-          onClick={() => navigate(`/post/${id}`)} // 목록 페이지로 돌아가기 버튼
-          type="button"
-          className="px-2 py-1 sm:px-4 sm:py-2 text-sm sm:text-base bg-blue500 dark:bg-blue600 text-white rounded-md shadow-md hover:bg-blue600 dark:hover:bg-blue700 transition"
+            onClick={() => navigate(`/post/${id}`)} // 목록 페이지로 돌아가기 버튼
+            type="button"
+            className="px-2 py-1 sm:px-4 sm:py-2 text-sm sm:text-base bg-blue500 dark:bg-blue600 text-white rounded-md shadow-md hover:bg-blue600 dark:hover:bg-blue700 transition"
         >
-          Back
+            Back
         </button>
-      </div>
+        </div>
+    </div>
 
       {/* 배경 설정 */}
       <div
@@ -164,12 +173,14 @@ function PostEditPage() {
                 </div>
 
                 {/* 메시지 내용 */}
-                <div
-                  className="px-6 py-[16px] font-regular text-left text-[15px] leading-[22px] -tracking-[.01em]"
-                  style={{ textIndent: '1em' }} // 메시지 내용에 들여쓰기 적용
-                >
-                  {message.content}
-                </div>
+                <p
+              className={`px-6 py-[16px] h-[80px] ${
+                fontClasses[message.font] || 'font-custom'
+              } text-gray600 dark:text-gray300 text-left text-[15px] leading-[22px] -tracking-[.01em] overflow-hidden text-ellipsis `}
+              style={{ textIndent: '1em' }}
+            >
+              {message.content}
+            </p>
 
                 {/* 메시지 날짜 */}
                 <div className="px-6 font-regular text-gray500 dark:text-gray400 text-left text-[12px] leading-[18px] -tracking-[.05em]">
