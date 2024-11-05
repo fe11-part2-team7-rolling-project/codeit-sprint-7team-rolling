@@ -61,6 +61,7 @@ function PostEditPage() {
     if (window.confirm('정말 삭제하시겠습니까?')) {
       try {
         const response = await deleteRecipient(id); // 롤링페이퍼 삭제 API 호출
+        console.log(response);
         navigate('/list'); // 삭제 완료 후 리스트 페이지로 이동
       } catch (error) {
         console.error('삭제 중 오류가 발생했습니다:', error);

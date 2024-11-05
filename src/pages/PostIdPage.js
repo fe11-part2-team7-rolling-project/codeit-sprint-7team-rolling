@@ -1,7 +1,7 @@
 /* eslint-disable react/require-default-props */
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { useParams, useNavigate } from 'react-router-dom';
+import { Link, useParams, useNavigate } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Reactions from '../components/postIdPage/Reactions';
@@ -65,16 +65,23 @@ function PostIdPage({ initialValues = INITIAL_VALUES }) {
           className="p-4"
         />
         <div className="sticky top-0 z-20">
-          <div className="flex bg-white dark:bg-dark2 text-black w-full h-[52px] border-b border-gray200">
-            <h1 className="flex items-center px-6 w-full h-full text-[18px] leading-[26px] font-regular dark:text-gray200">
+          <div className="flex justify-between max-[768px]:pr-0 pr-4 items-center bg-white dark:bg-dark2 text-black w-full h-[52px] border-b border-gray200">
+            <h1 className="flex items-center px-6 w-1/2 h-full text-[18px] leading-[26px] font-regular dark:text-gray200">
               To. {items.name}
             </h1>
-            {/* EditButton 추가 */}
-            <EditButton onClick={() => navigate(`/post/${id}/edit`)} />
+            <Link
+              to="/list"
+              className="flex w-40 justify-center items-center text-gray700 dark:text-white border border-gray300 px-2 py-1 rounded-md font-regular"
+            >
+              리스트로 돌아가기
+            </Link>
           </div>
           <div className="dark:bg-dark2 flex items-center justify-between bg-white text-black w-full h-[52px] border-b border-gray200">
             <Reactions />
-            <Share items={items} />
+            <div className="flex pr-4">
+              <Share items={items} />
+              <EditButton onClick={() => navigate(`/post/${id}/edit`)} />
+            </div>
           </div>
         </div>
         <div
