@@ -22,7 +22,7 @@ function PostHeader() {
       <div className="flex justify-between items-center max-w-7xl mx-auto">
         <Logo />
         <div className="flex-shrink-0 ml-auto">
-          <ToggleButton/>
+          <ToggleButton />
         </div>
       </div>
     </header>
@@ -36,6 +36,7 @@ function MessagePage() {
   const [relation, setRelation] = useState("지인");
   const [font, setFont] = useState("Noto Sans");
   const [profileImageURL, setProfileImageURL] = useState("");
+  const [ToastError, setToastError] = useState();
 
   const fontClasses = useMemo(
     () => ({
@@ -66,22 +67,33 @@ function MessagePage() {
     (value) => setProfileImageURL(value),
     []
   );
-  
+  const handleToastError = useCallback((value) => setToastError(value), []);
+
   return (
     <div className="bg-gray-100 dark:bg-dark1 min-h-screen flex flex-col items-center gap-10">
       <MemoizedLogo />
-      <div className={`w-[720px] flex flex-col gap-10 ${fontClass} max-md:w-[320px]`}>
+      <form
+        className={`w-[720px] flex flex-col gap-10 ${fontClass} max-md:w-[320px]`}
+      >
         {/* From Input */}
-        <MemoizedFromInput onInputChange={handleFromChange} />
+        <MemoizedFromInput
+          onInputChange={handleFromChange}
+          IsOver={handleToastError}
+        />
 
         {/* Profile Image Selector */}
-        <MemoizedProfileImageSelector onSelectImage={handleProfileImageChange} />
+        <MemoizedProfileImageSelector
+          onSelectImage={handleProfileImageChange}
+        />
 
         {/* Relation Selector */}
         <MemoizedRelationSelector onSelectRelation={handleRelationChange} />
 
         {/* Text Editor */}
-        <MemoizedTextEditor onContentChange={handleContentChange} font={fontClass} />
+        <MemoizedTextEditor
+          onContentChange={handleContentChange}
+          font={fontClass}
+        />
 
         {/* Font Selector */}
         <MemoizedFontSelector onSelectFont={handleFontChange} />
@@ -91,10 +103,11 @@ function MessagePage() {
           from={from}
           content={content}
           relation={relation}
-          font={fontForApi} 
+          font={fontForApi}
           profileImageURL={profileImageURL}
+          ToastError={ToastError}
         />
-      </div>
+      </form>
     </div>
   );
 }
