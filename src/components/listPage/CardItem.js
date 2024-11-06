@@ -1,10 +1,10 @@
-import React from "react";
-import PropTypes from "prop-types";
-import purpleShape from "../../assets/pattern_01.png";
-import beigeShape from "../../assets/pattern_02.png";
-import greenShape from "../../assets/pattern_04.png";
-import blueShape from "../../assets/pattern_03.png";
-import CardProfileImg from "./CardProfileImg";
+import React from 'react';
+import PropTypes from 'prop-types';
+import purpleShape from '../../assets/pattern_01.png';
+import beigeShape from '../../assets/pattern_02.png';
+import greenShape from '../../assets/pattern_04.png';
+import blueShape from '../../assets/pattern_03.png';
+import CardProfileImg from './CardProfileImg';
 
 function CardItem({ item, nav, colorClassMap }) {
   const shapeImageMap = {
@@ -18,17 +18,17 @@ function CardItem({ item, nav, colorClassMap }) {
     <button
       type="button"
       onClick={() => nav(`/post/${item.id}`)}
-      className={` relative flex overflow-hidden flex-col items-start justify-start border-black/[.10] border-[1px] gap-3 pt-[30px] pl-[24px] rounded-2xl min-w-[208px] h-[232px] mobile:min-w-[275px] mobile:min-h-[260px] shadow-md ${
+      className={`relative flex overflow-hidden flex-col items-start justify-start border-black/[.10] border-[1px] gap-3 pt-[30px] pl-[24px] rounded-2xl min-w-[208px] h-[232px] mobile:min-w-[275px] mobile:min-h-[260px] shadow-md ${
         item.backgroundImageURL
-          ? "text-white"
+          ? 'text-white'
           : colorClassMap[item.backgroundColor]
       }`}
       style={{
         backgroundImage: item.backgroundImageURL
           ? `url(${item.backgroundImageURL})`
           : undefined,
-        backgroundSize: "cover",
-        backgroundPosition: "center",
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
       }}
     >
       {item.backgroundImageURL && (
@@ -38,7 +38,7 @@ function CardItem({ item, nav, colorClassMap }) {
         {/* 받는 사람 */}
         <h2
           className={`font-bold text-lg leading-7 mobile:text-2xl ${
-            item.backgroundImageURL ? "text-white" : "text-gray900"
+            item.backgroundImageURL ? 'text-white' : 'text-gray900'
           }`}
         >
           To. {item.name}
@@ -55,12 +55,12 @@ function CardItem({ item, nav, colorClassMap }) {
             </span>
           )}
         </div>
-        <div className="text-sm font-extraLight mobile:text-base">
+        <div className="text-sm font-extraLight mobile:text-base ">
           <span className="font-bold">{item.messageCount}</span>명이 작성했어요!
         </div>
 
         {/* 리액션 섹션 */}
-        <div className="flex w-[162px] gap-1 space-x-1 border-black/[.12] mt-[18px] border-t-[1px] pt-[17px] mobile:mt-[30px] mobile:w-[227px] mobile:space-x-1.5">
+        <div className="absolute top-28 flex w-[162px] gap-1 space-x-1 border-black/[.12] mt-[18px] border-t-[1px] pt-[17px] mobile:mt-[30px] mobile:w-[227px] mobile:space-x-1.5">
           {item.topReactions.map((reaction) => (
             <div
               key={reaction.id}
@@ -98,7 +98,7 @@ CardItem.propTypes = {
         id: PropTypes.number.isRequired,
         sender: PropTypes.string.isRequired,
         profileImageURL: PropTypes.string,
-      })
+      }),
     ),
     messageCount: PropTypes.number,
     topReactions: PropTypes.arrayOf(
@@ -106,7 +106,7 @@ CardItem.propTypes = {
         id: PropTypes.number.isRequired,
         emoji: PropTypes.string.isRequired,
         count: PropTypes.number.isRequired,
-      })
+      }),
     ),
   }).isRequired,
   nav: PropTypes.func.isRequired,

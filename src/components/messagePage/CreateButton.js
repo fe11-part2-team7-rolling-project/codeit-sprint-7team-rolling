@@ -1,8 +1,17 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { useParams } from "react-router-dom";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
-function CreateButton({ from, content, relation, font, profileImageURL }) {
+function CreateButton({
+  from,
+  content,
+  relation,
+  font,
+  profileImageURL,
+  ToastError,
+}) {
   const { Id } = useParams();
   const [isDisabled, setIsDisabled] = useState(true);
 
@@ -13,6 +22,10 @@ function CreateButton({ from, content, relation, font, profileImageURL }) {
   const handleSubmit = async () => {
     if (!profileImageURL || profileImageURL.includes("default_avatar")) {
       alert("프로필 이미지를 선택해주세요.");
+      return;
+    }
+    if (ToastError) {
+      toast.error("입력은 40자 이하여야 합니다");
       return;
     }
     if (!isDisabled) {
@@ -47,18 +60,21 @@ function CreateButton({ from, content, relation, font, profileImageURL }) {
   };
 
   return (
-    <button
-      type="button"
-      onClick={handleSubmit}
-      disabled={isDisabled}
-      className={`w-[720px] h-[56px] text-white font-semibold rounded-[12px] px-[24px] py-[14px] ${
-        isDisabled
-          ? "bg-[#CCCCCC] cursor-not-allowed"
-          : "bg-[#9935FF] hover:bg-[#861DEE] active:bg-[#6E0AD1] focus:bg-[#6E0AD1]"
-      } mb-10 max-md:w-[320px] max-md:h-[56px]`}
-    >
-      생성하기
-    </button>
+    <>
+      <button
+        type="button"
+        onClick={handleSubmit}
+        disabled={isDisabled}
+        className={`w-[720px] h-[56px] text-white font-semibold rounded-[12px] px-[24px] py-[14px] ${
+          isDisabled
+            ? "bg-[#CCCCCC] cursor-not-allowed dark:bg-gray400"
+            : "bg-[#9935FF] hover:bg-[#861DEE] active:bg-[#6E0AD1] focus:bg-[#6E0AD1]"
+        } mb-10 max-md:w-[320px] max-md:h-[56px]`}
+      >
+        생성하기
+      </button>
+      <ToastContainer position="bottom-center" />
+    </>
   );
 }
 CreateButton.propTypes = {
@@ -67,6 +83,7 @@ CreateButton.propTypes = {
   relation: PropTypes.string.isRequired,
   font: PropTypes.string.isRequired,
   profileImageURL: PropTypes.string.isRequired,
+  ToastError: PropTypes.bool.isRequired,
 };
 
 export default CreateButton;

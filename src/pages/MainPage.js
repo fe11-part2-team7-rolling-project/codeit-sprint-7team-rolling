@@ -7,7 +7,7 @@ import mainEmoji from "../assets/main_emoji.png";
 
 function MainPage() {
   return (
-    <div className="flex flex-col items-center bg-white min-h-screen">
+    <div className="flex flex-col items-center bg-white dark:bg-dark1 min-h-screen">
       <Header />
       <Section
         point="Point.01"
