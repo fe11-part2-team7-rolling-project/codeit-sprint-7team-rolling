@@ -1,35 +1,35 @@
 /* eslint-disable react/require-default-props */
-import React, { useState, useEffect } from 'react';
-import PropTypes from 'prop-types';
-import { Link, useParams, useNavigate } from 'react-router-dom';
-import 'react-toastify/dist/ReactToastify.css';
-import Reactions from '../components/postIdPage/Reactions';
-import Message from '../components/postIdPage/Message';
-import Share from '../components/postIdPage/Share';
-import { getRecipients } from '../api/recipientsApi';
-import EditButton from '../components/EditButton';
-import SEO from '../components/SEO';
-import ToggleButton from '../components/Layout/ToggleButton';
+import React, { useState, useEffect } from "react";
+import PropTypes from "prop-types";
+import { Link, useParams, useNavigate } from "react-router-dom";
+import "react-toastify/dist/ReactToastify.css";
+import Reactions from "../components/postIdPage/Reactions";
+import Message from "../components/postIdPage/Message";
+import Share from "../components/postIdPage/Share";
+import { getRecipients } from "../api/recipientsApi";
+import EditButton from "../components/EditButton";
+import SEO from "../components/SEO";
+import ToggleButton from "../components/Layout/ToggleButton";
 
 const INITIAL_VALUES = {
-  backgroundColor: '',
+  backgroundColor: "",
   backgroundImageURL: null,
-  createdAt: '',
+  createdAt: "",
   id: 0,
   messageCount: 0,
-  name: '',
+  name: "",
   recentMessages: [],
   topReactions: [],
 };
 
 const colorClassMap = {
-  purple: 'bg-purple200',
-  blue: 'bg-blue200',
-  green: 'bg-green200',
-  beige: 'bg-beige200',
+  purple: "bg-purple200",
+  blue: "bg-blue200",
+  green: "bg-green200",
+  beige: "bg-beige200",
 };
 const defaultContent =
-  '전통적인 롤링페이퍼 문화를 웹으로 구현한 커뮤니티형 플랫폼입니다.';
+  "전통적인 롤링페이퍼 문화를 웹으로 구현한 커뮤니티형 플랫폼입니다.";
 
 function PostIdPage({ initialValues = INITIAL_VALUES }) {
   const { id } = useParams();
@@ -46,7 +46,7 @@ function PostIdPage({ initialValues = INITIAL_VALUES }) {
         const data = await getRecipients(id);
         setItems(data);
       } catch (error) {
-        console.error('Error fetching data:', error);
+        console.error("Error fetching data:", error);
       }
     }
 
@@ -82,14 +82,14 @@ function PostIdPage({ initialValues = INITIAL_VALUES }) {
         </div>
         <div
           className={`w-full min-h-screen h-full bg-cover z-0 ${
-            items.backgroundImageURL ? '' : colorClassMap[items.backgroundColor]
+            items.backgroundImageURL ? "" : colorClassMap[items.backgroundColor]
           }`}
           style={{
             backgroundImage: items.backgroundImageURL
               ? `url(${items.backgroundImageURL})`
-              : 'none',
-            backgroundSize: items.backgroundImageURL ? 'cover' : 'auto',
-            backgroundPosition: 'center',
+              : "none",
+            backgroundSize: items.backgroundImageURL ? "cover" : "auto",
+            backgroundPosition: "center",
           }}
         >
           <Message />
@@ -117,14 +117,14 @@ PostIdPage.propTypes = {
         content: PropTypes.string,
         font: PropTypes.string,
         createdAt: PropTypes.string,
-      }),
+      })
     ),
     topReactions: PropTypes.arrayOf(
       PropTypes.shape({
         id: PropTypes.number,
         emoji: PropTypes.string,
         count: PropTypes.number,
-      }),
+      })
     ),
   }),
 };
