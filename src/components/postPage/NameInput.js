@@ -16,7 +16,7 @@ function NameInput({ name, handleChangeName, handleFocusout, isError }) {
         }`}
       />
       <p
-        className={`text-error mb-3 text-sm mb-[50px] ${
+        className={`text-error mb-3 text-sm mb-[30px] ${
           isError ? "visible" : "invisible"
         }`}
       >
