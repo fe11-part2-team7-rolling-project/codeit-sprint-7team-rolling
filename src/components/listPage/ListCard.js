@@ -6,6 +6,15 @@ import arrowLeft from '../../assets/arrow_left.svg';
 import arrowRight from '../../assets/arrow_right.svg';
 import CardItem from './CardItem';
 
+const colorClassMap = {
+  purple: "bg-purple200",
+  blue: "bg-blue200",
+  green: "bg-green200",
+  beige: "bg-beige200",
+};
+
+const CARDS_PER_PAGE = 4;
+
 function ListCard({ type, sortType }) {
   const [list, setList] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -13,14 +22,6 @@ function ListCard({ type, sortType }) {
   const [currentPage, setCurrentPage] = useState(0);
   const nav = useNavigate();
 
-  const colorClassMap = {
-    purple: 'bg-purple200',
-    blue: 'bg-blue200',
-    green: 'bg-green200',
-    beige: 'bg-beige200',
-  };
-
-  const CARDS_PER_PAGE = 4;
   const totalPages = Math.ceil(list.length / CARDS_PER_PAGE);
   const startIndex = currentPage * CARDS_PER_PAGE;
   const currentCards = list.slice(startIndex, startIndex + CARDS_PER_PAGE);
