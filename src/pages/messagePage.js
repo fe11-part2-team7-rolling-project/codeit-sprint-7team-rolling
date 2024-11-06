@@ -6,7 +6,7 @@ import TextEditor from "../components/messagePage/TextEditor";
 import FontSelector from "../components/messagePage/FontSelector";
 import CreateButton from "../components/messagePage/CreateButton";
 import Logo from "../components/Layout/Logo";
-import ToggleButton from "../components/Layout/ToggleButton";
+import DarkModeButton from "../components/Layout/DarkModeButton";
 
 // React.memo를 사용하여 각 컴포넌트를 최적화하여 불필요한 리렌더링을 방지
 const MemoizedFromInput = React.memo(FromInput);
@@ -22,7 +22,7 @@ function PostHeader() {
       <div className="flex justify-between items-center max-w-7xl mx-auto">
         <Logo />
         <div className="flex-shrink-0 ml-auto">
-          <ToggleButton />
+          <DarkModeButton />
         </div>
       </div>
     </header>

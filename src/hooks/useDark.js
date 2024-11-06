@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 
 function useDark() {
-  const [isDark, setIsDark] = useState(() =>
-    localStorage.getItem("theme") === "dark"
+  const [isDark, setIsDark] = useState(
+    () => localStorage.getItem("theme") === "dark"
   );
 
   const toggleDark = () => {

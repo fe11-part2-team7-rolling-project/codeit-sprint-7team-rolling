@@ -2,7 +2,7 @@
 import React from "react";
 import Logo from "./Logo";
 import CreateButton from "./CreateButton";
-import ToggleButton from "./ToggleButton";
+import DarkModeButton from "./DarkModeButton";
 
 function Header() {
   return (
@@ -10,7 +10,7 @@ function Header() {
       <div className="flex justify-between items-center max-w-7xl mx-auto">
         <Logo />
         <div className="flex items-center flex-shrink-0 ml-auto">
-          <ToggleButton/>
+          <DarkModeButton />
           <CreateButton />
         </div>
       </div>

@@ -10,7 +10,7 @@ import {
 } from "../api/recipientsApi";
 import Reactions from "../components/postIdPage/Reactions";
 import useDark from "../hooks/useDark"; // Dark Mode를 위한 훅 가져오기
-import ToggleButton from "../components/Layout/ToggleButton"; // 다크 모드 토글 버튼
+import DarkModeButton from "../components/Layout/DarkModeButton";
 
 // 배경 색상 맵, 다크 모드 스타일 포함
 const colorClassMap = {
@@ -114,7 +114,7 @@ function PostEditPage() {
           </div>
 
           {/* 다크 모드 토글 버튼 */}
-          <ToggleButton />
+          <DarkModeButton />
         </div>
 
         {/* 공유 영역 */}

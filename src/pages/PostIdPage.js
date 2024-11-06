@@ -9,7 +9,7 @@ import Share from "../components/postIdPage/Share";
 import { getRecipients } from "../api/recipientsApi";
 import EditButton from "../components/EditButton";
 import SEO from "../components/SEO";
-import ToggleButton from "../components/Layout/ToggleButton";
+import DarkModeButton from "../components/Layout/DarkModeButton";
 
 const INITIAL_VALUES = {
   backgroundColor: "",
@@ -63,7 +63,7 @@ function PostIdPage({ initialValues = INITIAL_VALUES }) {
               To. {items.name}
             </h1>
             <div className="flex">
-              <ToggleButton />
+              <DarkModeButton />
               <Link
                 to="/list"
                 className="flex w-40 justify-center items-center text-gray700 dark:text-white border border-gray300 px-2 py-1 rounded-md font-regular"
